@@ -3,6 +3,7 @@ import { Darker_Grotesque, Syne, Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/ui/NavBar";
 import Footer from "./components/ui/Footer";
+import { ScrollProvider } from "./providers/ScrollProvider";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -35,9 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${darkerGrotesque.className} ${syneSans.variable} ${interSans.variable} antialiased`}>
+        <ScrollProvider>
         <NavBar />
         {children}
         <Footer />
+        </ScrollProvider>
       </body>
     </html>
   );

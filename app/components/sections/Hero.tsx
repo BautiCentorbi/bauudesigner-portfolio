@@ -3,6 +3,7 @@
 import { motion, type Variants, type Transition } from "framer-motion";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import { useLenis } from "@/app/providers/ScrollProvider";
 import MainButton from "../ui/MainButton";
 
 const easeOut: Transition["ease"] = [0.16, 1, 0.3, 1];
@@ -28,6 +29,8 @@ const fadeUp: Variants = {
 };
 
 export default function Hero() {
+  const { scrollTo } = useLenis();
+  
   return (
     <motion.div
       className="px-12"
@@ -50,7 +53,13 @@ export default function Hero() {
           {/* Mini bio */}
           <motion.div variants={fadeUp} className="text-left mt-auto w-fit">
             <Link href="#contact">
-              <MainButton href="#contact" className="mt-12 font-inter text-2xl w-full my-4" rounded="rounded-full">Contactame</MainButton>
+              <MainButton
+                href="#contact"
+                className="mt-12 font-inter text-2xl w-full my-4"
+                rounded="rounded-full"
+              >
+                Contactame
+              </MainButton>
             </Link>
             <span className="font-alt text-2xl font-bold uppercase block">
               Bautista Centorbi
@@ -69,6 +78,10 @@ export default function Hero() {
             href="#projects"
             aria-label="Ir a proyectos"
             className="mt-48 inline-flex"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollTo("#projects", { offset: -96, duration: 1 });
+            }}
           >
             <span
               className="
