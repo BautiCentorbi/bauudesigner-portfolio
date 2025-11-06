@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ebebeb;
+  --foreground: #212121;
 }
 
 @theme inline {
@@ -33,6 +33,18 @@ html:focus-within {
 :target {
   scroll-margin-top: 96px; 
 }
+
+.logo-mono {
+  filter: brightness(0) saturate(100%);
+  /* Lo vuelvo negro puro y luego uso opacity para teñir */
+  opacity: 0.85; /* Opcional, para igualar tono */
+}
+
+.group:hover .logo-mono {
+  opacity: 1;
+  filter: none;
+}
+
 
 .title {
   font-size: 4rem;

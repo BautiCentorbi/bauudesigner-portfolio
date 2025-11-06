@@ -84,7 +84,7 @@ export default function NavBar() {
   const { scrollTo } = useLenis();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur">
+    <header className="fixed inset-x-0 top-0 z-50 bg-background">
       <nav className="mx-auto max-w-6xl px-4">
         {/* FLEX principal → logo izq / nav der */}
         <div className="flex h-16 items-center justify-between">

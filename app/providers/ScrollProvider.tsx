@@ -28,7 +28,7 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
     // ✅ Lenis v1 API (paquete 'lenis')
     const instance = new Lenis({
       smoothWheel: true,           // reemplaza smoothWheel/smoothTouch
-      duration: 1.0,                     // segundos aprox.
+      duration: 0.8,                     // segundos aprox.
       easing: (t) => 1 - Math.pow(1 - t, 3), // easeOutCubic
       orientation: "vertical",
       gestureOrientation: "vertical",

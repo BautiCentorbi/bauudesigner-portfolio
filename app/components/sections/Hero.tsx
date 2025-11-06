@@ -13,8 +13,8 @@ const container: Variants = {
   show: {
     opacity: 1,
     transition: {
-      delayChildren: 0.1,
-      staggerChildren: 0.18,
+      delayChildren: 0.2,
+      staggerChildren: 0.3,
     },
   },
 };
