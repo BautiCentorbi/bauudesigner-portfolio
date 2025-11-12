@@ -1,3 +1,4 @@
+// app/components/NavBar.tsx
 "use client";
 
 import Image from "next/image";
@@ -6,6 +7,7 @@ import clsx from "clsx";
 import { NAV_ITEMS } from "@/app/lib/nav";
 import { useActiveSection } from "@/app/hooks/useActiveSection";
 import { useLenis } from "@/app/providers/ScrollProvider";
+import { useEffect, useRef } from "react";
 
 const EASE = "[ease:cubic-bezier(0.16,1,0.3,1)]";
 const DURATION_FILL = "duration-300";
@@ -80,15 +82,37 @@ function SwipeNavItem({
 }
 
 export default function NavBar() {
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Mide el alto real del header y lo expone como --nav-h
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const setVar = () =>
+      document.documentElement.style.setProperty(
+        "--nav-h",
+        `${el.offsetHeight}px`
+      );
+
+    setVar();
+    const ro = new ResizeObserver(setVar);
+    ro.observe(el);
+    window.addEventListener("load", setVar);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("load", setVar);
+    };
+  }, []);
+
+  // Usa el hook con offset obtenido de --nav-h (el hook lo lee solo)
   const active = useActiveSection(NAV_ITEMS.map((n) => n.id));
   const { scrollTo } = useLenis();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-gray-200">
+    <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 bg-gray-200">
       <nav className="mx-auto max-w-6xl px-4">
-        {/* FLEX principal → logo izq / nav der */}
         <div className="flex h-16 items-center justify-between">
-          {/* 🖋️ LOGO IZQUIERDA */}
           <Link
             href="/"
             aria-label="Volver al inicio"
@@ -108,9 +132,7 @@ export default function NavBar() {
             />
           </Link>
 
-          {/* 🧭 NAV DERECHO */}
           <ul className="flex items-center gap-3 justify-end">
-            {/* Accesibilidad */}
             <li className="sr-only focus:not-sr-only">
               <a href="#home" className="px-3 py-1 rounded bg-white text-black">
                 Saltar al contenido
@@ -127,7 +149,12 @@ export default function NavBar() {
                     e.preventDefault();
                     const el = document.querySelector(`#${item.id}`);
                     if (el instanceof HTMLElement) {
-                      scrollTo(el, { offset: -96, duration: 0.9 });
+                      // usás Lenis → compenso 1:1 con el header
+                      const navHVar = getComputedStyle(
+                        document.documentElement
+                      ).getPropertyValue("--nav-h");
+                      const navH = parseInt(navHVar || "96", 10);
+                      scrollTo(el, { offset: -navH, duration: 0.9 });
                     }
                     history.replaceState(null, "", `#${item.id}`);
                   }}

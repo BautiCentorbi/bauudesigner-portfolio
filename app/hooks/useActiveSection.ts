@@ -1,40 +1,75 @@
+// app/hooks/useActiveSection.ts
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useMemo, useState } from "react";
+
+type Options = {
+  /** Offset desde el top para contemplar el header fijo */
+  offset?: number; // px
+};
 
 /**
- * Detecta qué sección (por ID) está visible en el viewport.
- * Ideal para resaltar el link activo del NavBar.
+ * Observa las secciones por id y devuelve cuál está activa.
+ * Compensa el header fijo leyendo --nav-h o usando offset explícito.
  */
-export function useActiveSection(sectionIds: string[]) {
-  const [active, setActive] = useState<string>(sectionIds[0] ?? "");
+export function useActiveSection(ids: string[], options?: Options) {
+  const [active, setActive] = useState<string>(ids[0] ?? "");
+  const idsKey = useMemo(() => ids.join("|"), [ids]);
 
   useEffect(() => {
-    const sections = sectionIds
+    const els = ids
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
+    if (els.length === 0) return;
 
-    if (sections.length === 0) return;
+    const headerOffset =
+      options?.offset ?? readNavHeightCssVar() ?? /* fallback */ 96;
 
-    const observer = new IntersectionObserver(
+    const io = new IntersectionObserver(
       (entries) => {
+        // 1) si hay intersectados, elijo el de mayor ratio
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
         if (visible) {
-          setActive(visible.target.id);
+          setActive((visible.target as HTMLElement).id);
+          return;
         }
+
+        // 2) fallback: “sección pasada” más cercana al scroll actual
+        const y = window.scrollY + headerOffset + 1;
+        let best: HTMLElement | null = null;
+        let bestDist = Infinity;
+        for (const el of els) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          if (top <= y && y - top < bestDist) {
+            bestDist = y - top;
+            best = el;
+          }
+        }
+        if (best) setActive(best.id);
       },
       {
-        rootMargin: "-20% 0px -60% 0px", // cuando entra/sale de pantalla
-        threshold: [0.2, 0.4, 0.6, 0.8],
+        // Compensamos header y dejamos margen inferior para que no cambie
+        // demasiado pronto al acercarse al siguiente bloque
+        root: null,
+        rootMargin: `-${headerOffset}px 0px -70% 0px`,
+        threshold: [0, 0.25, 0.5, 0.75, 1],
       }
     );
 
-    sections.forEach((sec) => observer.observe(sec));
-
-    return () => observer.disconnect();
-  }, [sectionIds.join(",")]);
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [idsKey, options?.offset]);
 
   return active;
+}
+
+function readNavHeightCssVar(): number | null {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(
+    "--nav-h"
+  );
+  const n = parseInt(v || "", 10);
+  return Number.isFinite(n) && n > 0 ? n : null;
 }

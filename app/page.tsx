@@ -1,11 +1,13 @@
 import About from "./components/sections/About";
 import Clients from "./components/sections/Clients";
 import Contact from "./components/sections/Contact";
+import EducationSection from "./components/sections/Education";
 import Education from "./components/sections/Education";
 import Experience from "./components/sections/Experience";
 import Hero from "./components/sections/Hero";
 import LogoGallery from "./components/sections/LogoGallery";
 import Projects from "./components/sections/Projects";
+import { EDUCATION } from "./data/education.data";
 
 export default function Home() {
   return (
@@ -22,17 +24,16 @@ export default function Home() {
         <LogoGallery />
       </section>
 
-      <section className="min-h-[80vh]">
+      <section className="">
         <Clients />
       </section>
 
       <section className="min-h-[80vh]">
         <About />
-        <Experience/>
       </section>
 
       <section className="min-h-[80vh]">
-        <Education />
+        <EducationSection items={EDUCATION} />
       </section>
 
       <section className="min-h-[80vh]">

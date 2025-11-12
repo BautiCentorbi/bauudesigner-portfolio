@@ -58,7 +58,7 @@ export default function ClientsMarquee({
                   <Image
                     src={logo.src}
                     alt={logo.alt}
-                    width={220}
+                    width={240}
                     height={80}
                     sizes="(min-width: 1024px) 220px, 33vw"
                     className="h-full w-auto object-contain
@@ -83,7 +83,7 @@ export default function ClientsMarquee({
                   <Image
                     src={logo.src}
                     alt={logo.alt}
-                    width={220}
+                    width={240}
                     height={80}
                     sizes="(min-width: 1024px) 220px, 33vw"
                     className="h-full w-auto object-contain
