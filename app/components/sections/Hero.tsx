@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { useLenis } from "@/app/providers/ScrollProvider";
 import MainButton from "../ui/MainButton";
 
-const easeOut: Transition["ease"] = [0.16, 1, 0.3, 1];
+export const easeOut: Transition["ease"] = [0.16, 1, 0.3, 1];
 
 const container: Variants = {
   hidden: { opacity: 0 },

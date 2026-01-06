@@ -12,7 +12,7 @@ const LOGOS: LogoItem[] = [
 
 export default function LogoGallery() {
   return (
-    <section aria-labelledby="logos-heading" className="scroll-mt-24 py-0">
+    <section id="#logos" aria-labelledby="logos-heading" className="scroll-mt-24 py-0">
       <div className="mx-auto max-w-6xl px-4 md:px-0 mb-6">
         <p className="font-alt text-xl uppercase tracking-wide text-neutral-700">
           Branding & Identidad

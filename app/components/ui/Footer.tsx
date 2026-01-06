@@ -1,11 +1,168 @@
-import React from 'react'
+"use client";
 
-type Props = {}
+import { ChevronUp } from "lucide-react";
+import Image from "next/image";
+import { motion, type Variants, type Transition } from "framer-motion";
+import { easeOut } from "../sections/Hero";
+import { useLenis } from "@/app/providers/ScrollProvider";
+import Link from "next/link";
 
-const Footer = (props: Props) => {
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: easeOut },
+  },
+};
+
+const NAV_LINKS = [
+  { label: "Inicio", href: "/" },
+  { label: "Proyectos", href: "#projects" },
+  { label: "Logotipos", href: "#logos" },
+  { label: "Sobre Mí", href: "#about" },
+  { label: "Experiencia", href: "#experience" },
+  { label: "Educación", href: "#education" },
+  { label: "Contacto", href: "#contact" },
+];
+
+export default function Footer() {
+  const { scrollTo } = useLenis();
+
   return (
-    <div>Footer</div>
-  )
-}
+    <footer className="w-full bg-gray-200">
+      {/* Top section */}
+      <div className="mx-auto max-w-6xl px-6 py-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-start">
+          {/* Left: Big title */}
+          <div className="md:col-span-7">
+            <div className="flex items-center gap-6">
+              {/* "All Projects" — dejalo igual y luego lo cambiás */}
+              <h2 className="text-[44px] leading-[1.05] tracking-tight md:text-[72px]">
+                All Projects
+              </h2>
 
-export default Footer
+              {/* Circle arrow button (estilo referencia) */}
+              <motion.a
+                variants={fadeUp}
+                href="#projects"
+                aria-label="Ir a proyectos"
+                className="mt-48 inline-flex"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo("#projects", { offset: -96, duration: 1 });
+                }}
+              >
+                <span
+                  className="
+      group relative inline-flex items-center justify-center
+      w-28 h-28 rounded-full
+      overflow-hidden   /* <- recorta el relleno */
+      transition-transform duration-300 hover:-translate-y-0.5
+      outline-none focus-visible:ring-2 focus-visible:ring-black/60
+    "
+                >
+                  {/* 1) BORDE (aparece primero) */}
+                  <span
+                    className="
+        pointer-events-none absolute inset-0 rounded-full
+        border border-black
+        opacity-0 group-hover:opacity-100
+        transition-opacity duration-150
+      "
+                  />
+
+                  {/* 2) RELLENO: rectángulo que sube (wipe) */}
+                  <span
+                    className="
+        pointer-events-none absolute inset-x-0 bottom-0
+        h-full w-full bg-black
+        translate-y-full group-hover:translate-y-0
+        transition-transform duration-400 delay-100
+        [ease:cubic-bezier(0.16,1,0.3,1)]
+        will-change-transform
+      "
+                  />
+
+                  {/* 3) ICONO: negro -> blanco cuando el fill cubre */}
+                  <ChevronUp
+                    size={64}
+                    className="
+        relative z-10 transition-colors duration-300
+        text-black group-hover:text-white
+      "
+                  />
+                </span>
+              </motion.a>
+            </div>
+          </div>
+
+          {/* Right: Single column links */}
+          <nav
+            className="md:col-span-5 md:justify-self-end"
+            aria-label="Footer navigation"
+          >
+            <ul className="space-y-4 text-[20px] leading-tight text-black/45 md:text-[24px]">
+              {NAV_LINKS.map((item) => (
+                <li key={item.href}>
+                  <a
+                    onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo(item.href, { offset: -96, duration: 1 });
+                  }}
+                    className="transition hover:text-black/80 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-black/30"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-black/10">
+        <div className="mx-auto max-w-6xl px-6 py-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-center">
+            {/* Logo placeholder (abajo izquierda) */}
+            <div className="md:col-span-4">
+              <div className="flex items-center gap-3">
+                {/* Placeholder: reemplazalo por tu logo cuando quieras */}
+                <div className="h-8 w-64 " />
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo("#projects", { offset: -96, duration: 1 });
+                  }}
+                >
+                  <Image
+                    src="/logos/Infinite_Graphics-Logo.webp"
+                    alt="Logo"
+                    width={112}
+                    height={32}
+                  />
+                </a>
+              </div>
+            </div>
+
+            {/* Location */}
+            <div className="md:col-span-4 md:text-center">
+              <p className="text-xs text-black/60">Mendoza, Argentina</p>
+            </div>
+
+            {/* Email */}
+            <div className="md:col-span-4 md:text-right">
+              <a
+                href="mailto:bcentorbi.designer@gmail.com"
+                className="text-xs text-black/60 transition hover:text-black/85 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-black/30"
+              >
+                bcentorbi.designer@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
