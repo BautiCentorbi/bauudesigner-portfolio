@@ -1,4 +1,4 @@
-import ContactForm from "./components/ContactForm";
+import ContactForm from "./components/sections/ContactForm";
 import About from "./components/sections/About";
 import Clients from "./components/sections/Clients";
 import EducationSection from "./components/sections/Education";

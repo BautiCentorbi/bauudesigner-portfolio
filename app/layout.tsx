@@ -4,6 +4,9 @@ import "./globals.css";
 import NavBar from "./components/ui/NavBar";
 import Footer from "./components/ui/Footer";
 import { ScrollProvider } from "./providers/ScrollProvider";
+import Script from "next/script";
+import CookiesBanner from "./components/CookiesBanner";
+import { Toaster } from "react-hot-toast";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -35,10 +38,43 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              functionality_storage: 'denied',
+              security_storage: 'denied'
+            });
+          `}
+        </Script>
+      </head>
       <body className={`${darkerGrotesque.className} ${syneSans.variable} ${interSans.variable} antialiased`}>
         <ScrollProvider>
         <NavBar />
+        <CookiesBanner />
         {children}
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            success: {
+              style: {
+                background: "#22c55e",
+                color: "#fff",
+              },
+            },
+            error: {
+              style: {
+                background: "#dc2626",
+                color: "#fff",
+              },
+            },
+          }}
+        />
         <Footer />
         </ScrollProvider>
       </body>
