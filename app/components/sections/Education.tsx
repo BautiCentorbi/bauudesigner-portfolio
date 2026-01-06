@@ -7,14 +7,15 @@ import clsx from "clsx";
 /* -------------------- Tipos -------------------- */
 export type EducationItem = {
   id: string;
-  title: string;           // "Diplomatura en UI"
-  institution: string;     // "Universidad X"
-  year: string;            // "2024"
-  duration?: string;       // "6 meses"
+  title: string; // "Diplomatura en UI"
+  institution: string; // "Universidad X"
+  year: string; // "2024"
+  duration?: string; // "6 meses"
   certificateSrc?: string; // /certs/ui-ux.webp (opcional)
-  description?: string;    // breve overview
-  highlights?: string[];   // bullets: logros/aprendizajes
-  url?: string;            // link externo (opcional)
+  description?: string; // breve overview
+  highlights?: string[]; // bullets: logros/aprendizajes
+  url?: string; // link externo (opcional)
+  trackId?: "ux-ui" | "frontend-react";
 };
 
 export type EducationProps = {
@@ -167,34 +168,88 @@ function EducationCard({
   onOpen: (it: EducationItem) => void;
 }) {
   return (
-    <button
-      onClick={() => onOpen(item)}
+    <div
       className={clsx(
-        "group relative w-full overflow-hidden rounded-xl",
-        "bg-[rgb(58,29,245)] text-white", // azul intenso
-        "px-5 py-6 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+        // full-bleed + bordes arriba/abajo
+        "relative w-screen mx-auto",
+        "border-y border-foreground/40"
       )}
     >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h4 className="text-lg font-semibold leading-tight">{item.title}</h4>
-          <p className="text-white/80 text-sm">
-            {item.institution} · {item.year}
-            {item.duration ? ` · ${item.duration}` : ""}
-          </p>
+      {/* Contenido centrado en ancho, pero texto alineado a la izquierda */}
+      <div className="mx-auto max-w-6xl px-4 md:px-0 py-8 md:py-10">
+        <div className="grid grid-cols-12 gap-6 items-start">
+          {/* Columna texto */}
+          <div className="col-span-12 md:col-span-8 text-left">
+            <h4 className="text-xl md:text-2xl font-semibold leading-tight">
+              {item.title}
+            </h4>
+
+            <p className="mt-1 text-sm md:text-base text-neutral-600">
+              {item.institution} · {item.year}
+              {item.duration ? ` · ${item.duration}` : ""}
+            </p>
+
+            {item.highlights?.length ? (
+              <ul className="mt-4 list-disc pl-5 space-y-1 text-sm md:text-[0.95rem] leading-relaxed text-neutral-700">
+                {item.highlights.map((h, i) => (
+                  <li key={i}>{h}</li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+
+          {/* Columna certificado (misma “banda” de padding) */}
+          <div className="col-span-12 md:col-span-4 flex md:justify-end">
+            <button
+              onClick={() => onOpen(item)}
+              className="group relative w-full md:max-w-xs overflow-hidden rounded-xl border border-neutral-200 bg-white"
+              aria-label={`Abrir certificado de ${item.title}`}
+            >
+              <div className="relative aspect-4/3 w-full">
+                {item.certificateSrc ? (
+                  <Image
+                    src={item.certificateSrc}
+                    alt={`Certificado de ${item.title}`}
+                    fill
+                    sizes="(min-width: 768px) 20rem, 90vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                ) : (
+                  <div className="grid h-full place-items-center text-sm text-neutral-500">
+                    Ver certificado
+                  </div>
+                )}
+              </div>
+
+              <span className="absolute bottom-2 right-2 rounded-full bg-black/80 px-2 py-0.5 text-xs text-white">
+                Ampliar
+              </span>
+            </button>
+          </div>
         </div>
-        <span
-          aria-hidden
-          className="translate-y-1 rounded-full border border-white/30 px-2 py-0.5 text-xs"
-        >
-          Ver
-        </span>
       </div>
-    </button>
+    </div>
   );
 }
 
 /* -------------------- Sección completa -------------------- */
+
+const TRACKS: Record<
+  NonNullable<EducationItem["trackId"]>,
+  { title: string; subtitle?: string; order: number }
+> = {
+  "ux-ui": {
+    title: "Carrera Desarrollador UX/UI",
+    subtitle: "Trayecto de formación (Coderhouse)",
+    order: 1,
+  },
+  "frontend-react": {
+    title: "Carrera Desarrollo Frontend React",
+    subtitle: "Trayecto de formación (Coderhouse)",
+    order: 2,
+  },
+};
+
 export default function EducationSection({ items, className }: EducationProps) {
   const data = useMemo(() => items ?? [], [items]);
   const [open, setOpen] = useState(false);
@@ -204,16 +259,49 @@ export default function EducationSection({ items, className }: EducationProps) {
     setCurrent(it);
     setOpen(true);
   };
+
   const closeModal = () => {
     setOpen(false);
-    // pequeño delay para evitar flicker al cerrar
     setTimeout(() => setCurrent(null), 180);
   };
 
+  // Agrupar por trackId (y ordenar)
+  const grouped = useMemo(() => {
+    const groups = new Map<string, EducationItem[]>();
+
+    for (const it of data) {
+      const key = it.trackId ?? "otros";
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key)!.push(it);
+    }
+
+    // Orden dentro de cada grupo (por año desc)
+    for (const [k, arr] of groups) {
+      arr.sort((a, b) => Number(b.year) - Number(a.year));
+      groups.set(k, arr);
+    }
+
+    // Orden de grupos (según TRACKS.order; "otros" al final)
+    const entries = Array.from(groups.entries()).sort(([a], [b]) => {
+      const oa =
+        a === "otros" ? 999 : TRACKS[a as keyof typeof TRACKS]?.order ?? 50;
+
+      const ob =
+        b === "otros" ? 999 : TRACKS[b as keyof typeof TRACKS]?.order ?? 50;
+
+      return oa - ob;
+    });
+
+    return entries;
+  }, [data]);
+
   return (
-    <section id="educacion" className={clsx("scroll-mt-28", className)}>
+    <section
+      id="education"
+      className={clsx("scroll-mt-28 overflow-x-hidden", className)}
+    >
+      {/* Encabezado centrado en el contenedor */}
       <div className="mx-auto max-w-6xl px-4 md:px-0">
-        {/* Encabezado simple a la izquierda */}
         <header className="mb-6 md:mb-10">
           <p className="text-sm tracking-[0.22em] uppercase text-neutral-500">
             Educación
@@ -223,19 +311,63 @@ export default function EducationSection({ items, className }: EducationProps) {
             formación.
           </h2>
         </header>
+      </div>
 
-        {/* Layout: los bloques azules “alineados a la derecha” */}
-        <div className="grid grid-cols-12 gap-4 md:gap-6">
-          {/* Columna vacía para empujar a la derecha en desktop */}
-          <div className="col-span-12 md:col-span-7" />
+      {/* Bloques por carrera (separadores + cards intactas) */}
+      {/* Bloques por carrera (separadores + cards intactas) */}
+      <div className="space-y-12">
+        {grouped.map(([trackKey, list], idx) => {
+          const meta =
+            trackKey === "otros"
+              ? null
+              : TRACKS[trackKey as keyof typeof TRACKS];
 
-          {/* Columna derecha con las tarjetas */}
-          <div className="col-span-12 md:col-span-5 space-y-4">
-            {data.map((item) => (
-              <EducationCard key={item.id} item={item} onOpen={openModal} />
-            ))}
-          </div>
-        </div>
+          return (
+            <div key={trackKey} className="space-y-6">
+              {/* Separador de carrera - FULL BLEED BAND */}
+              <div
+                className={clsx(
+                  "relative w-screen mx-auto",
+                  "border-y border-foreground/40",
+                  "bg-foreground"
+                )}
+              >
+                <div className="mx-auto max-w-6xl px-4 md:px-0 py-10 md:py-12">
+                  <div className="flex items-end justify-between gap-6">
+                    <div className="text-left">
+                      <p className="text-md tracking-[0.22em] uppercase text-neutral-100">
+                        {trackKey === "otros" ? "Otros" : "Carrera"}
+                      </p>
+
+                      <h3 className="text-white mt-2 text-xl md:text-4xl font-semibold tracking-[-0.01em]">
+                        {trackKey === "otros"
+                          ? "Cursos y certificaciones"
+                          : meta?.title}
+                      </h3>
+
+                      {meta?.subtitle ? (
+                        <p className="mt-2 text-lg text-neutral-100">
+                          {meta.subtitle}
+                        </p>
+                      ) : null}
+                    </div>
+
+                    <div className="text-md text-neutral-300">
+                      {list.length} {list.length === 1 ? "curso" : "cursos"}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tus tarjetas full-bleed intactas */}
+              <div className="space-y-4">
+                {list.map((item) => (
+                  <EducationCard key={item.id} item={item} onOpen={openModal} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Modal */}

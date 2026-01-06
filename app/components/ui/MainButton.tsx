@@ -11,6 +11,7 @@ type Props = React.ComponentProps<"button"> & {
   fillClassName?: string;   // ej: "bg-neutral-900"
   textClassName?: string;   // ej: "text-neutral-900"
   rounded?: string;         // ej: "rounded-lg" | "rounded-full"
+  ariaLabel?: string;
 };
 
 export default function MainButton({

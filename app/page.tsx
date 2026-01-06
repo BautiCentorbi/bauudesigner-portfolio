@@ -1,9 +1,7 @@
+import ContactForm from "./components/ContactForm";
 import About from "./components/sections/About";
 import Clients from "./components/sections/Clients";
-import Contact from "./components/sections/Contact";
 import EducationSection from "./components/sections/Education";
-import Education from "./components/sections/Education";
-import Experience from "./components/sections/Experience";
 import Hero from "./components/sections/Hero";
 import LogoGallery from "./components/sections/LogoGallery";
 import Projects from "./components/sections/Projects";
@@ -37,7 +35,7 @@ export default function Home() {
       </section>
 
       <section className="min-h-[80vh]">
-        <Contact />
+        <ContactForm />
       </section>
 
     </main>
