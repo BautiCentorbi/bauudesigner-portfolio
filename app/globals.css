@@ -4,6 +4,7 @@
   --background: #ebebeb;
   --foreground: #212121;
   --nav-h: 88px;
+  color-scheme: light;
 }
 
 @theme inline {
