@@ -65,7 +65,7 @@ export async function POST(request: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY ?? "");
 
     const response = await resend.emails.send({
-      from: "Formulario MUTA AI <noreply@mutaconsultora.com.ar>",
+      from: "Formulario PORTFOLIO CONTACTO <noreply@bcentorbi.com>",
       to: process.env.RESEND_TO_EMAIL ?? "",
       subject: asunto,
       html: `
