@@ -12,72 +12,117 @@ const container: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      delayChildren: 0.2,
-      staggerChildren: 0.3,
-    },
+    transition: { delayChildren: 0.2, staggerChildren: 0.3 },
   },
 };
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: easeOut },
-  },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 };
 
 export default function Hero() {
   const { scrollTo } = useLenis();
-  
+
   return (
     <motion.div
-      className="px-12"
+      className="px-12 max-lg:px-6 max-sm:px-4"
       variants={container}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.5 }}
     >
-      <h1 className="flex flex-col text-[14rem] font-bold leading-[0.8] items-center h-full">
+      <h1
+        className="
+          flex flex-col font-bold uppercase items-center h-full
+          leading-[0.8]
+
+          /* MOBILE/TABLET (colapsa y baja tamaño) */
+          max-lg:text-[8rem]
+          max-md:text-[6rem]
+          max-sm:text-[4.25rem]
+          max-sm:leading-[0.9]
+
+          /* DESKTOP: escala editorial entre 1280 y 1920 sin romper */
+          lg:text-[clamp(8.75rem,11vw,14rem)]
+        "
+      >
         {/* Línea 1 */}
-        <div className="flex gap-4 text-left">
-          {/* Título parte 1 */}
-          <motion.span variants={fadeUp} className="w-full uppercase">
+        <div
+          className="
+            flex text-left
+
+            /* desktop: ritmo editorial controlado */
+            lg:gap-[clamp(0.75rem,1.2vw,1rem)]
+
+            /* responsive: colapsa */
+            max-lg:flex-col max-lg:gap-6 max-lg:w-full
+          "
+        >
+          <motion.span
+            variants={fadeUp}
+            className="w-full uppercase max-lg:text-center"
+          >
             Mucho más que{" "}
             <span className="transition-colors duration-300 hover:text-blue-600">
               Diseño
             </span>
           </motion.span>
 
-          {/* Mini bio */}
-          <motion.div variants={fadeUp} className="text-left mt-auto w-fit">
+          <motion.div
+            variants={fadeUp}
+            className="
+              text-left mt-auto w-fit
+              max-lg:mt-0 max-lg:w-full max-lg:text-center
+            "
+          >
             <Link href="#contact">
               <MainButton
                 href="#contact"
-                className="mt-12 font-inter text-2xl w-full my-4"
+                className="
+                  mt-12 font-inter text-2xl w-full my-4
+                  max-lg:mt-6 max-lg:text-lg max-lg:w-full
+                "
                 rounded="rounded-full"
               >
                 Contactame
               </MainButton>
             </Link>
-            <span className="font-alt text-2xl font-bold uppercase block">
+
+            <span className="font-alt text-2xl font-bold uppercase block max-lg:text-xl">
               Bautista Centorbi
             </span>
-            <p className="font-sans text-2xl leading-[0.9]">
+            <p className="font-sans text-2xl leading-[0.9] max-lg:text-xl">
               Frontend Developer &amp; Graphic Designer
             </p>
-            <p className="text-lg text-slate-700">Mendoza, Argentina</p>
+            <p className="text-lg text-slate-700 max-lg:text-base">
+              Mendoza, Argentina
+            </p>
           </motion.div>
         </div>
 
         {/* Línea 2 */}
-        <div className="flex gap-4 text-right">
+        <div
+          className="
+            flex text-right
+
+            lg:gap-[clamp(0.75rem,1.2vw,1rem)]
+
+            max-lg:flex-col-reverse max-lg:gap-8 max-lg:w-full max-lg:text-center
+          "
+        >
           <motion.a
             variants={fadeUp}
             href="#projects"
             aria-label="Ir a proyectos"
-            className="mt-48 inline-flex"
+            className="
+              inline-flex
+
+              /* desktop: en vez de mt-48 fijo, escalamos para 1280/1366/1600 */
+              lg:mt-[clamp(3rem,10vh,12rem)]
+
+              max-lg:mt-6 max-lg:justify-center
+            "
             onClick={(e) => {
               e.preventDefault();
               scrollTo("#projects", { offset: -96, duration: 1 });
@@ -85,48 +130,47 @@ export default function Hero() {
           >
             <span
               className="
-      group relative inline-flex items-center justify-center
-      w-28 h-28 rounded-full
-      overflow-hidden   /* <- recorta el relleno */
-      transition-transform duration-300 hover:-translate-y-0.5
-      outline-none focus-visible:ring-2 focus-visible:ring-black/60
-    "
+                group relative inline-flex items-center justify-center
+                w-28 h-28 rounded-full overflow-hidden
+                transition-transform duration-300 hover:-translate-y-0.5
+                outline-none focus-visible:ring-2 focus-visible:ring-black/60
+
+                max-sm:w-20 max-sm:h-20
+              "
             >
-              {/* 1) BORDE (aparece primero) */}
               <span
                 className="
-        pointer-events-none absolute inset-0 rounded-full
-        border border-black
-        opacity-0 group-hover:opacity-100
-        transition-opacity duration-150
-      "
+                  pointer-events-none absolute inset-0 rounded-full
+                  border border-black
+                  opacity-0 group-hover:opacity-100
+                  transition-opacity duration-150
+                "
               />
-
-              {/* 2) RELLENO: rectángulo que sube (wipe) */}
               <span
                 className="
-        pointer-events-none absolute inset-x-0 bottom-0
-        h-full w-full bg-black
-        translate-y-full group-hover:translate-y-0
-        transition-transform duration-400 delay-100
-        [ease:cubic-bezier(0.16,1,0.3,1)]
-        will-change-transform
-      "
+                  pointer-events-none absolute inset-x-0 bottom-0
+                  h-full w-full bg-black
+                  translate-y-full group-hover:translate-y-0
+                  transition-transform duration-400 delay-100
+                  [ease:cubic-bezier(0.16,1,0.3,1)]
+                  will-change-transform
+                "
               />
-
-              {/* 3) ICONO: negro -> blanco cuando el fill cubre */}
               <ChevronDown
                 size={64}
                 className="
-        relative z-10 transition-colors duration-300
-        text-black group-hover:text-white
-      "
+                  relative z-10 transition-colors duration-300
+                  text-black group-hover:text-white
+                  max-sm:w-10 max-sm:h-10
+                "
               />
             </span>
           </motion.a>
 
-          {/* Título parte 2 */}
-          <motion.span variants={fadeUp} className="w-full uppercase">
+          <motion.span
+            variants={fadeUp}
+            className="w-full uppercase max-lg:text-center"
+          >
             Construyo{" "}
             <span className="transition-colors duration-300 hover:text-blue-600">
               Experiencias

@@ -5,21 +5,18 @@ import Link, { type LinkProps } from "next/link";
 import { motion, type Variants } from "framer-motion";
 import clsx from "clsx";
 
-/* ---------- Tipos públicos ---------- */
 export type LogoItem = {
   id: string;
   title: string;
   year: string | number;
-  img: string; // /public/logos/*.webp|png|svg
+  img: string;
 };
 
-// Discriminada: si asLink=true → href obligatorio; si false/omitido → sin href
 type Base = { item: LogoItem; className?: string; ariaLabel?: string };
 type Linky = Base & { asLink: true; href: LinkProps["href"] };
 type Divy = Base & { asLink?: false; href?: never };
 export type LogoTileProps = Linky | Divy;
 
-/* ---------- Anim ---------- */
 const fadeIn: Variants = {
   hidden: { opacity: 0, scale: 0.96 },
   show: {
@@ -29,7 +26,6 @@ const fadeIn: Variants = {
   },
 } satisfies Variants;
 
-/* ---------- UI interna ---------- */
 function TileInner({ item }: { item: LogoItem }) {
   return (
     <>
@@ -41,22 +37,24 @@ function TileInner({ item }: { item: LogoItem }) {
           height={600}
           className="
             max-h-[52%] w-auto object-contain
-            brightness-0 saturate-100 opacity-90
+            md:brightness-0 md:saturate-100
             transition-all duration-300
             group-hover:brightness-100 group-hover:saturate-100 group-hover:opacity-100
           "
         />
       </div>
 
-      <div className="absolute left-3 bottom-3 text-neutral-600 text-[13px] flex gap-2 items-center">
-        <span className="text-xl">{item.title}</span>
-        <span className="text-xl text-neutral-400">{item.year}</span>
+      {/* Caption: responsive SOLO para <md (md+ queda igual que antes: text-xl) */}
+      <div className="absolute left-3 bottom-3 text-neutral-600 flex gap-2 items-center">
+        <span className="text-base sm:text-lg md:text-xl">{item.title}</span>
+        <span className="text-base sm:text-lg md:text-xl text-neutral-400">
+          {item.year}
+        </span>
       </div>
     </>
   );
 }
 
-/* ---------- Componente único ---------- */
 export function LogoTile(props: LogoTileProps) {
   const { item, className, ariaLabel } = props;
 
@@ -67,8 +65,8 @@ export function LogoTile(props: LogoTileProps) {
       whileInView="show"
       viewport={{ once: false, amount: 0.4 }}
       className={clsx(
-        // leve achique del contenedor
-        "group relative aspect-square outline-1 outline-gray-300", "bg-black/3",
+        "group relative aspect-square outline-1 outline-gray-300",
+        "bg-black/3",
         className
       )}
     >
@@ -93,7 +91,6 @@ export function LogoTile(props: LogoTileProps) {
   );
 }
 
-/* ---------- Grid (responsive + 3/2 centrados en desktop) ---------- */
 export function LogosRow({
   items,
   className,
@@ -106,26 +103,26 @@ export function LogosRow({
       <div className="mx-auto max-w-6xl px-4 md:px-0">
         <div
           className={clsx(
-            // responsive base
-            "grid ",
-            // mobile: 2 por fila, tablet+: 3 por fila
-            "grid-cols-2 md:grid-cols-3"
+            "grid",
+            // Desktop: igual a tu layout actual
+            "grid-cols-2 md:grid-cols-3",
+            // Espaciado (si ya te funciona, dejalo; esto solo mejora mobile)
+            "gap-3 sm:gap-4 md:gap-0"
           )}
         >
-          <div className="flex flex-col justify-center p-6">
+          {/* TEXTO: en mobile ocupa 2 columnas (full width). En desktop queda igual. */}
+          <div className="col-span-2 md:col-span-1 flex flex-col justify-center p-4 sm:p-6">
             <h3 className="font-alt text-lg md:text-3xl font-semibold text-neutral-800 tracking-tight mb-3">
               Identidad visual sólida
             </h3>
-            <p className="text-neutral-800 leading-relaxed font-inter text-md md:text-xl">
-              Desarrollo marcas auténticas que transmiten esencia, propósito
-              y diferenciación real. Cada logo es diseñado para ser versátil,
-              memorable y adaptable a entornos digitales y físicos.
+            <p className="text-neutral-800 leading-relaxed font-inter text-base sm:text-lg md:text-xl">
+              Desarrollo marcas auténticas que transmiten esencia, propósito y diferenciación real.
+              Cada logo es diseñado para ser versátil, memorable y adaptable a entornos digitales y físicos.
             </p>
           </div>
+
+          {/* LOGOS: desktop igual, centrado 3/2 intacto */}
           {items.map((item, i) => {
-            // Si hay 5 elementos exactamente:
-            // fila 1: i=0,1,2 (cols 1-3)
-            // fila 2: i=3,4 -> centrados en md+: col-start-2 y col-start-3
             const centerSecondRow =
               items.length === 5 && i >= 3
                 ? i === 3
@@ -137,14 +134,10 @@ export function LogosRow({
               <LogoTile
                 key={item.id}
                 item={item}
-                className={clsx(
-                  "h-full", // asegura tamaño consistente
-                  centerSecondRow
-                )}
+                className={clsx(centerSecondRow)}
               />
             );
           })}
-          
         </div>
       </div>
     </section>

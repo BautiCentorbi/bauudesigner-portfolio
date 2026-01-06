@@ -10,19 +10,19 @@ import { EDUCATION } from "./data/education.data";
 export default function Home() {
   return (
     <main className="py-20 space-y-32 bg-gray-200">
-      <section className="min-h-[80vh]">
+      <section className="min-h-[80vh] overflow-x-hidden">
         <Hero />
       </section>
 
-      <section className="min-h-[80vh]">
+      <section className="min-h-[80vh] overflow-x-hidden">
         <Projects />
       </section>
 
-      <section className="min-h-[80vh]">
+      <section className="min-h-[80vh] overflow-x-hidden">
         <LogoGallery />
       </section>
 
-      <section className="">
+      <section className=" overflow-x-hidden">
         <Clients />
       </section>
 
@@ -30,11 +30,11 @@ export default function Home() {
         <About />
       </section>
 
-      <section className="min-h-[80vh]">
+      <section className="min-h-[80vh] overflow-x-hidden">
         <EducationSection items={EDUCATION} />
       </section>
 
-      <section className="min-h-[80vh]">
+      <section className="min-h-[80vh] overflow-x-hidden">
         <ContactForm />
       </section>
 
