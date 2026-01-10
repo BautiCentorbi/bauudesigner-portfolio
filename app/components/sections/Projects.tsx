@@ -49,12 +49,10 @@ const VIEWPORT = {
 };
 
 const PROJECTS: Project[] = [
-  { id: "p1", title: "MUTA AI", tags: ["Branding", "Web Development"], img: "/images/Projects-MUTA.webp", href: "#" },
-  { id: "p2", title: "Blindaje", tags: ["Branding", "Web Development"], img: "/images/Projects-Blindaje.webp", href: "#" },
-  { id: "p3", title: "Proyecto 3", tags: ["Ecommerce", "Next.js"], img: "/projects/Projects-P3.webp", href: "#" },
-  { id: "p4", title: "Proyecto 4", tags: ["UI", "Frontend"], img: "/projects/Projects-P4.webp", href: "#" },
-  { id: "p5", title: "Proyecto 5", tags: ["Art Direction"], img: "/projects/Projects-P5.webp", href: "#" },
-  { id: "p6", title: "Proyecto 6", tags: ["Photo Retouch"], img: "/projects/Projects-P6.webp", href: "#" },
+  { id: "p1", title: "MUTA AI", tags: ["Branding", "Web Development"], img: "/images/projects/Projects-MUTA.webp", href: "#" },
+  { id: "p2", title: "Blindaje", tags: ["Branding", "Web Development"], img: "/images/projects/Projects-Blindaje.webp", href: "#" },
+  { id: "p3", title: "iMatorras", tags: ["Brand System", "Art Direction"], img: "/images/projects/Projects-iMatorras.webp", href: "#" },
+  { id: "p4", title: "Liga de F5 Adaptado", tags: ["Visual Identity", "Social Content"], img: "/images/projects/Projects-LF5A.webp", href: "#" },
 ];
 
 function pairAt(index: number): [Project, Project] {
@@ -271,7 +269,7 @@ export default function ProjectsGallery() {
 
         {/* GRID */}
         <div className="z-10 grid grid-cols-1 md:grid-cols-2 gap-0">
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence mode="popLayout" initial={false}>
             {/* dentro de tu grid: */}
             <ProjectCard
               p={left}

@@ -40,8 +40,9 @@ export default function Hero() {
           /* MOBILE/TABLET (colapsa y baja tamaño) */
           max-lg:text-[8rem]
           max-md:text-[6rem]
-          max-sm:text-[4.25rem]
+          max-sm:text-[3.5rem]
           max-sm:leading-[0.9]
+          max-sm:text-center
 
           /* DESKTOP: escala editorial entre 1280 y 1920 sin romper */
           lg:text-[clamp(8.75rem,11vw,14rem)]
@@ -57,6 +58,7 @@ export default function Hero() {
 
             /* responsive: colapsa */
             max-lg:flex-col max-lg:gap-6 max-lg:w-full
+            max-sm:text-center
           "
         >
           <motion.span
