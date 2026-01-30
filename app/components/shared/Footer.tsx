@@ -3,7 +3,7 @@
 import { ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { motion, type Variants, type Transition } from "framer-motion";
-import { easeOut } from "../sections/Hero";
+import { easeOut } from "@/app/lib/animationEffects";
 import { useLenis } from "@/app/providers/ScrollProvider";
 import Link from "next/link";
 

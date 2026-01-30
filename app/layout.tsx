@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Darker_Grotesque, Syne, Inter } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/ui/NavBar";
-import Footer from "./components/ui/Footer";
+import NavBar from "./components/shared/NavBar";
+import Footer from "./components/shared/Footer";
 import { ScrollProvider } from "./providers/ScrollProvider";
 import Script from "next/script";
 import CookiesBanner from "./components/CookiesBanner";

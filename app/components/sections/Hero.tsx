@@ -4,22 +4,8 @@ import { motion, type Variants, type Transition } from "framer-motion";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { useLenis } from "@/app/providers/ScrollProvider";
-import MainButton from "../ui/MainButton";
-
-export const easeOut: Transition["ease"] = [0.16, 1, 0.3, 1];
-
-const container: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { delayChildren: 0.2, staggerChildren: 0.3 },
-  },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
-};
+import MainButton from "../shared/MainButton";
+import { easeOut, container, fadeUp } from "@/app/lib/animationEffects";
 
 export default function Hero() {
   const { scrollTo } = useLenis();

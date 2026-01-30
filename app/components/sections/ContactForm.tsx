@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import MainButton from "../ui/MainButton";
+import MainButton from "../shared/MainButton";
 import { SendIcon } from "lucide-react";
 import toast from "react-hot-toast";
 

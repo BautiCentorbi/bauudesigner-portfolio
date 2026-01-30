@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { NAV_ITEMS } from "@/app/lib/nav";
 import { useActiveSection } from "@/app/hooks/useActiveSection";
@@ -34,7 +35,7 @@ function SwipeNavItem({
         "group relative inline-flex items-center",
         "px-3 py-2 text-xl transition-colors",
         active ? "font-bold text-white" : "text-neutral-800 hover:text-white",
-        className
+        className,
       )}
     >
       <span className="relative overflow-hidden rounded-md">
@@ -44,7 +45,7 @@ function SwipeNavItem({
           className={clsx(
             "pointer-events-none absolute inset-0 rounded-md border border-black",
             "opacity-0 group-hover:opacity-100",
-            DURATION_BORDER
+            DURATION_BORDER,
           )}
         />
 
@@ -55,7 +56,7 @@ function SwipeNavItem({
             "pointer-events-none absolute inset-y-0 left-0 w-full bg-black",
             "-translate-x-full group-hover:translate-x-0",
             active && "translate-x-0",
-            `transition-transform ${DURATION_FILL} ${EASE}`
+            `transition-transform ${DURATION_FILL} ${EASE}`,
           )}
         />
 
@@ -63,7 +64,7 @@ function SwipeNavItem({
         <span
           className={clsx(
             "relative z-10 px-2 py-1 transition-colors duration-300",
-            active ? "text-white" : "group-hover:text-white"
+            active ? "text-white" : "group-hover:text-white",
           )}
         >
           {label}
@@ -76,7 +77,7 @@ function SwipeNavItem({
             "absolute -bottom-1 left-0 h-0.5 bg-black origin-left",
             "w-0 group-hover:w-full",
             active && "w-full",
-            `transition-[width] ${DURATION_FILL} ${EASE}`
+            `transition-[width] ${DURATION_FILL} ${EASE}`,
           )}
         />
       </span>
@@ -86,7 +87,7 @@ function SwipeNavItem({
 
 function getNavH() {
   const navHVar = getComputedStyle(document.documentElement).getPropertyValue(
-    "--nav-h"
+    "--nav-h",
   );
   const navH = parseInt((navHVar || "96").trim(), 10);
   return Number.isFinite(navH) ? navH : 96;
@@ -102,7 +103,10 @@ export default function NavBar() {
     if (!el) return;
 
     const setVar = () =>
-      document.documentElement.style.setProperty("--nav-h", `${el.offsetHeight}px`);
+      document.documentElement.style.setProperty(
+        "--nav-h",
+        `${el.offsetHeight}px`,
+      );
 
     setVar();
     const ro = new ResizeObserver(setVar);
@@ -139,6 +143,9 @@ export default function NavBar() {
       setOpen(false);
     };
 
+  const pathname = usePathname();
+  const router = useRouter();
+
   return (
     <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 bg-gray-200">
       <nav className="mx-auto max-w-6xl px-4">
@@ -148,7 +155,16 @@ export default function NavBar() {
             aria-label="Volver al inicio"
             onClick={(e) => {
               e.preventDefault();
-              scrollTo("body", { duration: 0.9 });
+
+              // Si ya estamos en la home → scroll
+              if (pathname === "/") {
+                scrollTo("body", { duration: 0.9 });
+              }
+              // Si estamos en otra ruta → navegar a home
+              else {
+                router.push("/");
+              }
+
               setOpen(false);
             }}
             className="inline-flex items-center gap-2 hover:opacity-90 hover:-translate-y-px transition-all duration-200 motion-reduce:transition-none"
@@ -191,7 +207,7 @@ export default function NavBar() {
               "rounded-md border border-black/20 w-11 h-11",
               "hover:bg-black/5 transition-colors",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/60",
-              open && "opacity-0 pointer-events-none" // mantiene espacio, pero desaparece
+              open && "opacity-0 pointer-events-none", // mantiene espacio, pero desaparece
             )}
             aria-label="Abrir menú"
             aria-expanded={open}
@@ -209,7 +225,7 @@ export default function NavBar() {
         className={clsx(
           "md:hidden",
           "fixed inset-0 z-40",
-          open ? "pointer-events-auto" : "pointer-events-none"
+          open ? "pointer-events-auto" : "pointer-events-none",
         )}
         aria-hidden={!open}
       >
@@ -220,7 +236,7 @@ export default function NavBar() {
           onClick={() => setOpen(false)}
           className={clsx(
             "absolute inset-0 bg-black/30 transition-opacity",
-            open ? "opacity-100" : "opacity-0"
+            open ? "opacity-100" : "opacity-0",
           )}
         />
 
@@ -232,7 +248,7 @@ export default function NavBar() {
             "pt-var(--nav-h)",
             "transition-transform duration-300",
             EASE,
-            open ? "translate-x-0" : "translate-x-full"
+            open ? "translate-x-0" : "translate-x-full",
           )}
         >
           {/* X DEL PANEL: ABSOLUTO AL PANEL (NO lo afecta el padding-top) */}

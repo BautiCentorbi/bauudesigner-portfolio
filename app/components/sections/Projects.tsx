@@ -12,13 +12,28 @@ import {
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
+import { PROJECTS as CASES } from "@/app/lib/projects";
+
+export function generateStaticParams() {
+  return PROJECTS.map((p) => ({ slug: p.slug }));
+}
+
+
+const PROJECTS: Project[] = CASES.map((p) => ({
+  id: p.slug,
+  slug: p.slug,
+  title: p.clientName,
+  tags: p.tags,
+  img: p.heroImage.src, // si no existe img, usa heroImage
+}));
+
 
 type Project = {
   id: string;
+  slug: string;
   title: string;
   tags: string[];
   img: string;
-  href?: string;
 };
 
 const easeOut: Transition["ease"] = [0.16, 1, 0.3, 1];
@@ -43,23 +58,24 @@ const fadeIn: Variants = {
 
 // Ajustes de viewport para disparar “in-view” de forma fluida
 const VIEWPORT = {
-  amount: 0.45,                 // ~45% del elemento visible
-  margin: "0px 0px -10% 0px",   // arranca un poco antes
-  once: true,         // animar cada vez que entra (cámbialo a true si querés 1 sola vez)
+  amount: 0.45, // ~45% del elemento visible
+  margin: "0px 0px -10% 0px", // arranca un poco antes
+  once: true, // animar cada vez que entra (cámbialo a true si querés 1 sola vez)
 };
 
-const PROJECTS: Project[] = [
-  { id: "p1", title: "MUTA AI", tags: ["Branding", "Web Development"], img: "/images/projects/Projects-MUTA.webp", href: "#" },
-  { id: "p2", title: "Blindaje", tags: ["Branding", "Web Development"], img: "/images/projects/Projects-Blindaje.webp", href: "#" },
-  { id: "p3", title: "iMatorras", tags: ["Brand System", "Art Direction"], img: "/images/projects/Projects-iMatorras.webp", href: "#" },
-  { id: "p4", title: "Liga de F5 Adaptado", tags: ["Visual Identity", "Social Content"], img: "/images/projects/Projects-LF5A.webp", href: "#" },
-];
 
-function pairAt(index: number): [Project, Project] {
-  const a = (index + PROJECTS.length) % PROJECTS.length;
+function mod(n: number, m: number) {
+  return ((n % m) + m) % m;
+}
+
+function pairAtPairIndex(pairIndex: number): [Project, Project] {
+  const pairs = Math.ceil(PROJECTS.length / 2);
+  const pi = mod(pairIndex, pairs);
+  const a = (pi * 2) % PROJECTS.length;
   const b = (a + 1) % PROJECTS.length;
   return [PROJECTS[a], PROJECTS[b]];
 }
+
 
 function ProjectCard({
   p,
@@ -70,7 +86,6 @@ function ProjectCard({
   side: "left" | "right";
   delay?: number;
 }) {
-  const Card = p.href ? Link : "div";
   const reduceMotion = useReducedMotion();
 
   return (
@@ -86,8 +101,7 @@ function ProjectCard({
         side === "right" && "md:rounded-r-2xl"
       )}
     >
-      <Card href={p.href as string} className="group block relative">
-        {/* IMAGEN: mini fade-in en viewport (con delay para stagger) */}
+      <Link href={`/projects/${p.slug}`} className="group block relative">
         <motion.div
           variants={fadeIn}
           initial="hidden"
@@ -110,16 +124,13 @@ function ProjectCard({
           />
         </motion.div>
 
-        {/* OVERLAY INFERIOR: mobile SIEMPRE / desktop SOLO hover */}
+        {/* overlay igual que ahora */}
         <div className="pointer-events-none absolute inset-0">
-          {/* degradé */}
           <div
             className={clsx(
               "absolute inset-x-0 bottom-0 h-24 md:h-32",
               "bg-linear-to-t from-black/80 to-transparent",
-              // mobile visible
               "opacity-100 translate-y-0",
-              // desktop solo hover
               "md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0",
               "transition-all duration-300",
               "rounded-2xl md:rounded-none",
@@ -127,13 +138,10 @@ function ProjectCard({
               side === "right" && "md:rounded-br-2xl"
             )}
           />
-          {/* contenido */}
           <div
             className={clsx(
               "absolute inset-x-0 bottom-0 p-4 md:p-6",
-              // mobile visible
               "opacity-100 translate-y-0",
-              // desktop solo hover
               "md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0",
               "transition-all duration-300",
               side === "left"
@@ -161,10 +169,11 @@ function ProjectCard({
             </div>
           </div>
         </div>
-      </Card>
+      </Link>
     </motion.div>
   );
 }
+
 
 function WipeButton({
   dir = "right",
@@ -210,7 +219,7 @@ function WipeButton({
 
 export default function ProjectsGallery() {
   const [page, setPage] = useState(0);
-  const [left, right] = useMemo(() => pairAt(page * 2), [page]);
+  const [left, right] = useMemo(() => pairAtPairIndex(page), [page]);
   const reduceMotion = useReducedMotion();
 
   return (
@@ -277,6 +286,7 @@ export default function ProjectsGallery() {
               delay={0.0}
               key={`left-${left.id}`}
             />
+
             <ProjectCard
               p={right}
               side="right"
