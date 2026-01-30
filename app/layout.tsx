@@ -7,6 +7,7 @@ import { ScrollProvider } from "./providers/ScrollProvider";
 import Script from "next/script";
 import CookiesBanner from "./components/CookiesBanner";
 import { Toaster } from "react-hot-toast";
+import PageTransition from "./components/shared/PageTransition";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -57,7 +58,7 @@ export default function RootLayout({
         <ScrollProvider>
         <NavBar />
         <CookiesBanner />
-        {children}
+        <PageTransition>{children}</PageTransition>
         <Toaster
           position="top-right"
           toastOptions={{

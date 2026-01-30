@@ -148,15 +148,15 @@ export const PROJECTS: ProjectCase[] = [
         layout: "twoUpPlusOne",
         items: [
           {
-            src: "/images/projects/muta/brand-w&b.png",
+            src: "/images/projects/muta/brand-w&b.webp",
             alt: "MUTA AI · Construcción del logotipo",
           },
           {
-            src: "/images/projects/muta/brand-2.png",
+            src: "/images/projects/muta/brand-2.webp",
             alt: "MUTA AI · Logotipo completo",
           },
           {
-            src: "/images/projects/muta/brand-app.png",
+            src: "/images/projects/muta/brand-app.webp",
             alt: "MUTA AI · Aplicación del logotipo",
           },
         ],
@@ -250,8 +250,8 @@ export const PROJECTS: ProjectCase[] = [
 
       {
         kind: "richText",
-        tone: "light",
-        align: "left",
+        tone: "dark",
+        align: "center",
         text: BLINDAJE.blindaje_body,
       },
       {
@@ -298,6 +298,26 @@ export const PROJECTS: ProjectCase[] = [
             src: "/projects/blindaje/screen-2.webp",
             alt: "Blindaje · Secciones y servicios",
           },
+        ],
+      },
+
+      {
+        kind: "deliverables",
+        title: "Entregables",
+        items: BLINDAJE.blindaje_items,
+      },
+      {
+        kind: "stack",
+        title: "Stack",
+        items: [
+          "Next.js",
+          "TypeScript",
+          "TailwindCSS",
+          "Framer Motion",
+          "Lenis Scroll",
+          "Resend",
+          "Google reCAPTCHA",
+          "Vercel",
         ],
       },
 
