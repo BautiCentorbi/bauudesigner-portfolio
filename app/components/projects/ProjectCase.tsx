@@ -58,7 +58,10 @@ export default function ProjectCase({ project }: { project: ProjectCaseType }) {
         {/* Image + CTA */}
         <div className="mt-10 grid gap-6 md:grid-cols-12 items-center">
           <div className="md:col-span-9">
-            <div className="relative w-full overflow-hidden border border-black/15">
+            <motion.div
+              layoutId={`project-hero-${project.slug}`}
+              className="relative w-full overflow-hidden border border-black/15"
+            >
               <div className="relative aspect-video">
                 <Image
                   src={project.heroImage.src}
@@ -68,7 +71,7 @@ export default function ProjectCase({ project }: { project: ProjectCaseType }) {
                   className="object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
 
           <div className="md:col-span-3 flex md:flex-col items-center md:items-end gap-3 md:gap-4">

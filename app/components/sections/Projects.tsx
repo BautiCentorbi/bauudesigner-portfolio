@@ -107,6 +107,7 @@ function ProjectCard({
           initial="hidden"
           whileInView="show"
           viewport={VIEWPORT}
+          layoutId={`project-hero-${p.slug}`}
           transition={{
             delay,
             duration: reduceMotion ? 0 : 0.45,
