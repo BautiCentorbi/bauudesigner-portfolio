@@ -40,12 +40,18 @@ export async function POST(request: Request) {
     // --- Campos del formulario ---
     const nombre = formData.get("nombre");
     const apellido = formData.get("apellido");
+    const email = formData.get("email");
+    const phoneCountry = formData.get("phoneCountry");
+    const phoneNumber = formData.get("phoneNumber");
     const asunto = formData.get("asunto");
     const mensaje = formData.get("mensaje");
 
     if (
       typeof nombre !== "string" ||
       typeof apellido !== "string" ||
+      typeof email !== "string" ||
+      typeof phoneCountry !== "string" ||
+      typeof phoneNumber !== "string" ||
       typeof asunto !== "string" ||
       typeof mensaje !== "string"
     ) {
@@ -56,7 +62,15 @@ export async function POST(request: Request) {
     }
 
     // Validación adicional
-    const error = validateFormFields({ nombre, apellido, asunto, mensaje });
+    const error = validateFormFields({
+      nombre,
+      apellido,
+      email,
+      phoneCountry,
+      phoneNumber,
+      asunto,
+      mensaje,
+    });
     if (error) {
       return NextResponse.json({ error }, { status: 400 });
     }
@@ -72,6 +86,10 @@ export async function POST(request: Request) {
         <p><strong>Nombre:</strong> ${sanitize(nombre)} ${sanitize(
         apellido
       )}</p>
+        <p><strong>Email:</strong> ${sanitize(email)}</p>
+        <p><strong>Teléfono:</strong> ${sanitize(
+          `${phoneCountry} ${phoneNumber}`
+        )}</p>
         <p><strong>Mensaje:</strong></p>
         <p>${sanitize(mensaje)}</p>
       `,

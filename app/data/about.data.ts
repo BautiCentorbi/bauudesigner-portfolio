@@ -43,7 +43,7 @@ export const ABOUT: AboutData = {
     titleB: "y construyo sitios",
     titleC: "rápidos y claros.",
   },
-  photo: { src: "/images/BCentorbi.webp", alt: "Bautista Centorbi" },
+  photo: { src: "/images/About-BCentorbi.webp", alt: "Bautista Centorbi" },
   bio: "Soy Bautista. Me muevo entre branding, UI e implementación front-end (Next.js + Tailwind + Motion) para lanzar productos con criterio, claridad y performance.",
   capabilities: [
     "Dirección de arte",
