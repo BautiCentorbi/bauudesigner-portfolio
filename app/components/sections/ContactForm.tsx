@@ -10,6 +10,7 @@ type Consent = "accepted_all" | "accepted_essential" | "rejected" | null;
 
 const ContactForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [phoneCountry, setPhoneCountry] = useState("");
 
   const [consent, setConsent] = useState<Consent>(null);
   const consentGranted =
@@ -107,11 +108,30 @@ const ContactForm: React.FC = () => {
   // Disabled
   "disabled:opacity-60 disabled:cursor-not-allowed";
 
+  const selectField =
+    "w-full outline-none rounded-2xl transition-all duration-200 " +
+    "bg-transparent text-foreground " +
+    "!border !border-foreground/25 " +
+    "hover:bg-black/5 hover:!border-foreground/40 " +
+    "focus-visible:!border-primary/70 focus-visible:ring-2 focus-visible:ring-primary/25 " +
+    "disabled:opacity-60 disabled:cursor-not-allowed";
+
 
 
 
   const labelClass = "text-sm md:text-base text-foreground/85";
   const hintClass = "text-sm text-zinc-500";
+  const phoneCountries = [
+    { code: "+54", label: "Argentina", flag: "🇦🇷" },
+    { code: "+1", label: "Estados Unidos", flag: "🇺🇸" },
+    { code: "+34", label: "España", flag: "🇪🇸" },
+    { code: "+52", label: "México", flag: "🇲🇽" },
+    { code: "+56", label: "Chile", flag: "🇨🇱" },
+    { code: "+57", label: "Colombia", flag: "🇨🇴" },
+    { code: "+51", label: "Perú", flag: "🇵🇪" },
+    { code: "+598", label: "Uruguay", flag: "🇺🇾" },
+    { code: "+55", label: "Brasil", flag: "🇧🇷" },
+  ];
 
   return (
     <section
@@ -157,6 +177,74 @@ const ContactForm: React.FC = () => {
                   disabled={loading}
                 />
               </div>
+            </div>
+
+            {/* Email */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className={labelClass}>
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                placeholder="tuemail@correo.com"
+                className={`${baseField} h-11 rounded-2xl px-4`}
+                disabled={loading}
+              />
+            </div>
+
+            {/* Teléfono */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="phoneNumber" className={labelClass}>
+                Teléfono
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-3">
+                <div className="group relative">
+                  <select
+                    id="phoneCountry"
+                    name="phoneCountry"
+                    required
+                    autoComplete="tel-country-code"
+                    className={`${selectField} h-11 px-3 pr-8 appearance-none transition duration-300 ${
+                      phoneCountry
+                        ? "!bg-black !text-white !border-transparent hover:!bg-black"
+                        : "text-zinc-500"
+                    }`}
+                    disabled={loading}
+                    value={phoneCountry}
+                    onChange={(e) => setPhoneCountry(e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Seleccioná país
+                    </option>
+                    {phoneCountries.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.flag} {c.code} · {c.label}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-zinc-500 transition-transform duration-200 group-focus-within:rotate-180">
+                    ▼
+                  </span>
+                </div>
+
+                <input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  required
+                  autoComplete="tel-national"
+                  inputMode="tel"
+                  placeholder="Ej: 261 555 1234"
+                  className={`${baseField} h-11 rounded-2xl px-4`}
+                  disabled={loading}
+                />
+              </div>
+              <p className={hintClass}>
+                Incluí el número sin el código de país.
+              </p>
             </div>
 
             {/* Asunto */}
