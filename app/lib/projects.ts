@@ -21,6 +21,16 @@ export type ProjectBlock =
       items: ProjectMedia[];
     }
   | {
+      kind: "sectionTitle";
+      title: string;
+    }
+  | {
+      kind: "video";
+      src: string;
+      label: string;
+      aspect?: ProjectMedia["aspect"];
+    }
+  | {
       kind: "highlights";
       title?: string;
       items: Array<{ label: string; value: string }>;
@@ -161,29 +171,25 @@ export const PROJECTS: ProjectCase[] = [
           },
         ],
       },
-
-      // WEB (texto + grilla 2 screens)
+      {
+        kind: "sectionTitle",
+        title: "Web",
+      },
       {
         kind: "richText",
         tone: "light",
         align: "left",
-        text: "La web fue diseñada y desarrollada como una plataforma moderna y performante, priorizando claridad, accesibilidad y SEO técnico. Se implementaron animaciones sutiles y una arquitectura lista para escalar, incluyendo formulario funcional con Resend y reCAPTCHA.",
+        text: "La web fue diseÃ±ada y desarrollada como una plataforma moderna y performante, priorizando claridad, accesibilidad y SEO tÃ©cnico. Se implementaron animaciones sutiles y una arquitectura lista para escalar, incluyendo formulario funcional con Resend y reCAPTCHA.",
       },
+      // WEB (video demo)
       {
-        kind: "mediaGrid",
-        layout: "twoUp",
-        items: [
-          {
-            src: "/projects/muta/web-1.webp",
-            alt: "MUTA AI · Web institucional",
-          },
-          {
-            src: "/projects/muta/web-2.webp",
-            alt: "MUTA AI · Secciones y navegación",
-          },
-        ],
+        kind: "video",
+        src: "/videos/MUTA-Web_Demo.webm",
+        label: "MUTA AI · Web demo",
+        aspect: "16/9",
       },
-      
+
+            
       {
         kind: "deliverables",
         title: "Entregables",
@@ -280,6 +286,10 @@ export const PROJECTS: ProjectCase[] = [
         ],
       },
       {
+        kind: "sectionTitle",
+        title: "Web",
+      },
+      {
         kind: "richText",
         tone: "light",
         align: "left",
@@ -287,18 +297,10 @@ export const PROJECTS: ProjectCase[] = [
       },
 
       {
-        kind: "mediaGrid",
-        layout: "twoUp",
-        items: [
-          {
-            src: "/projects/blindaje/screen-1.webp",
-            alt: "Blindaje · Web institucional",
-          },
-          {
-            src: "/projects/blindaje/screen-2.webp",
-            alt: "Blindaje · Secciones y servicios",
-          },
-        ],
+        kind: "video",
+        src: "/videos/Blindaje-Web_Demo.webm",
+        label: "Blindaje · Web demo",
+        aspect: "16/9",
       },
 
       {
@@ -412,3 +414,7 @@ export const PROJECTS: ProjectCase[] = [
 export function getProjectBySlug(slug: string) {
   return PROJECTS.find((p) => p.slug === slug);
 }
+
+
+
+

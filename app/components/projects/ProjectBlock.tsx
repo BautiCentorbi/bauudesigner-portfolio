@@ -1,10 +1,25 @@
 "use client";
 
-import type { ProjectBlock, ProjectCase as ProjectCaseType } from "@/app/lib/projects";
+import type { ProjectBlock, ProjectCase as ProjectCaseType, ProjectMedia } from "@/app/lib/projects";
 import ProjectMediaGrid from "./ProjectMediaGrid";
 
 function SectionShell({ children }: { children: React.ReactNode }) {
   return <div className="mx-auto max-w-6xl px-4 md:px-0">{children}</div>;
+}
+
+function aspectClass(aspect?: ProjectMedia["aspect"]) {
+  switch (aspect) {
+    case "21/9":
+      return "aspect-[21/9]";
+    case "16/9":
+      return "aspect-[16/9]";
+    case "4/3":
+      return "aspect-[4/3]";
+    case "1/1":
+      return "aspect-square";
+    default:
+      return "aspect-[16/9]";
+  }
 }
 
 function BlockRenderer({ block }: { block: ProjectBlock }) {
@@ -31,6 +46,38 @@ function BlockRenderer({ block }: { block: ProjectBlock }) {
         <section className="py-0">
           <SectionShell>
             <ProjectMediaGrid layout={block.layout} items={block.items} />
+          </SectionShell>
+        </section>
+      );
+
+    case "sectionTitle":
+      return (
+        <section className="py-8">
+          <SectionShell>
+            <div className="flex items-center gap-4">
+              <span className="h-px flex-1 bg-black" />
+              <h3 className="text-lg md:text-2xl font-bold uppercase">{block.title}</h3>
+              <span className="h-px flex-1 bg-black" />
+            </div>
+          </SectionShell>
+        </section>
+      );
+
+    case "video":
+      return (
+        <section className="py-0">
+          <SectionShell>
+            <div className={aspectClass(block.aspect)}>
+              <video
+                className="h-full w-full object-cover"
+                src={block.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label={block.label}
+              />
+            </div>
           </SectionShell>
         </section>
       );
