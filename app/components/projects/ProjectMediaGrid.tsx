@@ -12,6 +12,8 @@ function aspectClass(aspect?: ProjectMedia["aspect"]) {
       return "aspect-[16/9]";
     case "4/3":
       return "aspect-[4/3]";
+    case "3/4":
+      return "aspect-[3/4]";
     case "1/1":
       return "aspect-square";
     default:
@@ -24,7 +26,7 @@ export default function ProjectMediaGrid({
   layout,
 }: {
   items: ProjectMedia[];
-  layout: "twoUp" | "oneFull" | "twoUpPlusOne";
+  layout: "twoUp" | "oneFull" | "twoUpPlusOne" | "twoUpPlusOneExtended";
 }) {
   if (layout === "oneFull") {
     const first = items[0];
@@ -54,10 +56,10 @@ export default function ProjectMediaGrid({
     );
   }
 
-  // twoUpPlusOne
   const [a, b, c] = items;
-  return (
-    <div className="border border-black/15">
+  const extra = items.slice(3);
+  const baseGrid = (
+    <>
       <div className="grid md:grid-cols-2">
         {[a, b].map((m, i) => (
           <div key={i} className={clsx("relative", i === 0 ? "md:border-r border-black/15" : "")}>
@@ -72,6 +74,28 @@ export default function ProjectMediaGrid({
         <div className="relative border-t border-black/15">
           <div className={clsx("relative", c.aspect ? aspectClass(c.aspect) : "aspect-video md:aspect-21/9")}>
             <Image src={c.src} alt={c.alt} fill className="object-cover" />
+          </div>
+        </div>
+      )}
+    </>
+  );
+
+  if (layout === "twoUpPlusOne") {
+    return <div className="border border-black/15">{baseGrid}</div>;
+  }
+
+  // twoUpPlusOneExtended
+  return (
+    <div className="border border-black/15">
+      {baseGrid}
+      {extra.length > 0 && (
+        <div className="mt-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {extra.map((m, i) => (
+              <div key={i} className={clsx("relative", m?.aspect ? aspectClass(m.aspect) : "aspect-4/3 md:aspect-16/10")}>
+                <Image src={m.src} alt={m.alt} fill className="object-cover" />
+              </div>
+            ))}
           </div>
         </div>
       )}
