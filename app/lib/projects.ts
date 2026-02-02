@@ -5,7 +5,7 @@ export type ProjectTag = string;
 export type ProjectMedia = {
   src: string;
   alt: string;
-  aspect?: "16/9" | "4/3" | "1/1" | "21/9" | "auto";
+  aspect?: "16/9" | "4/3" | "3/4" | "1/1" | "21/9" | "auto";
 };
 
 export type ProjectBlock =
@@ -17,7 +17,7 @@ export type ProjectBlock =
     }
   | {
       kind: "mediaGrid";
-      layout: "twoUp" | "oneFull" | "twoUpPlusOne";
+      layout: "twoUp" | "oneFull" | "twoUpPlusOne" | "twoUpPlusOneExtended";
       items: ProjectMedia[];
     }
   | {
@@ -272,15 +272,15 @@ export const PROJECTS: ProjectCase[] = [
         layout: "twoUpPlusOne",
         items: [
           {
-            src: "/projects/blindaje/brand-1.webp",
+            src: "/images/projects/blindaje/brand-w&b.webp",
             alt: "Blindaje · Construcción del logotipo",
           },
           {
-            src: "/projects/blindaje/brand-2.webp",
+            src: "/images/projects/blindaje/brand-2.webp",
             alt: "Blindaje · Logotipo completo",
           },
           {
-            src: "/projects/blindaje/brand-3.webp",
+            src: "/images/projects/blindaje/brand-app.webp",
             alt: "Blindaje · Aplicación del logotipo",
           },
         ],
@@ -365,7 +365,7 @@ export const PROJECTS: ProjectCase[] = [
       },
       {
         kind: "closing",
-        leftText: " LOREM_LONG",
+        leftText: "",
         rightTitle: "iMatorras",
         rightTags: ["Brand System", "Art Direction"],
       },
@@ -379,7 +379,8 @@ export const PROJECTS: ProjectCase[] = [
     clientName: "Liga de F5 Adaptado",
     year: 2025,
     tags: ["Visual Identity", "Social Content"],
-    heroIntro: "LOREM_MED",
+    heroIntro:
+      "LF5A es una liga deportiva con un fuerte componente social, inclusivo y comunitario. El proyecto se centró en construir una identidad visual sólida y coherente, capaz de representar los valores del deporte adaptado, la inclusión y el trabajo colectivo, y trasladarlos de forma clara y reconocible al ecosistema digital.",
     heroImage: {
       src: "/images/projects/Projects-LF5A.webp",
       alt: "Liga de F5 Adaptado",
@@ -390,11 +391,35 @@ export const PROJECTS: ProjectCase[] = [
     },
 
     blocks: [
-      { kind: "richText", tone: "dark", align: "center", text: "LOREM_SHORT" },
+      {
+        kind: "richText",
+        tone: "dark",
+        align: "center",
+        text:
+          "El desafío fue desarrollar una marca flexible y contemporánea, pensada para convivir con múltiples formatos y situaciones: comunicación institucional, difusión de eventos, piezas gráficas para redes sociales y aplicaciones visuales en contextos reales. La identidad debía ser accesible, directa y emocional, sin perder carácter ni consistencia visual.",
+      },
+      {
+        kind: "sectionTitle",
+        title: "Identidad",
+      },
+      {
+        kind: "richText",
+        tone: "light",
+        align: "left",
+        text:
+          "Se definió un sistema de marca claro, con criterios de uso precisos, tipografías funcionales y una paleta cromática con presencia y legibilidad, diseñada para destacar en entornos digitales y reforzar el sentido de pertenencia de la comunidad LF5A. El resultado es una identidad reconocible, adaptable y preparada para crecer junto a la liga y su impacto social.",
+      },
       {
         kind: "mediaGrid",
-        layout: "oneFull",
-        items: [{ src: "/projects/lf5a/img-1.webp", alt: "Imagen full" }],
+        layout: "twoUpPlusOneExtended",
+        items: [
+          { src: "/images/projects/lf5a/brand-w&b.webp", alt: "LF5A · Logo en Blanco y Negro" },
+          { src: "/images/projects/lf5a/brand-2.webp", alt: "LF5A · Logo Completo y Variantes" },
+          { src: "/images/projects/lf5a/brand-app-1.webp", alt: "LF5A · Aplicación 01", aspect: "3/4" },
+          { src: "/images/projects/lf5a/brand-app-2.webp", alt: "LF5A · Aplicación 02", aspect: "3/4" },
+          { src: "/images/projects/lf5a/brand-app-3.webp", alt: "LF5A · Aplicación 03", aspect: "3/4" },
+          { src: "/images/projects/lf5a/brand-app-4.webp", alt: "LF5A · Aplicación 04", aspect: "3/4" },
+        ],
       },
       {
         kind: "deliverables",
@@ -403,7 +428,7 @@ export const PROJECTS: ProjectCase[] = [
       },
       {
         kind: "closing",
-        leftText: "LOREM_LONG",
+        leftText: "",
         rightTitle: "Liga de F5 Adaptado",
         rightTags: ["Visual Identity", "Social Content"],
       },
