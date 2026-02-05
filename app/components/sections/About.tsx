@@ -3,9 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ABOUT } from "@/app/data/about.data";
+import ReactMarkdown from "react-markdown";
 import ExperienceSection from "./Experience";
+import { useLenis } from "@/app/providers/ScrollProvider";
 
 export default function AboutSplit() {
+  const { scrollTo } = useLenis();
+
+  const cta = ABOUT.cta;
+
   return (
     <section id="about" className="scroll-mt-28">
       {/* Poster headline */}
@@ -43,13 +49,17 @@ export default function AboutSplit() {
             <span className="text-lg font-semibold">{ABOUT.year}</span>
           </div>
 
-          {ABOUT.cta?.href && ABOUT.cta?.label ? (
-            <Link
-              href={ABOUT.cta.href}
+          {cta?.href && cta?.label ? (
+            <a
+              href={cta.href}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo(cta.href, { offset: -96, duration: 1 });
+              }}
               className="mt-3 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold border border-black bg-black text-white hover:-translate-y-0.5 transition"
             >
-              {ABOUT.cta.label}
-            </Link>
+              {cta.label}
+            </a>
           ) : null}
         </figure>
 
@@ -57,7 +67,17 @@ export default function AboutSplit() {
         <div className="col-span-12 md:col-span-8 space-y-6">
           {/* Bio */}
           <div className="rounded-2xl border border-neutral-200/80 bg-white/70 p-5 backdrop-blur">
-            <p className="text-xl md:text-2xl leading-relaxed">{ABOUT.bio}</p>
+            <div className="text-lg md:text-xl leading-relaxed">
+              <ReactMarkdown
+                components={{
+                  strong: ({ children }) => (
+                    <strong className="font-bold">{children}</strong>
+                  ),
+                }}
+              >
+                {ABOUT.bio}
+              </ReactMarkdown>
+            </div>
           </div>
 
           {/* Capacidades + Métricas */}
@@ -78,13 +98,9 @@ export default function AboutSplit() {
 
             <Block title="Métricas">
               <ul className="divide-y divide-neutral-200/80">
-                {ABOUT.metrics.map((m) => (
-                  <li
-                    key={m.label}
-                    className="flex items-baseline justify-between py-3"
-                  >
-                    <span className="text-neutral-500">{m.label}</span>
-                    <span className="text-xl font-semibold">{m.value}</span>
+                {ABOUT.principles.map((p) => (
+                  <li key={p} className="py-3">
+                    <span className="text-foreground">{p}</span>
                   </li>
                 ))}
               </ul>

@@ -26,7 +26,7 @@ export type AboutData = {
   photo: { src: string; alt: string };
   bio: string;
   capabilities: string[];
-  metrics: Metric[];
+  principles: string[];
   experience: ExperienceItem[];
 
   // ⬇️ estos son opcionales para que no rompa si los quitás
@@ -44,20 +44,22 @@ export const ABOUT: AboutData = {
     titleC: "rápidos y claros.",
   },
   photo: { src: "/images/About-BCentorbi.webp", alt: "Bautista Centorbi" },
-  bio: "Soy Bautista. Me muevo entre branding, UI e implementación front-end (Next.js + Tailwind + Motion) para lanzar productos con criterio, claridad y performance.",
+  bio: "Soy Bautista. Diseño **identidades** y construyo **interfaces digitales** que funcionan en el mundo real. Trabajo en conjunto con **branding, UI y front-end** para lanzar productos con criterio visual, claridad funcional y performance técnica.",
   capabilities: [
-    "Dirección de arte",
+    "Dirección de arte aplicada a producto",
     "Identidad & sistemas visuales",
-    "UX/UI design",
+    "UX/UI con foco en claridad y usabilidad",
     "Front-end (Next.js)",
-    "Estrategia & contenido",
+    "Estrategia Visual & contenido",
     "Optimización SEO",
     "Colaboración ágil",
   ],
-  metrics: [
-    { label: "Años construyendo", value: "3+" },
-    { label: "Clientes", value: "12+" },
-    { label: "Sectores", value: "Vino, Seguridad, Salud, Consultoría" },
+  principles: [
+    "Diseñar con intención, no por tendencia",
+    "Pensar en sistemas, no en piezas sueltas",
+    "Diseño que se puede construir y escalar",
+    "Claridad antes que complejidad",
+    "Diseño funcional, no solo estético",
   ],
   experience: <ExperienceItem[]>[
     {

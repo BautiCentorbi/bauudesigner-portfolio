@@ -6,6 +6,7 @@ export type ProjectMedia = {
   src: string;
   alt: string;
   aspect?: "16/9" | "4/3" | "3/4" | "1/1" | "21/9" | "auto";
+  href?: string;
 };
 
 export type ProjectBlock =
@@ -340,7 +341,8 @@ export const PROJECTS: ProjectCase[] = [
     clientName: "iMatorras",
     year: 2025,
     tags: ["Brand System", "Art Direction"],
-    heroIntro: " LOREM_MED",
+    heroIntro:
+      "iMatorras es una bodega que combina tradición y visión contemporánea. El proyecto se enfocó en construir un sistema de marca refinado y coherente, capaz de transmitir identidad, origen y carácter en cada punto de contacto.",
     heroImage: {
       src: "/images/projects/Projects-iMatorras.webp",
       alt: "iMatorras",
@@ -348,14 +350,50 @@ export const PROJECTS: ProjectCase[] = [
     primaryCta: { label: "Ver caso completo", href: "https://imatorras.com" },
 
     blocks: [
-      { kind: "richText", tone: "dark", align: "center", text: "LOREM_SHORT" },
+      {
+        kind: "richText",
+        tone: "dark",
+        align: "center",
+        text:
+          "El desafío fue consolidar una identidad visual sobria y elegante, con un sistema flexible que pudiera escalar a nuevas aplicaciones sin perder consistencia ni reconocimiento. Se trabajó la marca desde la estructura tipográfica y los criterios de uso para lograr una presencia sólida y clara.",
+      },
+      {
+        kind: "sectionTitle",
+        title: "Identidad",
+      },
+      {
+        kind: "richText",
+        tone: "light",
+        align: "left",
+        text:
+          "Se definió un lenguaje visual atemporal, con una paleta cromática contenida, jerarquías claras y un sistema de marca versátil. El resultado es una identidad con personalidad, pensada para convivir en soportes editoriales, digitales y de packaging.",
+      },
       {
         kind: "mediaGrid",
         layout: "twoUpPlusOne",
         items: [
-          { src: "/projects/imatorras/img-1.webp", alt: "Imagen 1" },
-          { src: "/projects/imatorras/img-2.webp", alt: "Imagen 2" },
-          { src: "/projects/imatorras/img-3.webp", alt: "Imagen 3" },
+          { src: "/images/projects/imatorras/brand-w&b.webp", alt: "iMatorras · Construcción del logotipo" },
+          { src: "/images/projects/imatorras/brand-2.webp", alt: "iMatorras · Logotipo completo" },
+          { src: "/images/projects/imatorras/brand-app.webp", alt: "iMatorras · Aplicación del logotipo" },
+        ],
+      },
+      {
+        kind: "richText",
+        tone: "light",
+        align: "left",
+        text:
+          "Como parte del sistema, se desarrolló un brandbook que documenta criterios de uso, proporciones, aplicaciones y lineamientos visuales para mantener consistencia en todos los medios.",
+      },
+      {
+        kind: "mediaGrid",
+        layout: "oneFull",
+        items: [
+          {
+            src: "/images/projects/imatorras/brandbook-cover.webp",
+            alt: "iMatorras · Brandbook",
+            href: "/downloads/Matorras_Brandbook.pdf",
+            aspect: "4/3",
+          },
         ],
       },
       {
@@ -386,7 +424,7 @@ export const PROJECTS: ProjectCase[] = [
       alt: "Liga de F5 Adaptado",
     },
     primaryCta: {
-      label: "Ver caso completo",
+      label: "Visitar Instagram",
       href: "https://instagram.com/futbol5adaptado",
     },
 

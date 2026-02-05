@@ -21,6 +21,37 @@ function aspectClass(aspect?: ProjectMedia["aspect"]) {
   }
 }
 
+function MediaFrame({
+  media,
+  aspectFallback,
+}: {
+  media?: ProjectMedia;
+  aspectFallback: string;
+}) {
+  const aspect = media?.aspect ? aspectClass(media.aspect) : aspectFallback;
+  const image = (
+    <div className={clsx("relative", aspect)}>
+      {media && <Image src={media.src} alt={media.alt} fill className="object-cover" />}
+    </div>
+  );
+
+  if (media?.href) {
+    return (
+      <a
+        href={media.href}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={media.alt}
+        className="block"
+      >
+        {image}
+      </a>
+    );
+  }
+
+  return image;
+}
+
 export default function ProjectMediaGrid({
   items,
   layout,
@@ -33,9 +64,7 @@ export default function ProjectMediaGrid({
     if (!first) return null;
     return (
       <div className="border border-black/15">
-        <div className={clsx("relative", aspectClass(first.aspect))}>
-          <Image src={first.src} alt={first.alt} fill className="object-cover" />
-        </div>
+        <MediaFrame media={first} aspectFallback="aspect-[16/9]" />
       </div>
     );
   }
@@ -46,9 +75,7 @@ export default function ProjectMediaGrid({
         <div className="grid md:grid-cols-2">
           {items.slice(0, 2).map((m, i) => (
             <div key={i} className={clsx("relative", i === 0 ? "md:border-r border-black/15" : "")}>
-              <div className={clsx("relative", m.aspect ? aspectClass(m.aspect) : "aspect-4/3 md:aspect-16/10")}>
-                <Image src={m.src} alt={m.alt} fill className="object-cover" />
-              </div>
+              <MediaFrame media={m} aspectFallback="aspect-4/3 md:aspect-16/10" />
             </div>
           ))}
         </div>
@@ -63,18 +90,14 @@ export default function ProjectMediaGrid({
       <div className="grid md:grid-cols-2">
         {[a, b].map((m, i) => (
           <div key={i} className={clsx("relative", i === 0 ? "md:border-r border-black/15" : "")}>
-            <div className={clsx("relative", m?.aspect ? aspectClass(m.aspect) : "aspect-4/3 md:aspect-16/10")}>
-              {m && <Image src={m.src} alt={m.alt} fill className="object-cover" />}
-            </div>
+            <MediaFrame media={m} aspectFallback="aspect-4/3 md:aspect-16/10" />
           </div>
         ))}
       </div>
 
       {c && (
         <div className="relative border-t border-black/15">
-          <div className={clsx("relative", c.aspect ? aspectClass(c.aspect) : "aspect-video md:aspect-21/9")}>
-            <Image src={c.src} alt={c.alt} fill className="object-cover" />
-          </div>
+          <MediaFrame media={c} aspectFallback="aspect-video md:aspect-21/9" />
         </div>
       )}
     </>
@@ -92,9 +115,7 @@ export default function ProjectMediaGrid({
         <div className="mt-4">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {extra.map((m, i) => (
-              <div key={i} className={clsx("relative", m?.aspect ? aspectClass(m.aspect) : "aspect-4/3 md:aspect-16/10")}>
-                <Image src={m.src} alt={m.alt} fill className="object-cover" />
-              </div>
+              <MediaFrame key={i} media={m} aspectFallback="aspect-4/3 md:aspect-16/10" />
             ))}
           </div>
         </div>

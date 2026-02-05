@@ -23,6 +23,7 @@ export default function MainButton({
   textClassName = "text-black",
   rounded = "rounded-lg",
   children,
+  ariaLabel,
   ...rest
 }: Props) {
   const Component: any = as === "a" ? "a" : "button";
@@ -30,6 +31,7 @@ export default function MainButton({
   return (
     <Component
       href={href}
+      aria-label={ariaLabel}
       className={clsx(
         "group relative inline-flex items-center justify-center",
         "px-6 py-3 font-medium",

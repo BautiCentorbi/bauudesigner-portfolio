@@ -33,6 +33,8 @@ export const EDUCATION: EducationItem[] = [
       "Profundización en CleanCode escalable y buenas prácticas",
     ],
     trackId: "frontend-react",
+    url: "https://pf-centorbi-next-js.vercel.app",
+    urlLabel: "Ver proyecto web final del curso",
   },
   {
     id: "React-2024",
@@ -42,9 +44,11 @@ export const EDUCATION: EducationItem[] = [
     duration: "12 h",
     certificateSrc: "/certs/courses/Course-ReactJS.webp",
     description:
-      "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
+    "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
     highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
     trackId: "frontend-react",
+    url: "https://infinite-computing.vercel.app/",
+    urlLabel: "Ver proyecto web final del curso",
   },
   {
     id: "JavaScript-2024",
@@ -67,8 +71,10 @@ export const EDUCATION: EducationItem[] = [
     certificateSrc: "/certs/courses/Course-WebDev.webp",
     description:
       "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
-    highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
+    highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps", "CSS Avanzado"],
     trackId: "ux-ui",
+    url: "https://infinitegraphics.vercel.app/",
+    urlLabel: "Ver proyecto web final del curso", 
   },
   {
     id: "Advanced_UXUI-2024",
@@ -81,6 +87,8 @@ export const EDUCATION: EducationItem[] = [
       "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
     highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
     trackId: "ux-ui",
+    url: "https://www.behance.net/gallery/174275747/CAB-app-Redesign",
+    urlLabel: "Ver proyecto en Behance",
   },
   {
     id: "UXUI-2023",
@@ -93,6 +101,8 @@ export const EDUCATION: EducationItem[] = [
       "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
     highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
     trackId: "ux-ui",
+    url: "https://www.behance.net/gallery/162363743/WayToGo-UXUI-Design",
+    urlLabel: "Ver proyecto en Behance",
   },
   {
     id: "PSD_AI-2023",
@@ -105,5 +115,7 @@ export const EDUCATION: EducationItem[] = [
       "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
     highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
     trackId: "ux-ui",
+    url: "https://www.behance.net/gallery/155638875/Caffe-Brand-Design",
+    urlLabel: "Ver proyecto en Behance",
   },
 ];
