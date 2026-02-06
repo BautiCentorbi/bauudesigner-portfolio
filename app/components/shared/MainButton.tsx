@@ -3,10 +3,18 @@
 import React from "react";
 import clsx from "clsx";
 
-type Props = React.ComponentProps<"button"> & {
-  as?: "button" | "a";
-  href?: string;
-  /** Cambiá colores rápido sin tocar el DOM */
+type ButtonProps = React.ComponentProps<"button"> & {
+  as?: "button";
+  href?: never;
+};
+
+type AnchorProps = React.ComponentProps<"a"> & {
+  as: "a";
+  href: string;
+};
+
+type Props = (ButtonProps | AnchorProps) & {
+  /** CambiÃ¡ colores rÃ¡pido sin tocar el DOM */
   borderClassName?: string; // ej: "border-neutral-900"
   fillClassName?: string;   // ej: "bg-neutral-900"
   textClassName?: string;   // ej: "text-neutral-900"
