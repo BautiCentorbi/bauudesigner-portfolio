@@ -96,7 +96,7 @@ export default function AboutSplit() {
               </ul>
             </Block>
 
-            <Block title="Métricas">
+            <Block title="Capacidades">
               <ul className="divide-y divide-neutral-200/80">
                 {ABOUT.principles.map((p) => (
                   <li key={p} className="py-3">
