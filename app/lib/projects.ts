@@ -180,7 +180,7 @@ export const PROJECTS: ProjectCase[] = [
         kind: "richText",
         tone: "light",
         align: "left",
-        text: "La web fue diseÃ±ada y desarrollada como una plataforma moderna y performante, priorizando claridad, accesibilidad y SEO tÃ©cnico. Se implementaron animaciones sutiles y una arquitectura lista para escalar, incluyendo formulario funcional con Resend y reCAPTCHA.",
+        text: "El sitio prioriza velocidad de carga y jerarquía clara por sobre efectos innecesarios: microinteracciones puntuales, tipografía legible y una arquitectura de información pensada para convertir visitas en consultas. El formulario de contacto corre sobre Resend con protección reCAPTCHA, y el proyecto está armado para sumar secciones sin rehacer la base.",
       },
       // WEB (video demo)
       {
@@ -294,7 +294,7 @@ export const PROJECTS: ProjectCase[] = [
         kind: "richText",
         tone: "light",
         align: "left",
-        text: "La web institucional fue diseñada y desarrollada para comunicar confianza y posicionamiento premium desde el primer contacto, con una estructura clara de servicios, metodología y canales de consulta.",
+        text: "En la web, cada sección responde a una pregunta que se hace un cliente potencial: qué servicios ofrece, cómo trabaja y cómo contactarla. Esa estructura ordenada, sumada a una identidad visual sobria, es lo que traslada la sensación de profesionalismo del papel a la pantalla.",
       },
 
       {
@@ -351,11 +351,28 @@ export const PROJECTS: ProjectCase[] = [
 
     blocks: [
       {
+        kind: "highlights",
+        title: "Resumen",
+        items: [
+          { label: "Rol", value: "Diseñador de Marca & Dirección de Arte" },
+          {
+            label: "Objetivo",
+            value:
+              "Consolidar un sistema de identidad visual sobrio y flexible, capaz de transmitir origen, tradición y carácter en cada punto de contacto de la bodega.",
+          },
+          {
+            label: "Entrega",
+            value:
+              "Sistema de identidad completo, brandbook y aplicaciones para medios editoriales, digitales y de packaging.",
+          },
+        ],
+      },
+      {
         kind: "richText",
         tone: "dark",
         align: "center",
         text:
-          "El desafío fue consolidar una identidad visual sobria y elegante, con un sistema flexible que pudiera escalar a nuevas aplicaciones sin perder consistencia ni reconocimiento. Se trabajó la marca desde la estructura tipográfica y los criterios de uso para lograr una presencia sólida y clara.",
+          "Trabajar la marca de una bodega con historia implica un riesgo concreto: quedar anclada al pasado, o renovarse perdiendo lo que la hace reconocible. El objetivo fue encontrar ese punto medio, con un sistema flexible que pudiera escalar a nuevas aplicaciones sin resignar consistencia.",
       },
       {
         kind: "sectionTitle",
@@ -366,7 +383,7 @@ export const PROJECTS: ProjectCase[] = [
         tone: "light",
         align: "left",
         text:
-          "Se definió un lenguaje visual atemporal, con una paleta cromática contenida, jerarquías claras y un sistema de marca versátil. El resultado es una identidad con personalidad, pensada para convivir en soportes editoriales, digitales y de packaging.",
+          "El resultado es un lenguaje visual atemporal: paleta cromática contenida, jerarquías claras y un sistema versátil, pensado para convivir en soportes editoriales, digitales y de packaging sin perder personalidad.",
       },
       {
         kind: "mediaGrid",
@@ -430,11 +447,28 @@ export const PROJECTS: ProjectCase[] = [
 
     blocks: [
       {
+        kind: "highlights",
+        title: "Resumen",
+        items: [
+          { label: "Rol", value: "Diseñador Gráfico & Community Manager" },
+          {
+            label: "Objetivo",
+            value:
+              "Construir una identidad visual accesible y consistente que representara los valores del deporte adaptado, la inclusión y el trabajo colectivo.",
+          },
+          {
+            label: "Entrega",
+            value:
+              "Sistema de marca, aplicaciones visuales y piezas para comunicación institucional, eventos y redes sociales.",
+          },
+        ],
+      },
+      {
         kind: "richText",
         tone: "dark",
         align: "center",
         text:
-          "El desafío fue desarrollar una marca flexible y contemporánea, pensada para convivir con múltiples formatos y situaciones: comunicación institucional, difusión de eventos, piezas gráficas para redes sociales y aplicaciones visuales en contextos reales. La identidad debía ser accesible, directa y emocional, sin perder carácter ni consistencia visual.",
+          "Una liga de deporte adaptado necesita comunicar dos cosas al mismo tiempo: seriedad institucional y calidez humana. El reto fue construir una marca lo suficientemente flexible para convivir con comunicación institucional, difusión de eventos y piezas para redes, sin perder carácter ni consistencia visual.",
       },
       {
         kind: "sectionTitle",
@@ -445,7 +479,7 @@ export const PROJECTS: ProjectCase[] = [
         tone: "light",
         align: "left",
         text:
-          "Se definió un sistema de marca claro, con criterios de uso precisos, tipografías funcionales y una paleta cromática con presencia y legibilidad, diseñada para destacar en entornos digitales y reforzar el sentido de pertenencia de la comunidad LF5A. El resultado es una identidad reconocible, adaptable y preparada para crecer junto a la liga y su impacto social.",
+          "El sistema combina tipografías funcionales y una paleta con presencia y legibilidad, pensada para destacar en entornos digitales y reforzar el sentido de pertenencia de la comunidad LF5A: una identidad reconocible, adaptable y lista para crecer junto a la liga.",
       },
       {
         kind: "mediaGrid",

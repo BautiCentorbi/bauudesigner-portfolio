@@ -15,8 +15,7 @@ export default function Hero() {
       className="px-12 max-lg:px-6 max-sm:px-4"
       variants={container}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.5 }}
+      animate="show"
     >
       <h1
         className="
@@ -66,7 +65,6 @@ export default function Hero() {
           >
             <Link href="#contact">
               <MainButton
-                href="#contact"
                 className="
                   mt-12 font-inter text-2xl w-full my-4
                   max-lg:mt-6 max-lg:text-lg max-lg:w-full
@@ -81,7 +79,7 @@ export default function Hero() {
               Bautista Centorbi
             </span>
             <p className="font-sans text-2xl leading-[0.9] max-lg:text-xl">
-              Frontend Developer &amp; Graphic Designer
+              Diseñador Gráfico &amp; Brand Designer
             </p>
             <p className="text-lg text-slate-700 max-lg:text-base">
               Mendoza, Argentina

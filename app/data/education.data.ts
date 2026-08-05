@@ -24,7 +24,7 @@ export const EDUCATION: EducationItem[] = [
     duration: "2 meses",
     certificateSrc: "/certs/courses/Course-NextJs.webp",
     description:
-      "Formación y fundamentos completos de Next.Js, incluyendo SSR, SSG y rutas dinámicas. Donse se realizó un e-commerce funcional como proyecto final. La base de datos utilizada fue Firebase. Se utilizaron métodos de fetching de datos como getStaticProps y getServerSideProps. El proyecto cuenta con una landing page, página de productos, carrito funcional y un generador de tickets u órdenes de compra que se envían por email al usuario.",
+      "Formación y fundamentos completos de Next.js, incluyendo SSR, SSG y rutas dinámicas, con Firebase como base de datos y getStaticProps/getServerSideProps para el fetching de datos. Como proyecto final se construyó un e-commerce funcional con landing page, página de productos, carrito y un generador de tickets de compra enviados por email al usuario.",
     highlights: [
       "Implementación de SSR y SSG",
       "Integración con Firebase",
@@ -44,8 +44,12 @@ export const EDUCATION: EducationItem[] = [
     duration: "12 h",
     certificateSrc: "/certs/courses/Course-ReactJS.webp",
     description:
-    "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
-    highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
+      "Componentes, props, estado y hooks como base de React. Se practicó la construcción de interfaces reutilizables y el manejo de datos entre componentes en una SPA.",
+    highlights: [
+      "Componentes y props",
+      "useState y useEffect",
+      "Renderizado condicional y listas",
+    ],
     trackId: "frontend-react",
     url: "https://infinite-computing.vercel.app/",
     urlLabel: "Ver proyecto web final del curso",
@@ -58,8 +62,12 @@ export const EDUCATION: EducationItem[] = [
     duration: "12 h",
     certificateSrc: "/certs/courses/Course-JavaScript.webp",
     description:
-      "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
-    highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
+      "Fundamentos de JavaScript moderno (ES6+): variables, funciones, arrays, objetos y manipulación del DOM. La base necesaria antes de avanzar a React.",
+    highlights: [
+      "ES6+: arrow functions, destructuring, spread",
+      "Manipulación del DOM",
+      "Eventos y funciones asíncronas",
+    ],
     trackId: "frontend-react",
   },
   {
@@ -70,11 +78,15 @@ export const EDUCATION: EducationItem[] = [
     duration: "12 h",
     certificateSrc: "/certs/courses/Course-WebDev.webp",
     description:
-      "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
-    highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps", "CSS Avanzado"],
+      "HTML semántico y CSS aplicados a la estructura y maquetado de proyectos web, con foco en accesibilidad y buenas prácticas como base de todo el trayecto de frontend.",
+    highlights: [
+      "HTML semántico",
+      "Maquetado responsive",
+      "Buenas prácticas de accesibilidad",
+    ],
     trackId: "ux-ui",
     url: "https://infinitegraphics.vercel.app/",
-    urlLabel: "Ver proyecto web final del curso", 
+    urlLabel: "Ver proyecto web final del curso",
   },
   {
     id: "Advanced_UXUI-2024",
@@ -84,8 +96,12 @@ export const EDUCATION: EducationItem[] = [
     duration: "12 h",
     certificateSrc: "/certs/courses/Course-Advanced_UXUI.webp",
     description:
-      "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
-    highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
+      "Profundización en investigación de usuarios, arquitectura de información y prototipado de alta fidelidad, aplicada al rediseño real de un producto (proyecto CAB app).",
+    highlights: [
+      "Investigación de usuarios",
+      "Arquitectura de información",
+      "Prototipado de alta fidelidad en Figma",
+    ],
     trackId: "ux-ui",
     url: "https://www.behance.net/gallery/174275747/CAB-app-Redesign",
     urlLabel: "Ver proyecto en Behance",
@@ -98,8 +114,12 @@ export const EDUCATION: EducationItem[] = [
     duration: "12 h",
     certificateSrc: "/certs/courses/Course-UXUI.webp",
     description:
-      "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
-    highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
+      "Fundamentos de UX/UI: research, wireframing, prototipado y testeo de usabilidad, aplicados al diseño end-to-end de una app (proyecto WayToGo).",
+    highlights: [
+      "Wireframing y prototipado",
+      "Heurísticas de usabilidad",
+      "Diseño de flujos end-to-end",
+    ],
     trackId: "ux-ui",
     url: "https://www.behance.net/gallery/162363743/WayToGo-UXUI-Design",
     urlLabel: "Ver proyecto en Behance",
@@ -112,8 +132,12 @@ export const EDUCATION: EducationItem[] = [
     duration: "12 h",
     certificateSrc: "/certs/courses/Course-PSD_AI.webp",
     description:
-      "Fundamentos de indexación, performance, metadatos y auditorías con Lighthouse.",
-    highlights: ["Core Web Vitals", "Estructura HTML semántica", "Sitemaps"],
+      "Edición y retoque en Photoshop, e ilustración vectorial en Illustrator, aplicados al desarrollo de una identidad de marca (proyecto Caffè).",
+    highlights: [
+      "Retoque y composición en Photoshop",
+      "Ilustración vectorial en Illustrator",
+      "Aplicación a una identidad de marca real",
+    ],
     trackId: "ux-ui",
     url: "https://www.behance.net/gallery/155638875/Caffe-Brand-Design",
     urlLabel: "Ver proyecto en Behance",

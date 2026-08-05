@@ -28,8 +28,9 @@ const interSans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio - Bautista Centorbi",
-  description: "This is my portfolio, built with Next.js, Typescript, TailwindCSS and more.",
+  title: "Bautista Centorbi — Diseñador Gráfico & Brand Designer",
+  description:
+    "Diseño de identidad visual, rebranding y desarrollo web para marcas que necesitan verse tan sólidas como son. Con base en Mendoza, Argentina.",
 };
 
 export default function RootLayout({

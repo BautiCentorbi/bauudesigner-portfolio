@@ -51,9 +51,14 @@ const headingUp: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 };
 
-const fadeIn: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { duration: 0.45, ease: easeOut } },
+const cardEnter: Variants = {
+  hidden: { opacity: 0, y: 40, scale: 0.97 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: easeOut },
+  },
 };
 
 // Ajustes de viewport para disparar “in-view” de forma fluida
@@ -90,10 +95,15 @@ function ProjectCard({
 
   return (
     <motion.div
-      variants={fadeIn}
+      variants={cardEnter}
       initial="hidden"
       whileInView="show"
       viewport={VIEWPORT}
+      transition={{
+        delay,
+        duration: reduceMotion ? 0 : 0.7,
+        ease: easeOut,
+      }}
       className={clsx(
         "relative z-0 block w-full overflow-hidden",
         "rounded-2xl md:rounded-none py-4 md:py-0",
@@ -101,18 +111,17 @@ function ProjectCard({
         side === "right" && "md:rounded-r-2xl"
       )}
     >
-      <Link href={`/projects/${p.slug}`} className="group block relative">
+      <Link
+        href={`/projects/${p.slug}`}
+        className={clsx(
+          "group block relative overflow-hidden",
+          "rounded-2xl md:rounded-none",
+          side === "left" && "md:rounded-l-2xl",
+          side === "right" && "md:rounded-r-2xl"
+        )}
+      >
         <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="show"
-          viewport={VIEWPORT}
           layoutId={`project-hero-${p.slug}`}
-          transition={{
-            delay,
-            duration: reduceMotion ? 0 : 0.45,
-            ease: easeOut,
-          }}
           className="relative aspect-16/10 overflow-hidden"
         >
           <Image
@@ -120,54 +129,61 @@ function ProjectCard({
             alt={p.title}
             fill
             sizes="100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transform-gpu transition-transform duration-700 [ease:cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
             priority={false}
           />
         </motion.div>
 
-        {/* overlay igual que ahora */}
-        <div className="pointer-events-none absolute inset-0">
+        {/*
+          Gradient + texto: visibles siempre en mobile (max-md:), y revelados
+          solo al hover en desktop (md:). "max-md:" en vez de una clase base
+          sin prefijo evita que ambas reglas compitan en el mismo breakpoint.
+          El punto final "to-black/0" (en vez de "to-transparent") evita el
+          corte duro que Tailwind v4 genera al interpolar en oklab hacia el
+          keyword "transparent" — esa era la "línea negra" en el borde.
+          Tampoco se redondean estos overlays: el <Link> ya los recorta, y
+          duplicar el radio generaba un segundo borde de recorte con el que
+          chocaba (otra fuente de la línea).
+        */}
+        <div
+          aria-hidden
+          className={clsx(
+            "pointer-events-none absolute inset-x-0 bottom-0 h-28 md:h-40",
+            "bg-linear-to-t from-black/90 via-black/40 to-black/0",
+            "max-md:opacity-100",
+            "md:opacity-0 md:group-hover:opacity-100",
+            "transition-opacity duration-500 [ease:cubic-bezier(0.16,1,0.3,1)]"
+          )}
+        />
+
+        <div
+          className={clsx(
+            "pointer-events-none absolute inset-x-0 bottom-0 p-4 md:p-6",
+            "max-md:opacity-100 max-md:translate-y-0",
+            "md:opacity-0 md:translate-y-3 md:group-hover:opacity-100 md:group-hover:translate-y-0",
+            "transition-all duration-500 [ease:cubic-bezier(0.16,1,0.3,1)]",
+            side === "left"
+              ? "text-right pr-6 md:pr-10"
+              : "text-left pl-6 md:pl-10"
+          )}
+        >
+          <h3 className="font-alt text-white text-xl md:text-2xl font-semibold leading-tight">
+            {p.title}
+          </h3>
           <div
             className={clsx(
-              "absolute inset-x-0 bottom-0 h-24 md:h-32",
-              "bg-linear-to-t from-black/80 to-transparent",
-              "opacity-100 translate-y-0",
-              "md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0",
-              "transition-all duration-300",
-              "rounded-2xl md:rounded-none",
-              side === "left" && "md:rounded-bl-2xl",
-              side === "right" && "md:rounded-br-2xl"
-            )}
-          />
-          <div
-            className={clsx(
-              "absolute inset-x-0 bottom-0 p-4 md:p-6",
-              "opacity-100 translate-y-0",
-              "md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0",
-              "transition-all duration-300",
-              side === "left"
-                ? "text-right pr-6 md:pr-10"
-                : "text-left pl-6 md:pl-10"
+              "mt-2 flex flex-wrap gap-2",
+              side === "left" ? "justify-end" : "justify-start"
             )}
           >
-            <h3 className="font-alt text-white text-xl md:text-2xl font-semibold leading-tight">
-              {p.title}
-            </h3>
-            <div
-              className={clsx(
-                "mt-2 flex flex-wrap gap-2",
-                side === "left" ? "justify-end" : "justify-start"
-              )}
-            >
-              {p.tags.map((t) => (
-                <span
-                  key={t}
-                  className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-xs text-white/90 backdrop-blur"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
+            {p.tags.map((t) => (
+              <span
+                key={t}
+                className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-xs text-white/90 backdrop-blur"
+              >
+                {t}
+              </span>
+            ))}
           </div>
         </div>
       </Link>

@@ -14,7 +14,7 @@ type AnchorProps = React.ComponentProps<"a"> & {
 };
 
 type Props = (ButtonProps | AnchorProps) & {
-  /** CambiÃ¡ colores rÃ¡pido sin tocar el DOM */
+  /** Cambiá colores rápido sin tocar el DOM */
   borderClassName?: string; // ej: "border-neutral-900"
   fillClassName?: string;   // ej: "bg-neutral-900"
   textClassName?: string;   // ej: "text-neutral-900"
