@@ -26,7 +26,7 @@ export type AboutData = {
   photo: { src: string; alt: string };
   bio: string;
   capabilities: string[];
-  metrics: Metric[];
+  principles: string[];
   experience: ExperienceItem[];
 
   // ⬇️ estos son opcionales para que no rompa si los quitás
@@ -44,24 +44,38 @@ export const ABOUT: AboutData = {
     titleC: "rápidos y claros.",
   },
   photo: { src: "/images/About-BCentorbi.webp", alt: "Bautista Centorbi" },
-  bio: "Soy Bautista. Me muevo entre branding, UI e implementación front-end (Next.js + Tailwind + Motion) para lanzar productos con criterio, claridad y performance.",
+  bio: "Soy Bautista, diseñador gráfico y **brand designer** en Mendoza. Construyo identidades visuales y las llevo hasta su expresión digital para que una marca se vea igual de sólida en un manual, una tarjeta o un sitio web. Trabajé con clientes de rubros bien distintos —industrial, deportivo, vitivinícola, seguridad, consultoría— y en todos aplico el mismo criterio: **menos piezas sueltas, más sistema**.",
   capabilities: [
-    "Dirección de arte",
-    "Identidad & sistemas visuales",
-    "UX/UI design",
-    "Front-end (Next.js)",
-    "Estrategia & contenido",
-    "Optimización SEO",
-    "Colaboración ágil",
+    "Identidad Visual & Rebranding",
+    "Design Systems y Manual de Marca",
+    "Dirección de Arte & Diseño Editorial",
+    "Estrategia de Contenido (LinkedIn, Instagram, Meta/Google Ads)",
+    "Desarrollo web complementario (Next.js, React, TailwindCSS)",
   ],
-  metrics: [
-    { label: "Años construyendo", value: "3+" },
-    { label: "Clientes", value: "12+" },
-    { label: "Sectores", value: "Vino, Seguridad, Salud, Consultoría" },
+  principles: [
+    "Un sistema de marca vale más que un logo bonito",
+    "La coherencia entre papel y pantalla no es opcional",
+    "Cada pieza se diseña para repetirse, no para lucirse una sola vez",
+    "El contenido también es identidad, no un agregado",
+    "Simplicidad que se sostiene en el tiempo, no que sigue una moda",
   ],
   experience: <ExperienceItem[]>[
     {
-      year: "Ago. 2025 - Actualidad",
+      year: "Abr. 2026 - Jul. 2026",
+      company: "Cuenca del Sur",
+      subtitle: "Distribuidor B2B de caños de acero",
+      roleTitle: "Diseñador Gráfico y Encargado de Marketing",
+      summary:
+        "Lideré el reposicionamiento de identidad de marca en el marco de una reconversión comercial de la empresa: elaboré el manual de marca, piezas editoriales, brochure institucional, lineamientos visuales, contenido corporativo y tarjetas de presentación con código QR. En paralelo, diseñé y gestioné el plan de contenido de LinkedIn e Instagram —canal principal de ventas del cliente— y optimicé campañas de Meta Ads y Google Ads, además de construir un workspace en Notion para centralizar calendario editorial, documentación de marca y plantillas operativas.",
+      achievements: [
+        "Reposicionamiento completo de la identidad de marca durante una reconversión comercial activa de la empresa.",
+        "Plan de contenido y pauta paga (Meta Ads, Google Ads) alineados al canal principal de ventas del cliente.",
+        "Workspace de gestión de marca en Notion adoptado como base operativa del equipo.",
+      ],
+      tags: ["Branding", "Marketing", "Meta Ads", "Google Ads", "Diseño Editorial"],
+    },
+    {
+      year: "Ago. 2025 - May. 2026",
       company: "Santé Winebar",
       subtitle: "Vinoteca boutique en Mendoza",
       roleTitle: "Diseñador Gráfico",

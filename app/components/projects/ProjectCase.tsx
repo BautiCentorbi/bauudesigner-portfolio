@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp } from "@/app/lib/animationEffects";
+import { container, fadeUp } from "@/app/lib/animationEffects";
 import Image from "next/image";
 import Link from "next/link";
 import type { ProjectCase as ProjectCaseType } from "@/app/lib/projects";
@@ -26,17 +26,22 @@ export default function ProjectCase({ project }: { project: ProjectCaseType }) {
   return (
     <main className="bg-gray-200">
       {/* HERO */}
-      <section className="mx-auto max-w-6xl px-4 md:px-0 pt-24 md:pt-28 pb-10">
+      <motion.section
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="mx-auto max-w-6xl px-4 md:px-0 pt-24 md:pt-28 pb-10"
+      >
         <div className="grid gap-10 md:grid-cols-12 items-start">
           {/* Intro left */}
-          <div className="md:col-span-5">
+          <motion.div variants={fadeUp} className="md:col-span-5">
             <p className="text-md md:text-xl leading-relaxed text-neutral-900/90">
               {project.heroIntro}
             </p>
-          </div>
+          </motion.div>
 
           {/* Client right */}
-          <div className="md:col-span-7">
+          <motion.div variants={fadeUp} className="md:col-span-7">
             <div className="text-right">
               <p className="text-neutral-600 text-lg md:text-2xl leading-none">
                 {project.clientLabel ?? "Cliente:"}
@@ -52,12 +57,12 @@ export default function ProjectCase({ project }: { project: ProjectCaseType }) {
                 <TagPill key={t} label={t} />
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Image + CTA */}
         <div className="mt-10 grid gap-6 md:grid-cols-12 items-center">
-          <div className="md:col-span-9">
+          <motion.div variants={fadeUp} className="md:col-span-9">
             <motion.div
               layoutId={`project-hero-${project.slug}`}
               className="relative w-full overflow-hidden border border-black/15"
@@ -72,9 +77,12 @@ export default function ProjectCase({ project }: { project: ProjectCaseType }) {
                 />
               </div>
             </motion.div>
-          </div>
+          </motion.div>
 
-          <div className="md:col-span-3 flex md:flex-col items-center md:items-end gap-3 md:gap-4">
+          <motion.div
+            variants={fadeUp}
+            className="md:col-span-3 flex md:flex-col items-center md:items-end gap-3 md:gap-4"
+          >
             {project.primaryCta && (
               <Link
                 href={project.primaryCta.href}
@@ -87,10 +95,7 @@ export default function ProjectCase({ project }: { project: ProjectCaseType }) {
             )}
 
             {project.secondaryCta && (
-              <motion.a
-                variants={fadeUp}
-                initial="hidden"
-                animate="show"
+              <a
                 href={project.secondaryCta.href}
                 target="_blank"
                 rel="noreferrer"
@@ -105,11 +110,11 @@ export default function ProjectCase({ project }: { project: ProjectCaseType }) {
                     className="relative z-10 transition-colors duration-300 text-black group-hover:text-white max-sm:w-10 max-sm:h-10"
                   />
                 </span>
-              </motion.a>
+              </a>
             )}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* BLOQUES (modular) */}
       <ProjectBlocks project={project} />

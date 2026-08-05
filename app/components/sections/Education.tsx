@@ -3,6 +3,9 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+import { X } from "lucide-react";
+import MainButton from "../shared/MainButton";
 
 /* -------------------- Tipos -------------------- */
 export type EducationItem = {
@@ -15,6 +18,7 @@ export type EducationItem = {
   description?: string; // breve overview
   highlights?: string[]; // bullets: logros/aprendizajes
   url?: string; // link externo (opcional)
+  urlLabel?: string; // texto del botón (opcional)
   trackId?: "ux-ui" | "frontend-react";
 };
 
@@ -61,24 +65,40 @@ function EducationModal({
     if (open) closeBtnRef.current?.focus();
   }, [open]);
 
-  if (!open || !item) return null;
+  if (!item) return null;
 
   return (
-    <div
-      aria-labelledby={`${dialogId}-title`}
-      aria-modal="true"
-      role="dialog"
-      className="fixed inset-0 z-60"
-    >
-      {/* Backdrop oscuro + blur */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
+    <AnimatePresence>
+      {open ? (
+        <motion.div
+          aria-labelledby={`${dialogId}-title`}
+          aria-modal="true"
+          role="dialog"
+          className="fixed inset-0 z-60"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
+        >
+          {/* Backdrop oscuro + blur */}
+          <motion.div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          />
 
-      {/* Contenido */}
-      <div className="absolute inset-0 grid place-items-center p-4">
-        <div className="relative w-full max-w-4xl rounded-2xl bg-white shadow-xl">
+          {/* Contenido */}
+          <div className="absolute inset-0 grid place-items-center p-4">
+            <motion.div
+              className="relative w-full max-w-4xl rounded-2xl bg-white shadow-xl"
+              initial={{ opacity: 0, y: 10, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 6, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+            >
           {/* Cerrar */}
           <button
             ref={closeBtnRef}
@@ -86,7 +106,7 @@ function EducationModal({
             aria-label="Cerrar"
             className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-50"
           >
-            ×
+            <X className="h-4 w-4" aria-hidden />
           </button>
 
           <div className="grid grid-cols-12 gap-6 p-6 md:p-8">
@@ -108,16 +128,6 @@ function EducationModal({
                   </div>
                 )}
               </div>
-              {item.url ? (
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-block text-sm underline underline-offset-4 decoration-neutral-300 hover:decoration-black"
-                >
-                  Ver más →
-                </a>
-              ) : null}
             </div>
 
             {/* Detalle */}
@@ -151,11 +161,26 @@ function EducationModal({
                   </ul>
                 </div>
               ) : null}
+
+              {item.url ? (
+                <MainButton
+                  as="a"
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 w-full flex justify-center"
+                  ariaLabel={`Abrir proyecto de ${item.title}`}
+                >
+                  {item.urlLabel ?? "Ver proyecto"}
+                </MainButton>
+              ) : null}
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }
 
@@ -200,31 +225,46 @@ function EducationCard({
 
           {/* Columna certificado (misma “banda” de padding) */}
           <div className="col-span-12 md:col-span-4 flex md:justify-end">
-            <button
-              onClick={() => onOpen(item)}
-              className="group relative w-full md:max-w-xs overflow-hidden rounded-xl border border-neutral-200 bg-white"
-              aria-label={`Abrir certificado de ${item.title}`}
-            >
-              <div className="relative aspect-4/3 w-full">
-                {item.certificateSrc ? (
-                  <Image
-                    src={item.certificateSrc}
-                    alt={`Certificado de ${item.title}`}
-                    fill
-                    sizes="(min-width: 768px) 20rem, 90vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                ) : (
-                  <div className="grid h-full place-items-center text-sm text-neutral-500">
-                    Ver certificado
-                  </div>
-                )}
-              </div>
+            <div className="w-full md:max-w-xs">
+              <button
+                onClick={() => onOpen(item)}
+                className="group relative w-full overflow-hidden rounded-xl border border-neutral-200 bg-white"
+                aria-label={`Abrir certificado de ${item.title}`}
+              >
+                <div className="relative aspect-4/3 w-full">
+                  {item.certificateSrc ? (
+                    <Image
+                      src={item.certificateSrc}
+                      alt={`Certificado de ${item.title}`}
+                      fill
+                      sizes="(min-width: 768px) 20rem, 90vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  ) : (
+                    <div className="grid h-full place-items-center text-sm text-neutral-500">
+                      Ver certificado
+                    </div>
+                  )}
+                </div>
 
-              <span className="absolute bottom-2 right-2 rounded-full bg-black/80 px-2 py-0.5 text-xs text-white">
-                Ampliar
-              </span>
-            </button>
+                <span className="absolute bottom-2 right-2 rounded-full bg-black/80 px-2 py-0.5 text-xs text-white">
+                  Ampliar
+                </span>
+              </button>
+
+              {item.url ? (
+                <MainButton
+                  as="a"
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 w-full flex justify-center"
+                  ariaLabel={`Abrir proyecto de ${item.title}`}
+                >
+                  {item.urlLabel ?? "Ver proyecto"}
+                </MainButton>
+              ) : null}
+            </div>
           </div>
         </div>
       </div>

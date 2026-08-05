@@ -1,11 +1,9 @@
 "use client";
 
 import { ChevronUp } from "lucide-react";
-import Image from "next/image";
 import { motion, type Variants, type Transition } from "framer-motion";
 import { easeOut } from "@/app/lib/animationEffects";
 import { useLenis } from "@/app/providers/ScrollProvider";
-import Link from "next/link";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -37,9 +35,8 @@ export default function Footer() {
           {/* Left: Big title */}
           <div className="md:col-span-7">
             <div className="flex items-center gap-6">
-              {/* "All Projects" — dejalo igual y luego lo cambiás */}
               <h2 className="text-[44px] leading-[1.05] tracking-tight md:text-[72px]">
-                All Projects
+                Ver proyectos
               </h2>
 
               {/* Circle arrow button (estilo referencia) */}
@@ -125,25 +122,17 @@ export default function Footer() {
       <div className="border-t border-black/10">
         <div className="mx-auto max-w-6xl px-6 py-6">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-center">
-            {/* Logo placeholder (abajo izquierda) */}
             <div className="md:col-span-4">
-              <div className="flex items-center gap-3">
-                {/* Placeholder: reemplazalo por tu logo cuando quieras */}
-                <div className="h-8 w-64 " />
-                <a
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo("#projects", { offset: -96, duration: 1 });
-                  }}
-                >
-                  <Image
-                    src="/logos/Infinite_Graphics-Logo.webp"
-                    alt="Logo"
-                    width={112}
-                    height={32}
-                  />
-                </a>
-              </div>
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo("body", { duration: 0.9 });
+                }}
+                className="font-alt text-sm font-bold uppercase tracking-tight hover:opacity-70 transition-opacity"
+              >
+                Bautista Centorbi
+              </a>
             </div>
 
             {/* Location */}

@@ -3,9 +3,17 @@
 import React from "react";
 import clsx from "clsx";
 
-type Props = React.ComponentProps<"button"> & {
-  as?: "button" | "a";
-  href?: string;
+type ButtonProps = React.ComponentProps<"button"> & {
+  as?: "button";
+  href?: never;
+};
+
+type AnchorProps = React.ComponentProps<"a"> & {
+  as: "a";
+  href: string;
+};
+
+type Props = (ButtonProps | AnchorProps) & {
   /** Cambiá colores rápido sin tocar el DOM */
   borderClassName?: string; // ej: "border-neutral-900"
   fillClassName?: string;   // ej: "bg-neutral-900"
@@ -23,6 +31,7 @@ export default function MainButton({
   textClassName = "text-black",
   rounded = "rounded-lg",
   children,
+  ariaLabel,
   ...rest
 }: Props) {
   const Component: any = as === "a" ? "a" : "button";
@@ -30,6 +39,7 @@ export default function MainButton({
   return (
     <Component
       href={href}
+      aria-label={ariaLabel}
       className={clsx(
         "group relative inline-flex items-center justify-center",
         "px-6 py-3 font-medium",
