@@ -2,6 +2,8 @@
 
 import { ChevronUp } from "lucide-react";
 import { motion, type Variants, type Transition } from "framer-motion";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { easeOut } from "@/app/lib/animationEffects";
 import { useLenis } from "@/app/providers/ScrollProvider";
 
@@ -19,13 +21,36 @@ const NAV_LINKS = [
   { label: "Proyectos", href: "#projects" },
   { label: "Logotipos", href: "#logos" },
   { label: "Sobre Mí", href: "#about" },
-  { label: "Experiencia", href: "#experience" },
+  { label: "Experiencia", href: "#experiencia" },
   { label: "Educación", href: "#education" },
   { label: "Contacto", href: "#contact" },
 ];
 
 export default function Footer() {
   const { scrollTo } = useLenis();
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHome = pathname === "/";
+
+  // En home: scrollea dentro de la página. Fuera de home (ej. /projects/[slug]),
+  // las anclas de las secciones no existen, así que navegamos de vuelta a "/"
+  // (con el hash, para que intente ubicarse en la sección al llegar).
+  const goTo = (href: string) => {
+    if (href === "/") {
+      if (isHome) {
+        scrollTo("body", { duration: 0.9 });
+      } else {
+        router.push("/");
+      }
+      return;
+    }
+
+    if (isHome) {
+      scrollTo(href, { offset: -96, duration: 1 });
+    } else {
+      router.push(`/${href}`);
+    }
+  };
 
   return (
     <footer className="w-full bg-gray-200">
@@ -36,18 +61,18 @@ export default function Footer() {
           <div className="md:col-span-7">
             <div className="flex items-center gap-6">
               <h2 className="text-[44px] leading-[1.05] tracking-tight md:text-[72px]">
-                Ver proyectos
+                {isHome ? "Ver proyectos" : "Volver al inicio"}
               </h2>
 
               {/* Circle arrow button (estilo referencia) */}
               <motion.a
                 variants={fadeUp}
-                href="#projects"
-                aria-label="Ir a proyectos"
+                href={isHome ? "#projects" : "/"}
+                aria-label={isHome ? "Ir a proyectos" : "Volver al inicio"}
                 className="mt-48 inline-flex"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollTo("#projects", { offset: -96, duration: 1 });
+                  goTo(isHome ? "#projects" : "/");
                 }}
               >
                 <span
@@ -103,13 +128,18 @@ export default function Footer() {
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
                   <a
+                    href={item.href === "/" ? "/" : `/${item.href}`}
                     onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo(item.href, { offset: -96, duration: 1 });
-                  }}
-                    className="transition hover:text-black/80 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-black/30"
+                      e.preventDefault();
+                      goTo(item.href);
+                    }}
+                    className="group relative inline-block pb-1 transition-colors hover:text-black/80 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-black/30"
                   >
                     {item.label}
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-300 [ease:cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
+                    />
                   </a>
                 </li>
               ))}
@@ -123,16 +153,16 @@ export default function Footer() {
         <div className="mx-auto max-w-6xl px-6 py-6">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-center">
             <div className="md:col-span-4">
-              <a
-                href="#home"
+              <Link
+                href="/"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollTo("body", { duration: 0.9 });
+                  goTo("/");
                 }}
                 className="font-alt text-sm font-bold uppercase tracking-tight hover:opacity-70 transition-opacity"
               >
                 Bautista Centorbi
-              </a>
+              </Link>
             </div>
 
             {/* Location */}
