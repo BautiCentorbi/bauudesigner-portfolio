@@ -93,9 +93,12 @@ function getNavH() {
   return Number.isFinite(navH) ? navH : 96;
 }
 
+const SCROLL_THRESHOLD = 24;
+
 export default function NavBar() {
   const headerRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Mide el alto real del header y lo expone como --nav-h
   useEffect(() => {
@@ -115,6 +118,28 @@ export default function NavBar() {
     return () => {
       ro.disconnect();
       window.removeEventListener("load", setVar);
+    };
+  }, []);
+
+  // Detecta scroll para transformar el nav en isla flotante
+  useEffect(() => {
+    let raf = 0;
+
+    const check = () => {
+      raf = 0;
+      setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    };
+
+    const onScroll = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(check);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 
@@ -147,7 +172,22 @@ export default function NavBar() {
   const router = useRouter();
 
   return (
-    <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 bg-gray-200">
+    <header
+      ref={headerRef}
+      className={clsx(
+        "fixed inset-x-0 top-0 z-50",
+        "transition-[padding] duration-500 ease-in-out",
+        scrolled ? "px-3 pt-3" : "px-0 pt-0",
+      )}
+    >
+      <div
+        className={clsx(
+          "mx-auto transition-all duration-500 ease-in-out will-change-transform",
+          scrolled
+            ? "max-w-5xl scale-[0.97] rounded-full border border-black/10 bg-gray-200/90 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur-md"
+            : "max-w-full scale-100 rounded-none border border-transparent bg-gray-200 shadow-[0_0_0_rgba(0,0,0,0)] backdrop-blur-[0px]",
+        )}
+      >
       <nav className="mx-auto max-w-6xl px-4">
         <div className="flex h-16 items-center justify-between">
           <Link
@@ -218,6 +258,7 @@ export default function NavBar() {
           </button>
         </div>
       </nav>
+      </div>
 
       {/* MOBILE OVERLAY + PANEL */}
       <div
