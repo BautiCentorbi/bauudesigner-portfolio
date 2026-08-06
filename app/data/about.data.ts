@@ -188,5 +188,5 @@ export const ABOUT: AboutData = {
   // ⬇️ estos son los que te faltaban según el error
   year: "2025",
   tag: "Branding • Web",
-  cta: { href: "#contacto", label: "Hablemos" },
+  cta: { href: "#contact", label: "Hablemos" },
 };

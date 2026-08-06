@@ -3,6 +3,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import type { ExperienceItem } from "@/app/data/about.data";
+import { useLenis } from "@/app/providers/ScrollProvider";
+
+function getNavH() {
+  const navHVar = getComputedStyle(document.documentElement).getPropertyValue(
+    "--nav-h",
+  );
+  const navH = parseInt((navHVar || "96").trim(), 10);
+  return Number.isFinite(navH) ? navH : 96;
+}
 
 type Props = {
   items: ExperienceItem[];
@@ -76,6 +85,8 @@ function ExperienceSticky({
   exp: ExperienceItem;
   progress: number; // 0..1
 }) {
+  const { scrollTo } = useLenis();
+
   return (
     <div className="md:sticky md:top-[calc(var(--nav-h,88px)+16px)] space-y-5">
       {/* Progreso de lectura */}
@@ -116,7 +127,15 @@ function ExperienceSticky({
             </Link>
           ) : (
             <Link
-              href="#contacto"
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.querySelector("#contact");
+                if (el instanceof HTMLElement) {
+                  scrollTo(el, { offset: -getNavH(), duration: 0.9 });
+                }
+                history.replaceState(null, "", "#contact");
+              }}
               className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold border border-black bg-white hover:-translate-y-0.5 transition"
             >
               Hablemos
