@@ -20,12 +20,14 @@ function SwipeNavItem({
   active,
   onClick,
   className,
+  scrolled = false,
 }: {
   id: string;
   label: string;
   active: boolean;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   className?: string;
+  scrolled?: boolean;
 }) {
   return (
     <Link
@@ -33,8 +35,14 @@ function SwipeNavItem({
       onClick={onClick}
       className={clsx(
         "group relative inline-flex items-center",
-        "px-3 py-2 text-xl transition-colors",
-        active ? "font-bold text-white" : "text-neutral-800 hover:text-white",
+        "px-3 py-2 text-xl transition-colors duration-300",
+        active
+          ? scrolled
+            ? "font-bold text-black"
+            : "font-bold text-white"
+          : scrolled
+            ? "text-white hover:text-black"
+            : "text-neutral-800 hover:text-white",
         className,
       )}
     >
@@ -43,7 +51,8 @@ function SwipeNavItem({
         <span
           aria-hidden
           className={clsx(
-            "pointer-events-none absolute inset-0 rounded-md border border-black",
+            "pointer-events-none absolute inset-0 rounded-md border transition-colors duration-300",
+            scrolled ? "border-white" : "border-black",
             "opacity-0 group-hover:opacity-100",
             DURATION_BORDER,
           )}
@@ -53,7 +62,8 @@ function SwipeNavItem({
         <span
           aria-hidden
           className={clsx(
-            "pointer-events-none absolute inset-y-0 left-0 w-full bg-black",
+            "pointer-events-none absolute inset-y-0 left-0 w-full transition-colors duration-300",
+            scrolled ? "bg-white" : "bg-black",
             "-translate-x-full group-hover:translate-x-0",
             active && "translate-x-0",
             `transition-transform ${DURATION_FILL} ${EASE}`,
@@ -64,7 +74,13 @@ function SwipeNavItem({
         <span
           className={clsx(
             "relative z-10 px-2 py-1 transition-colors duration-300",
-            active ? "text-white" : "group-hover:text-white",
+            active
+              ? scrolled
+                ? "text-black"
+                : "text-white"
+              : scrolled
+                ? "group-hover:text-black"
+                : "group-hover:text-white",
           )}
         >
           {label}
@@ -74,7 +90,8 @@ function SwipeNavItem({
         <span
           aria-hidden
           className={clsx(
-            "absolute -bottom-1 left-0 h-0.5 bg-black origin-left",
+            "absolute -bottom-1 left-0 h-0.5 origin-left transition-colors duration-300",
+            scrolled ? "bg-white" : "bg-black",
             "w-0 group-hover:w-full",
             active && "w-full",
             `transition-[width] ${DURATION_FILL} ${EASE}`,
@@ -184,7 +201,7 @@ export default function NavBar() {
         className={clsx(
           "mx-auto transition-all duration-500 ease-in-out will-change-transform",
           scrolled
-            ? "max-w-5xl scale-[0.97] rounded-full border border-black/10 bg-gray-200/90 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur-md"
+            ? "max-w-5xl scale-[0.97] rounded-full border border-white/10 bg-black shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md"
             : "max-w-full scale-100 rounded-none border border-transparent bg-gray-200 shadow-[0_0_0_rgba(0,0,0,0)] backdrop-blur-[0px]",
         )}
       >
@@ -215,7 +232,10 @@ export default function NavBar() {
               width={170}
               height={40}
               priority
-              className="h-5 w-auto object-contain md:h-7"
+              className={clsx(
+                "h-5 w-auto object-contain md:h-7 transition-[filter] duration-500 ease-in-out",
+                scrolled && "brightness-0 invert",
+              )}
             />
           </Link>
 
@@ -234,6 +254,7 @@ export default function NavBar() {
                   label={item.label}
                   active={active === item.id}
                   onClick={handleNavClick(item.id)}
+                  scrolled={scrolled}
                 />
               </li>
             ))}
@@ -244,8 +265,10 @@ export default function NavBar() {
             type="button"
             className={clsx(
               "md:hidden inline-flex items-center justify-center",
-              "rounded-md border border-black/20 w-11 h-11",
-              "hover:bg-black/5 transition-colors",
+              "rounded-md border w-11 h-11 transition-colors duration-300",
+              scrolled
+                ? "border-white/20 text-white hover:bg-white/10"
+                : "border-black/20 text-foreground hover:bg-black/5",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/60",
               open && "opacity-0 pointer-events-none", // mantiene espacio, pero desaparece
             )}

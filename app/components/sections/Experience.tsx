@@ -90,27 +90,27 @@ function ExperienceSticky({
   return (
     <div className="md:sticky md:top-[calc(var(--nav-h,88px)+16px)] space-y-5">
       {/* Progreso de lectura */}
-      <div className="h-1.5 w-full rounded-full bg-neutral-200/70 overflow-hidden">
+      <div className="h-1.5 w-full rounded-full bg-neutral-800 overflow-hidden">
         <div
-          className="h-full bg-black transition-[width] duration-200"
+          className="h-full bg-white transition-[width] duration-200"
           style={{ width: `${Math.round(progress * 100)}%` }}
           aria-hidden
         />
       </div>
 
-      <div className="rounded-2xl border border-neutral-200/80 bg-white/70 p-5 backdrop-blur">
+      <div className="rounded-2xl border border-neutral-700/80 bg-neutral-900/70 p-5 backdrop-blur">
         <div className="flex items-baseline justify-between">
-          <time className="text-lg font-semibold">{exp.year}</time>
-          <span className="text-xs uppercase tracking-wider text-neutral-500">Experiencia</span>
+          <time className="text-lg font-semibold text-white">{exp.year}</time>
+          <span className="text-xs uppercase tracking-wider text-neutral-400">Experiencia</span>
         </div>
-        <h4 className="mt-1 text-xl font-semibold tracking-tight">{exp.company}</h4>
-        <p className="text-neutral-500">{exp.subtitle}</p>
+        <h4 className="mt-1 text-xl font-semibold tracking-tight text-white">{exp.company}</h4>
+        <p className="text-neutral-400">{exp.subtitle}</p>
 
         <div className="mt-3 flex flex-wrap gap-2">
           {exp.tags.map((t) => (
             <span
               key={t}
-              className="inline-flex items-center rounded-full border border-neutral-200 bg-white px-2.5 py-1 text-xs text-neutral-700"
+              className="inline-flex items-center rounded-full border border-neutral-700 bg-neutral-800 px-2.5 py-1 text-xs text-neutral-300"
             >
               {t}
             </span>
@@ -121,7 +121,7 @@ function ExperienceSticky({
           {exp.link ? (
             <Link
               href={exp.link}
-              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold border border-black bg-black text-white hover:-translate-y-0.5 transition"
+              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold border border-white bg-white text-black hover:-translate-y-0.5 transition"
             >
               Ver caso
             </Link>
@@ -136,7 +136,7 @@ function ExperienceSticky({
                 }
                 history.replaceState(null, "", "#contact");
               }}
-              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold border border-black bg-white hover:-translate-y-0.5 transition"
+              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold border border-neutral-600 bg-neutral-800 text-white hover:-translate-y-0.5 transition"
             >
               Hablemos
             </Link>
@@ -171,7 +171,7 @@ function ExperienceCard({
       <div className="col-span-12 md:col-span-2">
         <time
           dateTime={exp.year}
-          className="inline-block rounded-lg border border-neutral-200 px-3 py-1 text-sm font-semibold"
+          className="inline-block rounded-lg border border-neutral-700 px-3 py-1 text-sm font-semibold text-white"
         >
           {exp.year}
         </time>
@@ -179,34 +179,34 @@ function ExperienceCard({
 
       {/* Contenido */}
       <div className="col-span-12 md:col-span-10">
-        <article className="rounded-xl border border-neutral-200/80 bg-white/60 p-6 hover:bg-white transition">
+        <article className="rounded-xl border border-neutral-700/80 bg-neutral-900/60 p-6 hover:bg-neutral-900 transition">
           {/* Título */}
-          <h4 className="text-2xl font-semibold tracking-tight">
+          <h4 className="text-2xl font-semibold tracking-tight text-white">
             {exp.company}
             {exp.subtitle && (
-              <span className="text-neutral-500 font-normal"> — {exp.subtitle}</span>
+              <span className="text-neutral-400 font-normal"> — {exp.subtitle}</span>
             )}
           </h4>
 
           {/* Rol */}
           {exp.roleTitle && (
-            <p className="mt-1 text-xl text-neutral-700">
+            <p className="mt-1 text-xl text-neutral-300">
               <strong>Rol:</strong> {exp.roleTitle}
             </p>
           )}
 
           {/* Descripción */}
-          <p className="mt-3 text-lg leading-relaxed text-neutral-800">
+          <p className="mt-3 text-lg leading-relaxed text-neutral-200">
             {exp.summary}
           </p>
 
           {/* Logros */}
           {exp.achievements && exp.achievements.length > 0 && (
             <div className="mt-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-1">
+              <p className="text-sm font-semibold text-neutral-200 mb-1">
                 Logros clave:
               </p>
-              <ul className="list-disc pl-5 space-y-1 text-neutral-700 text-sm">
+              <ul className="list-disc pl-5 space-y-1 text-neutral-300 text-sm">
                 {exp.achievements.map((a, i) => (
                   <li key={i}>{a}</li>
                 ))}
@@ -219,7 +219,7 @@ function ExperienceCard({
             {exp.tags.map((t) => (
               <span
                 key={t}
-                className="inline-flex items-center rounded-full border border-neutral-200 bg-white px-2.5 py-1 text-xs text-neutral-700"
+                className="inline-flex items-center rounded-full border border-neutral-700 bg-neutral-800 px-2.5 py-1 text-xs text-neutral-300"
               >
                 {t}
               </span>
@@ -231,7 +231,7 @@ function ExperienceCard({
             <div className="mt-5">
               <Link
                 href={exp.link}
-                className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold border border-black bg-black text-white hover:-translate-y-0.5 transition"
+                className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold border border-white bg-white text-black hover:-translate-y-0.5 transition"
               >
                 Ver caso
               </Link>
@@ -253,7 +253,7 @@ export default function ExperienceSection({ items, sectionVH = 120 }: Props) {
   return (
     <section id="experiencia">
       {/* Título único de la sección */}
-      <h3 className="font-bold text-4xl uppercase tracking-[0.18em] text-foreground mb-5">
+      <h3 className="font-bold text-4xl uppercase tracking-[0.18em] text-white mb-5">
         Experiencia
       </h3>
 

@@ -347,7 +347,7 @@ export default function EducationSection({ items, className }: EducationProps) {
             Educación
           </p>
           <h2 className="mt-2 font-black leading-[0.95] tracking-[-0.02em] text-[clamp(2rem,6vw,4rem)]">
-            Certificaciones, <span className="text-neutral-400">cursos</span> y
+            Certificaciones, <span className="text-pink-400">cursos</span> y
             formación.
           </h2>
         </header>
