@@ -6,6 +6,15 @@ import { ABOUT } from "@/app/data/about.data";
 import ReactMarkdown from "react-markdown";
 import ExperienceSection from "./Experience";
 import { useLenis } from "@/app/providers/ScrollProvider";
+import ClientsMarquee from "../clients/ClientMarquee";
+
+const LOGO_MARQUEE_TRACK = [
+  {
+    id: "infinite-graphics",
+    src: "/logos/Infinite_Graphics-Logo.webp",
+    alt: "Infinite Graphics",
+  },
+];
 
 export default function AboutSplit() {
   const { scrollTo } = useLenis();
@@ -13,13 +22,34 @@ export default function AboutSplit() {
   const cta = ABOUT.cta;
 
   return (
-    <section id="about" className="scroll-mt-28">
+    <section id="about" className="relative isolate scroll-mt-28 pb-48 md:pb-56">
+      {/* Fondo full-bleed: arranca en el mismo gris de la sección anterior (sin corte),
+          se abre a un blend horizontal rosa→cian, se funde a negro, se mantiene negro sólido
+          durante toda la sección, y al final vuelve a fundirse (solo negro → gris) al fondo de la página */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-black bg-[linear-gradient(to_bottom,#e5e7eb_0px,transparent_30px,transparent_70px,#000_100px,#000_calc(100%_-_160px),#e5e7eb_100%),linear-gradient(to_right,#f9a8d4,#67e8f9)]"
+      />
+
+      {/* Marquee del logo (blanco), justo arriba del eyebrow "SOBRE MI".
+          Baja lo suficiente para caer ya en la zona negra sólida (~100px), así el fade
+          de sus bordes (a negro) no choca con el blend rosa/cian de más arriba. */}
+      <div className="pt-28 md:pt-32">
+        <ClientsMarquee
+          logos={LOGO_MARQUEE_TRACK}
+          tone="light"
+          edgeFadeFromClassName="from-black"
+          logoHeightClass="h-6 md:h-7"
+          durationSec={16}
+        />
+      </div>
+
       {/* Poster headline */}
-      <header className="mx-auto max-w-6xl px-4 md:px-0">
-        <p className="text-sm tracking-[0.22em] uppercase text-neutral-500">
+      <header className="mx-auto max-w-6xl px-4 pt-6 md:px-0 md:pt-8">
+        <p className="text-sm tracking-[0.22em] uppercase text-neutral-300">
           {ABOUT.poster.kicker}
         </p>
-        <h1 className="mt-4 font-black leading-[0.92] tracking-[-0.02em] text-[clamp(2.4rem,7vw,7rem)]">
+        <h1 className="mt-4 font-black leading-[0.92] tracking-[-0.02em] text-[clamp(2.4rem,7vw,7rem)] text-white">
           {ABOUT.poster.titleA}
           <br className="hidden md:block" />
           <span className="block">{ABOUT.poster.titleB}</span>
@@ -31,7 +61,7 @@ export default function AboutSplit() {
       <div className="mx-auto max-w-6xl px-4 md:px-0 mt-10 md:mt-16 grid grid-cols-12 gap-x-4 md:gap-x-6 gap-y-10">
         {/* Foto */}
         <figure className="col-span-12 md:col-span-4">
-          <div className="relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-neutral-200">
+          <div className="relative aspect-4/5 w-full overflow-hidden rounded-2xl bg-neutral-800">
             <Image
               src={ABOUT.photo.src}
               alt={ABOUT.photo.alt}
@@ -43,10 +73,10 @@ export default function AboutSplit() {
 
           {/* Etiquetas y CTA debajo de la foto */}
           <div className="mt-4 flex items-center justify-between">
-            <span className="text-sm uppercase tracking-wider text-neutral-500">
+            <span className="text-sm uppercase tracking-wider text-neutral-400">
               {ABOUT.tag}
             </span>
-            <span className="text-lg font-semibold">{ABOUT.year}</span>
+            <span className="text-lg font-semibold text-white">{ABOUT.year}</span>
           </div>
 
           {cta?.href && cta?.label ? (
@@ -56,7 +86,7 @@ export default function AboutSplit() {
                 e.preventDefault();
                 scrollTo(cta.href, { offset: -96, duration: 1 });
               }}
-              className="mt-3 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold border border-black bg-black text-white hover:-translate-y-0.5 transition"
+              className="mt-3 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold border border-white bg-white text-black hover:-translate-y-0.5 transition"
             >
               {cta.label}
             </a>
@@ -66,12 +96,12 @@ export default function AboutSplit() {
         {/* Bio + Capacidades + Métricas */}
         <div className="col-span-12 md:col-span-8 space-y-6">
           {/* Bio */}
-          <div className="rounded-2xl border border-neutral-200/80 bg-white/70 p-5 backdrop-blur">
-            <div className="text-lg md:text-xl leading-relaxed">
+          <div className="rounded-2xl border border-neutral-700/80 bg-neutral-900/70 p-5 backdrop-blur">
+            <div className="text-lg md:text-xl leading-relaxed text-neutral-200">
               <ReactMarkdown
                 components={{
                   strong: ({ children }) => (
-                    <strong className="font-bold">{children}</strong>
+                    <strong className="font-bold text-white">{children}</strong>
                   ),
                 }}
               >
@@ -87,9 +117,9 @@ export default function AboutSplit() {
                 {ABOUT.capabilities.map((c) => (
                   <li
                     key={c}
-                    className="flex items-center gap-3 rounded-xl border border-neutral-200/80 bg-white/60 px-4 py-2 backdrop-blur hover:bg-white transition"
+                    className="flex items-center gap-3 rounded-xl border border-neutral-700/80 bg-neutral-800/60 px-4 py-2 backdrop-blur hover:bg-neutral-800 transition text-neutral-200"
                   >
-                    <span className="size-1.5 rounded-full bg-black" />
+                    <span className="size-1.5 rounded-full bg-white" />
                     <span>{c}</span>
                   </li>
                 ))}
@@ -97,10 +127,10 @@ export default function AboutSplit() {
             </Block>
 
             <Block title="Capacidades">
-              <ul className="divide-y divide-neutral-200/80">
+              <ul className="divide-y divide-neutral-700/80">
                 {ABOUT.principles.map((p) => (
                   <li key={p} className="py-3">
-                    <span className="text-foreground">{p}</span>
+                    <span className="text-neutral-200">{p}</span>
                   </li>
                 ))}
               </ul>
@@ -126,8 +156,8 @@ function Block({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-neutral-200/80 bg-white/70 p-5 backdrop-blur">
-      <h3 className="text-xs uppercase tracking-[0.18em] text-neutral-500 mb-3">
+    <div className="rounded-2xl border border-neutral-700/80 bg-neutral-900/70 p-5 backdrop-blur">
+      <h3 className="text-xs uppercase tracking-[0.18em] text-neutral-400 mb-3">
         {title}
       </h3>
       {children}

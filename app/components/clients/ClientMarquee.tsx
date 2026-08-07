@@ -19,6 +19,10 @@ export type ClientsMarqueeProps = {
   logoHeightClass?: string;
   /** Duración del loop (segundos). Default: 28 */
   durationSec?: number;
+  /** "dark" = logos negros (default, para fondos claros). "light" = logos blancos (para fondos oscuros) */
+  tone?: "dark" | "light";
+  /** Color del fade en los bordes (clase "from-*" de Tailwind). Default: from-gray-200 */
+  edgeFadeFromClassName?: string;
 };
 
 export default function ClientsMarquee({
@@ -26,7 +30,13 @@ export default function ClientsMarquee({
   className,
   logoHeightClass = "h-12 md:h-14",
   durationSec = 28,
+  tone = "dark",
+  edgeFadeFromClassName = "from-gray-200",
 }: ClientsMarqueeProps) {
+  const logoFilterClass =
+    tone === "light"
+      ? "brightness-0 invert saturate-100"
+      : "brightness-0 saturate-100 text-foreground";
   // Usamos dos pistas idénticas para loop perfecto (estética intacta)
   const TRACK = logos;
   const trackClass = "track flex min-w-max flex-none items-center";
@@ -202,10 +212,11 @@ export default function ClientsMarquee({
                       width={240}
                       height={80}
                       sizes="(min-width: 1024px) 220px, 33vw"
-                      className="h-full w-auto object-contain
-                               brightness-0 saturate-100 text-foreground
-                               opacity-90 transition-opacity duration-200
-                               group-hover:opacity-100"
+                      className={clsx(
+                        "h-full w-auto object-contain",
+                        logoFilterClass,
+                        "opacity-90 transition-opacity duration-200 group-hover:opacity-100",
+                      )}
                       priority={repeatIndex === 0 && i < 6}
                     />
                   </div>
@@ -229,10 +240,11 @@ export default function ClientsMarquee({
                       width={240}
                       height={80}
                       sizes="(min-width: 1024px) 220px, 33vw"
-                      className="h-full w-auto object-contain
-                               brightness-0 saturate-100 text-foreground
-                               opacity-90 transition-opacity duration-200
-                               group-hover:opacity-100"
+                      className={clsx(
+                        "h-full w-auto object-contain",
+                        logoFilterClass,
+                        "opacity-90 transition-opacity duration-200 group-hover:opacity-100",
+                      )}
                     />
                   </div>
                 </div>
@@ -242,8 +254,8 @@ export default function ClientsMarquee({
         </div>
 
         {/* Gradientes sutiles en bordes (fade) — igual que tenías */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-gray-200 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-gray-200 to-transparent" />
+        <div className={clsx("pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r to-transparent", edgeFadeFromClassName)} />
+        <div className={clsx("pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l to-transparent", edgeFadeFromClassName)} />
       </div>
 
       {/* Estilos: loop perfecto y pausa en hover (mismo espíritu que el tuyo) */}

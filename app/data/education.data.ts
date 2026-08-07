@@ -22,7 +22,7 @@ export const EDUCATION: EducationItem[] = [
     institution: "Coderhouse",
     year: "2024",
     duration: "2 meses",
-    certificateSrc: "/certs/courses/Course-NextJs.webp",
+    certificateSrc: "/certs/courses/Course-NextJS.webp",
     description:
       "Formación y fundamentos completos de Next.js, incluyendo SSR, SSG y rutas dinámicas, con Firebase como base de datos y getStaticProps/getServerSideProps para el fetching de datos. Como proyecto final se construyó un e-commerce funcional con landing page, página de productos, carrito y un generador de tickets de compra enviados por email al usuario.",
     highlights: [

@@ -2,6 +2,7 @@
 
 import { ChevronUp } from "lucide-react";
 import { motion, type Variants, type Transition } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { easeOut } from "@/app/lib/animationEffects";
@@ -155,13 +156,20 @@ export default function Footer() {
             <div className="md:col-span-4">
               <Link
                 href="/"
+                aria-label="Volver al inicio"
                 onClick={(e) => {
                   e.preventDefault();
                   goTo("/");
                 }}
-                className="font-alt text-sm font-bold uppercase tracking-tight hover:opacity-70 transition-opacity"
+                className="inline-flex items-center hover:opacity-70 transition-opacity"
               >
-                Bautista Centorbi
+                <Image
+                  src="/logos/Infinite_Graphics-Logo.webp"
+                  alt="Infinite Graphics"
+                  width={170}
+                  height={40}
+                  className="h-6 w-auto object-contain"
+                />
               </Link>
             </div>
 
