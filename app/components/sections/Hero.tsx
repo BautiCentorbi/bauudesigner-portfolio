@@ -1,11 +1,179 @@
 "use client";
 
-import { motion, type Variants, type Transition } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  type Variants,
+  type Transition,
+} from "framer-motion";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
+import clsx from "clsx";
 import { useLenis } from "@/app/providers/ScrollProvider";
 import MainButton from "../shared/MainButton";
 import { easeOut, container, fadeUp } from "@/app/lib/animationEffects";
+
+const CYCLE_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const CYCLE_WORDS = [
+  { text: "Experiencias", colorClass: "text-cyan-500" },
+  { text: "Identidades", colorClass: "text-pink-400" },
+];
+
+/** Palabra rotativa: sube en cubic-bezier y alterna color en cada ciclo */
+function CyclingWord() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % CYCLE_WORDS.length),
+      2500,
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  const current = CYCLE_WORDS[index];
+
+  return (
+    <span className="relative inline-block overflow-hidden align-bottom">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={current.text}
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.5, ease: CYCLE_EASE }}
+          className={clsx("inline-block", current.colorClass)}
+        >
+          {current.text}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+}
+
+/** Variantes de forma para cada trazo: cada ciclo dibuja una versión ligeramente distinta */
+const DOODLE_LINES = [
+  {
+    color: "#67e8f9",
+    strokeWidth: 2.5,
+    periodMs: 3200,
+    variants: [
+      "M14 18 C 60 6, 96 22, 108 52",
+      "M10 30 C 50 10, 90 12, 112 48",
+      "M18 8 C 55 22, 84 36, 104 58",
+    ],
+  },
+  {
+    color: "#f9a8d4",
+    strokeWidth: 3,
+    periodMs: 3900,
+    variants: [
+      "M46 118 Q 90 102 140 118 T 234 116",
+      "M40 112 Q 100 128 150 110 T 240 122",
+      "M50 122 Q 95 106 145 122 T 230 112",
+    ],
+  },
+  {
+    color: "#67e8f9",
+    strokeWidth: 2.5,
+    periodMs: 2700,
+    variants: [
+      "M278 24 L288 34 M280 40 L290 30 M284 20 L284 44",
+      "M276 30 L292 30 M284 22 L284 38 M279 24 L289 36",
+      "M280 22 L286 40 M280 40 L286 22 M283 20 L283 42",
+    ],
+  },
+];
+
+/** Un trazo que se dibuja, se sostiene y se borra, ciclando entre un par de formas */
+function DoodleLine({
+  color,
+  strokeWidth,
+  variants,
+  periodMs,
+  reduceMotion,
+}: {
+  color: string;
+  strokeWidth: number;
+  variants: string[];
+  periodMs: number;
+  reduceMotion: boolean;
+}) {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const id = setInterval(
+      () => setIdx((i) => (i + 1) % variants.length),
+      periodMs,
+    );
+    return () => clearInterval(id);
+  }, [periodMs, variants.length, reduceMotion]);
+
+  const pathVariants: Variants = {
+    initial: { pathLength: 0, opacity: 0 },
+    animate: {
+      pathLength: 1,
+      opacity: 1,
+      transition: { duration: 0.9, ease: CYCLE_EASE },
+    },
+    exit: {
+      pathLength: 0,
+      opacity: 0,
+      transition: { duration: 0.6, ease: CYCLE_EASE },
+    },
+  };
+
+  if (reduceMotion) {
+    return (
+      <path
+        d={variants[0]}
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        opacity={0.8}
+      />
+    );
+  }
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.path
+        key={idx}
+        d={variants[idx]}
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        variants={pathVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      />
+    </AnimatePresence>
+  );
+}
+
+/** Doodle de 3 trazos "dibujados a mano" que llaman la atención sobre el CTA, en loop continuo */
+function ContactDoodle() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 320 140"
+      preserveAspectRatio="none"
+      className="pointer-events-none absolute -inset-x-6 -inset-y-8 md:-inset-x-10 md:-inset-y-10"
+      fill="none"
+    >
+      {DOODLE_LINES.map((line, i) => (
+        <DoodleLine key={i} {...line} reduceMotion={!!reduceMotion} />
+      ))}
+    </svg>
+  );
+}
 
 export default function Hero() {
   const { scrollTo } = useLenis();
@@ -63,17 +231,20 @@ export default function Hero() {
               max-lg:mt-0 max-lg:w-full max-lg:text-center
             "
           >
-            <Link href="#contact">
-              <MainButton
-                className="
-                  mt-12 font-inter text-2xl w-full my-4
-                  max-lg:mt-6 max-lg:text-lg max-lg:w-full
-                "
-                rounded="rounded-full"
-              >
-                Contactame
-              </MainButton>
-            </Link>
+            <div className="relative mt-12 max-lg:mt-6">
+              <ContactDoodle />
+              <Link href="#contact">
+                <MainButton
+                  className="
+                    font-inter text-2xl w-full my-4
+                    max-lg:text-lg max-lg:w-full
+                  "
+                  rounded="rounded-full"
+                >
+                  Contactame
+                </MainButton>
+              </Link>
+            </div>
 
             <span className="font-alt text-2xl font-bold uppercase block max-lg:text-xl">
               Bautista Centorbi
@@ -157,10 +328,7 @@ export default function Hero() {
             variants={fadeUp}
             className="w-full uppercase max-lg:text-center"
           >
-            Construyo{" "}
-            <span className="transition-colors duration-300 hover:text-blue-600">
-              Experiencias
-            </span>
+            Construyo <CyclingWord />
           </motion.span>
         </div>
       </h1>
