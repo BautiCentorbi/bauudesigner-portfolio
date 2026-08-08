@@ -43,8 +43,11 @@ export const ABOUT: AboutData = {
     titleB: "y construyo sitios",
     titleC: "rápidos y claros.",
   },
-  photo: { src: "/images/About-BCentorbi.webp", alt: "Bautista Centorbi" },
-  bio: "Soy Bautista, diseñador gráfico y **brand designer** en Mendoza. Construyo identidades visuales y las llevo hasta su expresión digital para que una marca se vea igual de sólida en un manual, una tarjeta o un sitio web. Trabajé con clientes de rubros bien distintos —industrial, deportivo, vitivinícola, seguridad, consultoría— y en todos aplico el mismo criterio: **menos piezas sueltas, más sistema**.",
+  photo: {
+    src: "/images/About-BCentorbi.webp",
+    alt: "Bautista Centorbi, diseñador gráfico y desarrollador web en Mendoza",
+  },
+  bio: "Soy Bautista, diseñador gráfico, **brand designer** y desarrollador web en Mendoza. Construyo identidades visuales y las llevo hasta su expresión digital para que una marca se vea igual de sólida en un manual, una tarjeta o un sitio web. Trabajé con clientes de rubros bien distintos —industrial, deportivo, vitivinícola, seguridad, consultoría— y en todos aplico el mismo criterio: **menos piezas sueltas, más sistema**.",
   capabilities: [
     "Identidad Visual & Rebranding",
     "Design Systems y Manual de Marca",

@@ -250,7 +250,7 @@ export default function Hero() {
               Bautista Centorbi
             </span>
             <p className="font-sans text-2xl leading-[0.9] max-lg:text-xl">
-              Diseñador Gráfico &amp; Brand Designer
+              Diseñador Gráfico &amp; Desarrollador Web
             </p>
             <p className="text-lg text-slate-700 max-lg:text-base">
               Mendoza, Argentina

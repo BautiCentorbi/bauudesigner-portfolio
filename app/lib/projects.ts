@@ -114,7 +114,7 @@ export const PROJECTS: ProjectCase[] = [
     // Uso la misma imagen de tu grilla para mantener consistencia inmediata
     heroImage: {
       src: "/images/projects/Projects-MUTA.webp",
-      alt: "MUTA AI",
+      alt: "MUTA AI — Identidad de marca y desarrollo web para consultora de gestión, Mendoza",
     },
     primaryCta: {
       label: "Visitar sitio web",
@@ -231,7 +231,7 @@ export const PROJECTS: ProjectCase[] = [
     heroIntro: BLINDAJE.blindaje_header,
     heroImage: {
       src: "/images/projects/Projects-Blindaje.webp",
-      alt: "Blindaje",
+      alt: "Blindaje — Identidad de marca y desarrollo web para empresa de seguridad privada, Mendoza",
     },
     primaryCta: { label: "Visitar sitio web", href: "https://blindaje.com.ar" },
     secondaryCta: { label: "Abrir sitio", href: "https://blindaje.com.ar" },
@@ -345,7 +345,7 @@ export const PROJECTS: ProjectCase[] = [
       "iMatorras es una bodega que combina tradición y visión contemporánea. El proyecto se enfocó en construir un sistema de marca refinado y coherente, capaz de transmitir identidad, origen y carácter en cada punto de contacto.",
     heroImage: {
       src: "/images/projects/Projects-iMatorras.webp",
-      alt: "iMatorras",
+      alt: "iMatorras — Sistema de marca y dirección de arte para bodega, Mendoza",
     },
     primaryCta: { label: "Ver caso completo", href: "https://imatorras.com" },
 
@@ -438,7 +438,7 @@ export const PROJECTS: ProjectCase[] = [
       "LF5A es una liga deportiva con un fuerte componente social, inclusivo y comunitario. El proyecto se centró en construir una identidad visual sólida y coherente, capaz de representar los valores del deporte adaptado, la inclusión y el trabajo colectivo, y trasladarlos de forma clara y reconocible al ecosistema digital.",
     heroImage: {
       src: "/images/projects/Projects-LF5A.webp",
-      alt: "Liga de F5 Adaptado",
+      alt: "Liga de F5 Adaptado — Identidad visual para liga de fútbol 5 adaptado, Mendoza",
     },
     primaryCta: {
       label: "Visitar Instagram",

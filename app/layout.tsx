@@ -8,6 +8,7 @@ import Script from "next/script";
 import CookiesBanner from "./components/CookiesBanner";
 import { Toaster } from "react-hot-toast";
 import PageTransition from "./components/shared/PageTransition";
+import StructuredData from "./components/shared/StructuredData";
 
 const darkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -27,10 +28,61 @@ const interSans = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
+const SITE_URL = "https://bcentorbi.com";
+const SITE_TITLE =
+  "Bautista Centorbi — Diseñador Gráfico y Desarrollador Web en Mendoza";
+const SITE_DESCRIPTION =
+  "Diseñador gráfico y desarrollador web en Mendoza, Argentina. Identidad visual, branding, rebranding y desarrollo de sitios web para marcas y emprendimientos en Argentina, Chile, Uruguay, Estados Unidos y Europa. Graphic designer & web developer based in Mendoza, available for international clients.";
+
 export const metadata: Metadata = {
-  title: "Bautista Centorbi — Diseñador Gráfico & Brand Designer",
-  description:
-    "Diseño de identidad visual, rebranding y desarrollo web para marcas que necesitan verse tan sólidas como son. Con base en Mendoza, Argentina.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: "%s | Bautista Centorbi",
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "diseñador gráfico Mendoza",
+    "desarrollador web Mendoza",
+    "diseño de marca Mendoza",
+    "branding Mendoza Argentina",
+    "diseño web Mendoza",
+    "graphic designer Mendoza Argentina",
+    "web developer Mendoza Argentina",
+    "freelance graphic designer Argentina",
+    "freelance web developer Argentina",
+    "brand designer Latin America",
+    "Bautista Centorbi",
+    "Infinite Graphics",
+  ],
+  authors: [{ name: "Bautista Centorbi", url: SITE_URL }],
+  creator: "Bautista Centorbi",
+  publisher: "Bautista Centorbi",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "es_AR",
+    url: SITE_URL,
+    siteName: "Bautista Centorbi — Infinite Graphics",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -43,6 +95,7 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="light" />
         <meta name="theme-color" content="#ebebeb" />
+        <StructuredData />
         <Script id="consent-default" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
