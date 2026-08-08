@@ -165,7 +165,7 @@ function ContactDoodle() {
       aria-hidden
       viewBox="0 0 320 140"
       preserveAspectRatio="none"
-      className="pointer-events-none absolute -inset-x-6 -inset-y-8 md:-inset-x-10 md:-inset-y-10"
+      className="pointer-events-none absolute -inset-x-1 -inset-y-2 sm:-inset-x-4 sm:-inset-y-4 md:-inset-x-10 md:-inset-y-10"
       fill="none"
     >
       {DOODLE_LINES.map((line, i) => (
