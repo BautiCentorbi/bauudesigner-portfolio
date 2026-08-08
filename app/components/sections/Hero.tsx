@@ -169,7 +169,9 @@ function ContactDoodle() {
       fill="none"
     >
       {DOODLE_LINES.map((line, i) => (
-        <DoodleLine key={i} {...line} reduceMotion={!!reduceMotion} />
+        <g key={i} className={i === 1 ? "max-sm:hidden" : undefined}>
+          <DoodleLine {...line} reduceMotion={!!reduceMotion} />
+        </g>
       ))}
     </svg>
   );
