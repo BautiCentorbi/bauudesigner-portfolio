@@ -109,6 +109,18 @@ export default function RootLayout({
             });
           `}
         </Script>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-5WP0TX0MEE"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-5WP0TX0MEE');
+          `}
+        </Script>
       </head>
       <body className={`${darkerGrotesque.className} ${syneSans.variable} ${interSans.variable} antialiased`}>
         <ScrollProvider>
