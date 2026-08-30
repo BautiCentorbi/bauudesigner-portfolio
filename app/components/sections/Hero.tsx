@@ -19,7 +19,7 @@ const CYCLE_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const CYCLE_WORDS = [
   { text: "Experiencias", colorClass: "text-cyan-500" },
-  { text: "Identidades", colorClass: "text-pink-400" },
+  { text: "Identidades", colorClass: "text-green-400" },
 ];
 
 /** Palabra rotativa: sube en cubic-bezier y alterna color en cada ciclo */
