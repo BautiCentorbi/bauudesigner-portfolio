@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import type { ProjectBlock, ProjectCase as ProjectCaseType, ProjectMedia } from "@/app/lib/projects";
 import { fadeUp } from "@/app/lib/animationEffects";
 import ProjectMediaGrid from "./ProjectMediaGrid";
@@ -195,6 +197,42 @@ function BlockRenderer({ block }: { block: ProjectBlock }) {
                   </div>
                 </div>
               </div>
+            </SectionShell>
+          </section>
+        </Reveal>
+      );
+
+    case "crosslink":
+      return (
+        <Reveal>
+          <section className="py-10">
+            <SectionShell>
+              <Link
+                href={block.href}
+                className="group block border border-black/15 p-6 md:p-8 transition-colors hover:border-black/40"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-wide text-neutral-600">
+                      {block.eyebrow}
+                    </p>
+                    <h3 className="mt-1 text-xl md:text-2xl font-bold">
+                      {block.title}
+                    </h3>
+                    <p className="mt-2 max-w-2xl text-sm md:text-base text-neutral-700">
+                      {block.description}
+                    </p>
+                  </div>
+
+                  <span className="inline-flex items-center gap-1 text-sm font-medium whitespace-nowrap">
+                    {block.linkLabel}
+                    <ArrowUpRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </span>
+                </div>
+              </Link>
             </SectionShell>
           </section>
         </Reveal>

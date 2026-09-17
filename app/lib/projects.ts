@@ -51,6 +51,14 @@ export type ProjectBlock =
       leftText: string;
       rightTitle: string;
       rightTags: ProjectTag[];
+    }
+  | {
+      kind: "crosslink";
+      eyebrow: string;
+      title: string;
+      description: string;
+      href: string;
+      linkLabel: string;
     };
 
 export type ProjectCase = {
@@ -330,6 +338,15 @@ export const PROJECTS: ProjectCase[] = [
           "Blindaje es un proyecto concebido de manera integral, donde la identidad visual y la tecnología se alinean para comunicar seguridad, profesionalismo y control. Desde la construcción de la marca hasta el desarrollo frontend, el foco estuvo puesto en crear una presencia digital sólida y preparada para escalar junto al crecimiento de la empresa.",
         rightTitle: "Blindaje",
         rightTags: ["Branding", "Web Development"],
+      },
+      {
+        kind: "crosslink",
+        eyebrow: "Side project en curso",
+        title: "Blindaje Digital",
+        description:
+          "Misma razón social, otra empresa: el software de gestión de accesos, seguridad operativa y convivencia que estoy construyendo como brazo tecnológico de Blindaje Seguridad Privada.",
+        href: "/#side-projects",
+        linkLabel: "Conocer Blindaje Digital",
       },
     ],
   },
