@@ -41,6 +41,7 @@ export default function AboutSplit() {
           edgeFadeFromClassName="from-black"
           logoHeightClass="h-6 md:h-7"
           durationSec={16}
+          direction="right"
         />
       </div>
 

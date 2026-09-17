@@ -23,6 +23,8 @@ export type ClientsMarqueeProps = {
   tone?: "dark" | "light";
   /** Color del fade en los bordes (clase "from-*" de Tailwind). Default: from-gray-200 */
   edgeFadeFromClassName?: string;
+  /** Sentido del scroll. "left" (default) = contenido fluye de derecha a izquierda. "right" = al revés. */
+  direction?: "left" | "right";
 };
 
 export default function ClientsMarquee({
@@ -32,6 +34,7 @@ export default function ClientsMarquee({
   durationSec = 28,
   tone = "dark",
   edgeFadeFromClassName = "from-gray-200",
+  direction = "left",
 }: ClientsMarqueeProps) {
   const logoFilterClass =
     tone === "light"
@@ -111,7 +114,8 @@ export default function ClientsMarquee({
 
       const speed = trackWidth / (durationSec * 2500);
       offset = (offset + speed * dt) % trackWidth;
-      marqueeEl.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      const x = direction === "right" ? offset - trackWidth : -offset;
+      marqueeEl.style.transform = `translate3d(${x}px, 0, 0)`;
       rafId = requestAnimationFrame(tick);
     };
 
@@ -155,7 +159,7 @@ export default function ClientsMarquee({
       marqueeEl.removeEventListener("mouseleave", onMouseLeave);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [durationSec]);
+  }, [durationSec, direction]);
 
   return (
     <section
