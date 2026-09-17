@@ -5,6 +5,7 @@ import EducationSection from "./components/sections/Education";
 import Hero from "./components/sections/Hero";
 import LogoGallery from "./components/sections/LogoGallery";
 import Projects from "./components/sections/Projects";
+import SideProjects from "./components/sections/SideProjects";
 import { EDUCATION } from "./data/education.data";
 
 export default function Home() {
@@ -16,6 +17,10 @@ export default function Home() {
 
       <section className="min-h-[80vh] overflow-x-hidden">
         <Projects />
+      </section>
+
+      <section className="overflow-x-hidden">
+        <SideProjects />
       </section>
 
       <section className="min-h-[80vh] overflow-x-hidden">
