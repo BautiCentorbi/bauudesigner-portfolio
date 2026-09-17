@@ -113,9 +113,9 @@ export default function ClientsMarquee({
       lastTs = ts;
 
       const speed = trackWidth / (durationSec * 2500);
-      offset = (offset + speed * dt) % trackWidth;
-      const x = direction === "right" ? offset - trackWidth : -offset;
-      marqueeEl.style.transform = `translate3d(${x}px, 0, 0)`;
+      const delta = direction === "right" ? -speed * dt : speed * dt;
+      offset = ((offset + delta) % trackWidth + trackWidth) % trackWidth;
+      marqueeEl.style.transform = `translate3d(${-offset}px, 0, 0)`;
       rafId = requestAnimationFrame(tick);
     };
 
