@@ -4,7 +4,7 @@ import ClientsMarquee, { type ClientLogo } from "../clients/ClientMarquee";
 
 /** Ejemplo de data. Ajusta rutas a /public/clients/... */
 const CLIENT_LOGOS:  ClientLogo[] = [
-  { id: "muta",     src: "/logos/Logos-MUTA.webp",      alt: "MUTA" },
+  { id: "bepass",   src: "/logos/Logos-MUTA.webp",      alt: "BePass" }, // TODO: reemplazar logo por el de BePass
   { id: "imatorras",      src: "/logos/Logos-iMatorras.webp",       alt: "Bodega iMatorras" },
   { id: "anzorena",  src: "/logos/Logos-Anzorena.webp",  alt: "Anzorena Básquet" },
   { id: "blindaje", src: "/logos/Logos-Blindaje.webp",  alt: "Blindaje" },
