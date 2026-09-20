@@ -18,6 +18,7 @@ import { easeOut, container, fadeUp } from "@/app/lib/animationEffects";
 const CYCLE_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const CYCLE_WORDS = [
+  { text: "Sitios", colorClass: "text-violet-400" },
   { text: "Experiencias", colorClass: "text-cyan-500" },
   { text: "Identidades", colorClass: "text-pink-400" },
 ];
@@ -220,9 +221,9 @@ export default function Hero() {
             variants={fadeUp}
             className="w-full uppercase max-lg:text-center"
           >
-            Mucho más que{" "}
+            Diseño y{" "}
             <span className="transition-colors duration-300 hover:text-blue-600">
-              Diseño
+              desarrollo
             </span>
           </motion.span>
 

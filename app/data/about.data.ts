@@ -47,13 +47,13 @@ export const ABOUT: AboutData = {
     src: "/images/About-BCentorbi.webp",
     alt: "Bautista Centorbi, diseñador gráfico y desarrollador web en Mendoza",
   },
-  bio: "Soy Bautista, diseñador gráfico, **brand designer** y desarrollador web en Mendoza. Construyo identidades visuales y las llevo hasta su expresión digital para que una marca se vea igual de sólida en un manual, una tarjeta o un sitio web. Trabajé con clientes de rubros bien distintos —industrial, deportivo, vitivinícola, seguridad, consultoría— y en todos aplico el mismo criterio: **menos piezas sueltas, más sistema**.",
+  bio: "Soy Bautista, desarrollador web y **brand designer** en Mendoza. Construyo sitios rápidos y claros, y los sostengo con identidades visuales que se ven igual de sólidas en un manual, una tarjeta o una pantalla. Trabajé con clientes de rubros bien distintos —industrial, deportivo, vitivinícola, seguridad, consultoría— y en todos aplico el mismo criterio: **menos piezas sueltas, más sistema**.",
   capabilities: [
+    "Desarrollo web (Next.js, React, TailwindCSS)",
     "Identidad Visual & Rebranding",
     "Design Systems y Manual de Marca",
     "Dirección de Arte & Diseño Editorial",
-    "Estrategia de Contenido (LinkedIn, Instagram, Meta/Google Ads)",
-    "Desarrollo web complementario (Next.js, React, TailwindCSS)",
+    "Estrategia de Contenido (complementario: LinkedIn, Instagram, Meta/Google Ads)",
   ],
   principles: [
     "Un sistema de marca vale más que un logo bonito",
@@ -63,6 +63,51 @@ export const ABOUT: AboutData = {
     "Simplicidad que se sostiene en el tiempo, no que sigue una moda",
   ],
   experience: <ExperienceItem[]>[
+    {
+      year: "Jul. 2025 - Actualidad",
+      company: "BePass",
+      subtitle: "Consultora de Automatización y Gestión",
+      roleTitle:
+        "Frontend Developer, Consultor Creativo & Posicionamiento Digital",
+      summary:
+        "Formé parte del proceso de creación y construcción visual de la marca, definiendo su identidad conceptual y estética. Diseñé y desarrollé el sitio web institucional con un enfoque moderno y dinámico, integrando un lenguaje visual que comunica eficiencia, claridad y cercanía. También colaboré en la estructuración de contenidos para redes, alineando tono, discurso y diferenciación en un mercado donde predominan propuestas genéricas.",
+      achievements: [
+        "Lanzamiento de una marca con estética distintiva en un sector altamente saturado.",
+        "Desarrollo de un sitio web claro, veloz y visualmente coherente con su propósito.",
+      ],
+      tags: ["Branding", "UI", "Next.js"],
+      link: "#proyectos",
+    },
+    {
+      year: "Jun. 2025 - Actualidad",
+      company: "Blindaje",
+      subtitle: "Seguridad Privada Integral",
+      roleTitle:
+        "Diseñador de Identidad Visual, Social Media & Desarrollador Web",
+      summary:
+        "Participé en la construcción visual completa de la marca, desde su identidad conceptual hasta su aplicación en medios digitales y físicos. Llevé adelante el diseño y desarrollo de la web institucional utilizando Next.js, React, TailwindCSS y Framer Motion, optimizando su rendimiento en Vercel con altos estándares de SEO, accesibilidad y experiencia de usuario. También diseñé elementos de uso interno y externo, incluyendo indumentaria corporativa, cartelería, señalética y piezas para redes, asegurando coherencia estética y claridad comunicacional.",
+      achievements: [
+        "Lanzamiento de la web institucional con +95 PageSpeed en rendimiento, SEO y performance.",
+        "Estandarización completa de la identidad visual en todos los canales.",
+        "Desarrollo de un sistema de comunicación claro, moderno y consistente.",
+      ],
+      tags: ["Identidad", "UI", "Next.js", "Motion"],
+      link: "#proyectos",
+    },
+    {
+      year: "Sep. 2024 - Actualidad",
+      company: "Bodega iMatorras",
+      subtitle: "Tupungato",
+      roleTitle: "Diseñador de Comunicación Visual y Contenidos",
+      summary:
+        "Me desempeño en la dirección visual y producción de piezas gráficas para redes sociales y medios editoriales (brochures, listas de precios, presentaciones, etc.). Trabajo la coherencia estética de la marca, su narrativa y el tono comunicacional, con foco en transmitir la identidad del terroir, el origen y la esencia de la bodega. Además, colaboro en la articulación visual y comunicativa con distribuidores en otras provincias, asegurando consistencia en todos los puntos de contacto.",
+      achievements: [
+        "Construcción de una estética sólida y reconocible en redes.",
+        "Profesionalización de la narrativa de marca.",
+        "Fidelización y consolidación de comunidad sin recurrir a pauta inicial.",
+      ],
+      tags: ["Dirección de arte", "Redes", "Optimización"],
+    },
     {
       year: "Abr. 2026 - Jul. 2026",
       company: "Cuenca del Sur",
@@ -87,51 +132,6 @@ export const ABOUT: AboutData = {
       achievements:
         ["Consolidación visual de las comunicaciones gráficas del bar, respetando y estandarizando su identidad visual sin haber sido el autor original del branding."],
       tags: ["Eventos", "Vino", "Redes Sociales", "Diseño Gráfico"],
-    },
-    {
-      year: "Jun. 2025 - Actualidad",
-      company: "Blindaje",
-      subtitle: "Seguridad Privada Integral",
-      roleTitle:
-        "Diseñador de Identidad Visual, Social Media & Desarrollador Web",
-      summary:
-        "Participé en la construcción visual completa de la marca, desde su identidad conceptual hasta su aplicación en medios digitales y físicos. Llevé adelante el diseño y desarrollo de la web institucional utilizando Next.js, React, TailwindCSS y Framer Motion, optimizando su rendimiento en Vercel con altos estándares de SEO, accesibilidad y experiencia de usuario. También diseñé elementos de uso interno y externo, incluyendo indumentaria corporativa, cartelería, señalética y piezas para redes, asegurando coherencia estética y claridad comunicacional.",
-      achievements: [
-        "Lanzamiento de la web institucional con +95 PageSpeed en rendimiento, SEO y performance.",
-        "Estandarización completa de la identidad visual en todos los canales.",
-        "Desarrollo de un sistema de comunicación claro, moderno y consistente.",
-      ],
-      tags: ["Identidad", "UI", "Next.js", "Motion"],
-      link: "#proyectos",
-    },
-    {
-      year: "Jul. 2025 - Actualidad",
-      company: "BePass",
-      subtitle: "Consultora de Automatización y Gestión",
-      roleTitle:
-        "Frontend Developer, Consultor Creativo & Posicionamiento Digital",
-      summary:
-        "Formé parte del proceso de creación y construcción visual de la marca, definiendo su identidad conceptual y estética. Diseñé y desarrollé el sitio web institucional con un enfoque moderno y dinámico, integrando un lenguaje visual que comunica eficiencia, claridad y cercanía. También colaboré en la estructuración de contenidos para redes, alineando tono, discurso y diferenciación en un mercado donde predominan propuestas genéricas.",
-      achievements: [
-        "Lanzamiento de una marca con estética distintiva en un sector altamente saturado.",
-        "Desarrollo de un sitio web claro, veloz y visualmente coherente con su propósito.",
-      ],
-      tags: ["Branding", "UI", "Next.js"],
-      link: "#proyectos",
-    },
-    {
-      year: "Sep. 2024 - Actualidad",
-      company: "Bodega iMatorras",
-      subtitle: "Tupungato",
-      roleTitle: "Diseñador de Comunicación Visual y Contenidos",
-      summary:
-        "Me desempeño en la dirección visual y producción de piezas gráficas para redes sociales y medios editoriales (brochures, listas de precios, presentaciones, etc.). Trabajo la coherencia estética de la marca, su narrativa y el tono comunicacional, con foco en transmitir la identidad del terroir, el origen y la esencia de la bodega. Además, colaboro en la articulación visual y comunicativa con distribuidores en otras provincias, asegurando consistencia en todos los puntos de contacto.",
-      achievements: [
-        "Construcción de una estética sólida y reconocible en redes.",
-        "Profesionalización de la narrativa de marca.",
-        "Fidelización y consolidación de comunidad sin recurrir a pauta inicial.",
-      ],
-      tags: ["Dirección de arte", "Redes", "Optimización"],
     },
     {
       year: "Ago. 2024 - Mar. 2025",
