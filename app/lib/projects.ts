@@ -77,12 +77,12 @@ export type ProjectCase = {
   blocks: ProjectBlock[];
 };
 
-const MUTA = {
-  muta_header:
-    "MUTA AI es una consultora de gestión que integra estrategia, procesos y tecnología para acompañar a empresas en su evolución hacia modelos más eficientes y escalables. El proyecto abarcó la creación completa de la identidad de marca y el desarrollo de una plataforma web moderna, performante y preparada para crecer.",
-  muta_body:
+const BEPASS = {
+  bepass_header:
+    "BePass es una consultora de gestión que integra estrategia, procesos y tecnología para acompañar a empresas en su evolución hacia modelos más eficientes y escalables. El proyecto abarcó la creación completa de la identidad de marca y el desarrollo de una plataforma web moderna, performante y preparada para crecer.",
+  bepass_body:
     "El desafío fue construir una marca sólida desde cero y trasladarla a un producto digital funcional, claro y coherente. El proceso comenzó con la definición del sistema de identidad y continuó con el diseño y desarrollo de una web orientada a comunicar valor, generar confianza y servir como base para futuras iteraciones del negocio.",
-  muta_items: [
+  bepass_items: [
     "Sistema de identidad visual completo",
     "Diseño de logotipo y aplicaciones",
     "Wireframes conceptuales y definición de arquitectura",
@@ -111,26 +111,26 @@ const BLINDAJE = {
 };
 
 export const PROJECTS: ProjectCase[] = [
-  // 1) MUTA AI (igual a tu grilla)
+  // 1) BePass (ex MUTA AI, rebranding 2026)
   {
-    slug: "muta-ai",
+    slug: "bepass",
     clientLabel: "Cliente:",
-    clientName: "MUTA AI",
+    clientName: "BePass",
     year: 2025,
     tags: ["Branding", "Web Development"],
-    heroIntro: MUTA.muta_header,
-    // Uso la misma imagen de tu grilla para mantener consistencia inmediata
+    heroIntro: BEPASS.bepass_header,
+    // TODO: reemplazar por assets propios de BePass (heroImage, logos, video demo)
     heroImage: {
       src: "/images/projects/Projects-MUTA.webp",
-      alt: "MUTA AI — Identidad de marca y desarrollo web para consultora de gestión, Mendoza",
+      alt: "BePass — Identidad de marca y desarrollo web para consultora de gestión, Mendoza",
     },
     primaryCta: {
       label: "Visitar sitio web",
-      href: "https://www.mutaconsultora.com.ar",
+      href: "https://bepass.com.ar",
     },
     secondaryCta: {
       label: "Abrir sitio",
-      href: "https://www.mutaconsultora.com.ar",
+      href: "https://bepass.com.ar",
     },
 
     blocks: [
@@ -153,30 +153,31 @@ export const PROJECTS: ProjectCase[] = [
       },
 
       // Intro general
-      { kind: "richText", tone: "dark", align: "center", text: MUTA.muta_body },
+      { kind: "richText", tone: "dark", align: "center", text: BEPASS.bepass_body },
 
       // BRANDING (texto + grilla brandbook)
       {
         kind: "richText",
         tone: "light",
         align: "left",
-        text: "Se desarrolló el sistema de identidad de MUTA AI desde cero, definiendo logotipo, tipografías, paleta cromática y criterios de aplicación. El objetivo fue lograr una marca contemporánea, clara y flexible, capaz de trasladarse con coherencia al producto digital.",
+        text: "Se desarrolló el sistema de identidad de BePass desde cero, definiendo logotipo, tipografías, paleta cromática y criterios de aplicación. El objetivo fue lograr una marca contemporánea, clara y flexible, capaz de trasladarse con coherencia al producto digital.",
       },
       {
         kind: "mediaGrid",
         layout: "twoUpPlusOne",
         items: [
           {
+            // TODO: reemplazar por assets de marca de BePass
             src: "/images/projects/muta/brand-w&b.webp",
-            alt: "MUTA AI · Construcción del logotipo",
+            alt: "BePass · Construcción del logotipo",
           },
           {
             src: "/images/projects/muta/brand-2.webp",
-            alt: "MUTA AI · Logotipo completo",
+            alt: "BePass · Logotipo completo",
           },
           {
             src: "/images/projects/muta/brand-app.webp",
-            alt: "MUTA AI · Aplicación del logotipo",
+            alt: "BePass · Aplicación del logotipo",
           },
         ],
       },
@@ -193,16 +194,16 @@ export const PROJECTS: ProjectCase[] = [
       // WEB (video demo)
       {
         kind: "video",
-        src: "/videos/MUTA-Web_Demo.webm",
-        label: "MUTA AI · Web demo",
+        src: "/videos/BePass-Web_Demo.webm",
+        label: "BePass · Web demo",
         aspect: "16/9",
       },
 
-            
+
       {
         kind: "deliverables",
         title: "Entregables",
-        items: MUTA.muta_items,
+        items: BEPASS.bepass_items,
       },
       {
         kind: "stack",
@@ -222,8 +223,8 @@ export const PROJECTS: ProjectCase[] = [
       {
         kind: "closing",
         leftText:
-          "MUTA AI fue concebido como un proyecto integral, donde la identidad visual y la tecnología trabajan en conjunto. Desde los primeros bocetos en wireframes hasta el desarrollo final, el foco estuvo puesto en crear una base digital sólida, optimizada y escalable, capaz de acompañar el crecimiento de la marca en el tiempo.",
-        rightTitle: "MUTA AI",
+          "BePass fue concebido como un proyecto integral, donde la identidad visual y la tecnología trabajan en conjunto. Desde los primeros bocetos en wireframes hasta el desarrollo final, el foco estuvo puesto en crear una base digital sólida, optimizada y escalable, capaz de acompañar el crecimiento de la marca en el tiempo.",
+        rightTitle: "BePass",
         rightTags: ["Branding", "Web Development"],
       },
     ],

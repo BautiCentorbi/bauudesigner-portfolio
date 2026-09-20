@@ -3,7 +3,7 @@
 import { LogosRow, type LogoItem } from "./LogosRow";
 
 const LOGOS: LogoItem[] = [
-  { id: "muta", title: "Muta AI", year: 2025, img: "/logos/Logos-MUTA.webp" },
+  { id: "bepass", title: "BePass", year: 2025, img: "/logos/Logos-MUTA.webp" }, // TODO: reemplazar logo por el de BePass
   { id: "blindaje", title: "Blindaje", year: 2025, img: "/logos/Logos-Blindaje.webp" },
   { id: "lf5a", title: "Liga de F5 Adaptado", year: 2025, img: "/logos/Logos-LF5A.webp" },
   { id: "waytogo", title: "Way To Go", year: 2023, img: "/logos/Logos-WayToGo.webp" },

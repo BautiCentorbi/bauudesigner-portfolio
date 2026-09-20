@@ -106,7 +106,7 @@ export const ABOUT: AboutData = {
     },
     {
       year: "Jul. 2025 - Actualidad",
-      company: "MUTA AI",
+      company: "BePass",
       subtitle: "Consultora de Automatización y Gestión",
       roleTitle:
         "Frontend Developer, Consultor Creativo & Posicionamiento Digital",
