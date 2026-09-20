@@ -178,13 +178,21 @@ export default function Footer() {
               <p className="text-xs text-black/60">Mendoza, Argentina</p>
             </div>
 
-            {/* Email */}
-            <div className="md:col-span-4 md:text-right">
+            {/* Email + LinkedIn */}
+            <div className="md:col-span-4 flex flex-col gap-1 md:items-end md:text-right">
               <a
                 href="mailto:bcentorbi.designer@gmail.com"
                 className="text-xs text-black/60 transition hover:text-black/85 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-black/30"
               >
                 bcentorbi.designer@gmail.com
+              </a>
+              <a
+                href="https://www.linkedin.com/in/bautista-centorbi-designer/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs text-black/60 transition hover:text-black/85 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-black/30"
+              >
+                LinkedIn
               </a>
             </div>
           </div>
