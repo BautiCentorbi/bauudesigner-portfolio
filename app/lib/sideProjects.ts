@@ -30,7 +30,7 @@ export const SIDE_PROJECTS: SideProject[] = [
     nameNote: "(nombre provisional)",
     tagline: "Suite propia para gestionar el trabajo de Community Manager",
     description:
-      "Herramienta de uso interno para llevar el trabajo de Community Manager sobre varios clientes desde un solo lugar: workspace tipo Notion por cliente, calendario editorial con 3 vistas (Calendario, Kanban, Lista) y flujo de aprobación con el cliente, y analytics multi-plataforma arrancando por Instagram. MVP completo y en uso real con clientes.",
+      "Herramienta de uso interno para llevar el trabajo de Community Manager sobre varios clientes desde un solo lugar: workspace tipo Notion por cliente, calendario editorial con 3 vistas (Calendario, Kanban, Lista) y flujo de aprobación con el cliente, y analytics multi-plataforma arrancando por Instagram. MVP funcional en uso real con clientes, todavía en desarrollo activo.",
     tags: ["Next.js", "TypeScript", "Prisma", "Neon", "NextAuth"],
     status: "active",
     statusLabel: "En desarrollo activo — repo público, uso interno",
