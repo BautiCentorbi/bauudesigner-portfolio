@@ -1,11 +1,16 @@
 "use client";
 
+import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, Github, X } from "lucide-react";
 import { container, fadeUp } from "@/app/lib/animationEffects";
-import { SIDE_PROJECTS, type SideProject } from "@/app/lib/sideProjects";
+import {
+  SIDE_PROJECTS,
+  type SideProject,
+  type SideProjectScreenshot,
+} from "@/app/lib/sideProjects";
 
 const VIEWPORT = { amount: 0.3, margin: "0px 0px -10% 0px", once: true };
 
@@ -22,7 +27,105 @@ function StatusDot({ status }: { status: SideProject["status"] }) {
   );
 }
 
+/** Lightbox: amplía una captura sobre un backdrop oscuro. Cierra con ESC, click afuera o el botón. */
+function ScreenshotLightbox({
+  screenshot,
+  onClose,
+}: {
+  screenshot: SideProjectScreenshot | null;
+  onClose: () => void;
+}) {
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  const dialogId = useId();
+  const open = !!screenshot;
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  useEffect(() => {
+    if (open) closeBtnRef.current?.focus();
+  }, [open]);
+
+  return (
+    <AnimatePresence>
+      {open && screenshot ? (
+        <motion.div
+          aria-labelledby={`${dialogId}-title`}
+          aria-modal="true"
+          role="dialog"
+          className="fixed inset-0 z-60"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
+        >
+          <motion.div
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          />
+
+          <div className="absolute inset-0 grid place-items-center p-4 md:p-10">
+            <motion.div
+              className="relative w-full max-w-5xl"
+              initial={{ opacity: 0, y: 10, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 6, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+            >
+              <button
+                ref={closeBtnRef}
+                onClick={onClose}
+                aria-label="Cerrar"
+                className="absolute -top-12 right-0 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black/60 text-white hover:bg-black/80"
+              >
+                <X className="h-4 w-4" aria-hidden />
+              </button>
+
+              <p id={`${dialogId}-title`} className="sr-only">
+                {screenshot.alt}
+              </p>
+
+              <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-neutral-900">
+                <Image
+                  src={screenshot.src}
+                  alt={screenshot.alt}
+                  fill
+                  sizes="90vw"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
 function SideProjectCard({ project }: { project: SideProject }) {
+  const [openScreenshot, setOpenScreenshot] =
+    useState<SideProjectScreenshot | null>(null);
+
   return (
     <motion.article
       variants={fadeUp}
@@ -53,11 +156,10 @@ function SideProjectCard({ project }: { project: SideProject }) {
       {project.screenshots?.length ? (
         <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
           {project.screenshots.map((s) => (
-            <a
+            <button
               key={s.src}
-              href={s.src}
-              target="_blank"
-              rel="noreferrer"
+              type="button"
+              onClick={() => setOpenScreenshot(s)}
               aria-label={`Ampliar: ${s.alt}`}
               className="group relative aspect-video overflow-hidden rounded-lg border border-black/15 bg-neutral-900"
             >
@@ -73,7 +175,7 @@ function SideProjectCard({ project }: { project: SideProject }) {
                   Ampliar
                 </span>
               </span>
-            </a>
+            </button>
           ))}
         </div>
       ) : null}
@@ -117,6 +219,11 @@ function SideProjectCard({ project }: { project: SideProject }) {
           </Link>
         )}
       </div>
+
+      <ScreenshotLightbox
+        screenshot={openScreenshot}
+        onClose={() => setOpenScreenshot(null)}
+      />
     </motion.article>
   );
 }
