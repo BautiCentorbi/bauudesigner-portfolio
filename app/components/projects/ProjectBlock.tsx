@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import type { ProjectBlock, ProjectCase as ProjectCaseType, ProjectMedia } from "@/app/lib/projects";
 import { fadeUp } from "@/app/lib/animationEffects";
@@ -25,6 +26,29 @@ function Reveal({ children }: { children: React.ReactNode }) {
 
 function SectionShell({ children }: { children: React.ReactNode }) {
   return <div className="mx-auto max-w-6xl px-4 md:px-0">{children}</div>;
+}
+
+/** Solo monta el <video> (y dispara la descarga) cuando está por entrar en viewport. */
+function LazyVideo({ src, label }: { src: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isNear = useInView(ref, { once: true, margin: "200px 0px" });
+
+  return (
+    <div ref={ref} className="h-full w-full">
+      {isNear && (
+        <video
+          className="h-full w-full object-cover"
+          src={src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          aria-label={label}
+        />
+      )}
+    </div>
+  );
 }
 
 function aspectClass(aspect?: ProjectMedia["aspect"]) {
@@ -95,15 +119,7 @@ function BlockRenderer({ block }: { block: ProjectBlock }) {
           <section className="py-0">
             <SectionShell>
               <div className={aspectClass(block.aspect)}>
-                <video
-                  className="h-full w-full object-cover"
-                  src={block.src}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  aria-label={block.label}
-                />
+                <LazyVideo src={block.src} label={block.label} />
               </div>
             </SectionShell>
           </section>
