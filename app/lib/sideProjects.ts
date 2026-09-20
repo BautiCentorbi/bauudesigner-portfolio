@@ -9,6 +9,11 @@ export type SideProjectLink = {
   href: string;
 };
 
+export type SideProjectScreenshot = {
+  src: string;
+  alt: string;
+};
+
 export type SideProject = {
   slug: string;
   name: string;
@@ -18,6 +23,7 @@ export type SideProject = {
   tags: string[];
   status: SideProjectStatus;
   statusLabel: string;
+  screenshots?: SideProjectScreenshot[];
   primaryLink?: SideProjectLink;
   relatedCaseSlug?: string;
   relatedCaseLabel?: string;
@@ -34,6 +40,20 @@ export const SIDE_PROJECTS: SideProject[] = [
     tags: ["Next.js", "TypeScript", "Prisma", "Neon", "NextAuth"],
     status: "active",
     statusLabel: "En desarrollo activo — repo público, uso interno",
+    screenshots: [
+      {
+        src: "/cm-suite/Main-Dashboard.png",
+        alt: "CM-Suite · Panel de clientes, gestión multi-cliente desde un solo lugar",
+      },
+      {
+        src: "/cm-suite/Client-Calendar_View.png",
+        alt: "CM-Suite · Calendario editorial de un cliente, vista Calendario",
+      },
+      {
+        src: "/cm-suite/Client_Main-Dashboard_1.png",
+        alt: "CM-Suite · Workspace de cliente con analytics de Instagram y link de solo lectura",
+      },
+    ],
     primaryLink: {
       label: "Ver repositorio",
       href: "https://github.com/BautiCentorbi/infinitgraphics-dashboard",

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
@@ -48,6 +49,25 @@ function SideProjectCard({ project }: { project: SideProject }) {
       <p className="mt-4 text-sm md:text-base leading-relaxed text-neutral-800 opacity-90">
         {project.description}
       </p>
+
+      {project.screenshots?.length ? (
+        <div className="mt-5 grid grid-cols-3 gap-2">
+          {project.screenshots.map((s) => (
+            <div
+              key={s.src}
+              className="relative aspect-video overflow-hidden rounded-lg border border-black/15 bg-neutral-900"
+            >
+              <Image
+                src={s.src}
+                alt={s.alt}
+                fill
+                sizes="(min-width: 768px) 16rem, 33vw"
+                className="object-cover object-top"
+              />
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       <div className="mt-5 flex flex-wrap gap-2">
         {project.tags.map((t) => (

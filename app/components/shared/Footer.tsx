@@ -27,6 +27,17 @@ const NAV_LINKS = [
   { label: "Contacto", href: "#contact" },
 ];
 
+const CV_LINKS = [
+  {
+    label: "CV — Desarrollador Web",
+    href: "/cv/CV_Bautista_Centorbi_Desarrollador_Web_1.pdf",
+  },
+  {
+    label: "CV — Diseñador Gráfico",
+    href: "/cv/CV_Bautista_Centorbi_Disenador_Grafico_1.pdf",
+  },
+];
+
 export default function Footer() {
   const { scrollTo } = useLenis();
   const pathname = usePathname();
@@ -141,6 +152,20 @@ export default function Footer() {
                       aria-hidden
                       className="pointer-events-none absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-300 [ease:cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
                     />
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <ul className="mt-6 space-y-2 text-sm text-black/60">
+              {CV_LINKS.map((cv) => (
+                <li key={cv.href}>
+                  <a
+                    href={cv.href}
+                    download
+                    className="underline underline-offset-4 decoration-black/30 transition-colors hover:text-black/85 hover:decoration-black/60 focus:outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-black/30"
+                  >
+                    Descargar {cv.label}
                   </a>
                 </li>
               ))}
