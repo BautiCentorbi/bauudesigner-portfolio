@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
@@ -48,6 +49,34 @@ function SideProjectCard({ project }: { project: SideProject }) {
       <p className="mt-4 text-sm md:text-base leading-relaxed text-neutral-800 opacity-90">
         {project.description}
       </p>
+
+      {project.screenshots?.length ? (
+        <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          {project.screenshots.map((s) => (
+            <a
+              key={s.src}
+              href={s.src}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Ampliar: ${s.alt}`}
+              className="group relative aspect-video overflow-hidden rounded-lg border border-black/15 bg-neutral-900"
+            >
+              <Image
+                src={s.src}
+                alt={s.alt}
+                fill
+                sizes="(min-width: 768px) 12rem, 45vw"
+                className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+              <span className="pointer-events-none absolute inset-0 flex items-end justify-end bg-black/0 p-1.5 transition-colors group-hover:bg-black/30">
+                <span className="rounded-full bg-black/80 px-2 py-0.5 text-[10px] text-white opacity-0 transition-opacity group-hover:opacity-100">
+                  Ampliar
+                </span>
+              </span>
+            </a>
+          ))}
+        </div>
+      ) : null}
 
       <div className="mt-5 flex flex-wrap gap-2">
         {project.tags.map((t) => (
