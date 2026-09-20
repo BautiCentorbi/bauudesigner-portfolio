@@ -50,8 +50,20 @@ export const SIDE_PROJECTS: SideProject[] = [
         alt: "CM-Suite · Calendario editorial de un cliente, vista Calendario",
       },
       {
+        src: "/cm-suite/Client-Kanban_View.png",
+        alt: "CM-Suite · Flujo de aprobación en tablero Kanban",
+      },
+      {
         src: "/cm-suite/Client_Main-Dashboard_1.png",
         alt: "CM-Suite · Workspace de cliente con analytics de Instagram y link de solo lectura",
+      },
+      {
+        src: "/cm-suite/User-Main_View.png",
+        alt: "CM-Suite · Vista del cliente sobre su propio calendario de contenido",
+      },
+      {
+        src: "/cm-suite/User-Changes_Modal.png",
+        alt: "CM-Suite · El cliente aprueba o pide cambios sobre una pieza de contenido",
       },
     ],
     primaryLink: {
