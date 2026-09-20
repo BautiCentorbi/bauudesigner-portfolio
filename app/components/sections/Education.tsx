@@ -184,8 +184,8 @@ function EducationModal({
   );
 }
 
-/* -------------------- Tarjeta (bloque azul) -------------------- */
-function EducationCard({
+/* -------------------- Fila condensada -------------------- */
+function EducationRow({
   item,
   onOpen,
 }: {
@@ -193,82 +193,23 @@ function EducationCard({
   onOpen: (it: EducationItem) => void;
 }) {
   return (
-    <div
-      className={clsx(
-        // full-bleed + bordes arriba/abajo
-        "relative w-screen mx-auto",
-        "border-y border-foreground/40"
-      )}
+    <button
+      onClick={() => onOpen(item)}
+      aria-label={`Ver detalle de ${item.title}`}
+      className="group flex w-full items-center justify-between gap-4 border-b border-foreground/15 py-3 text-left last:border-b-0 hover:bg-neutral-100/60 transition-colors"
     >
-      {/* Contenido centrado en ancho, pero texto alineado a la izquierda */}
-      <div className="mx-auto max-w-6xl px-4 md:px-0 py-8 md:py-10">
-        <div className="grid grid-cols-12 gap-6 items-start">
-          {/* Columna texto */}
-          <div className="col-span-12 md:col-span-8 text-left">
-            <h4 className="text-xl md:text-2xl font-semibold leading-tight">
-              {item.title}
-            </h4>
-
-            <p className="mt-1 text-sm md:text-base text-neutral-600">
-              {item.institution} · {item.year}
-              {item.duration ? ` · ${item.duration}` : ""}
-            </p>
-
-            {item.highlights?.length ? (
-              <ul className="mt-4 list-disc pl-5 space-y-1 text-sm md:text-[0.95rem] leading-relaxed text-neutral-700">
-                {item.highlights.map((h, i) => (
-                  <li key={i}>{h}</li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
-
-          {/* Columna certificado (misma “banda” de padding) */}
-          <div className="col-span-12 md:col-span-4 flex md:justify-end">
-            <div className="w-full md:max-w-xs">
-              <button
-                onClick={() => onOpen(item)}
-                className="group relative w-full overflow-hidden rounded-xl border border-neutral-200 bg-white"
-                aria-label={`Abrir certificado de ${item.title}`}
-              >
-                <div className="relative aspect-4/3 w-full">
-                  {item.certificateSrc ? (
-                    <Image
-                      src={item.certificateSrc}
-                      alt={`Certificado de ${item.title}`}
-                      fill
-                      sizes="(min-width: 768px) 20rem, 90vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                    />
-                  ) : (
-                    <div className="grid h-full place-items-center text-sm text-neutral-500">
-                      Ver certificado
-                    </div>
-                  )}
-                </div>
-
-                <span className="absolute bottom-2 right-2 rounded-full bg-black/80 px-2 py-0.5 text-xs text-white">
-                  Ampliar
-                </span>
-              </button>
-
-              {item.url ? (
-                <MainButton
-                  as="a"
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 w-full flex justify-center"
-                  ariaLabel={`Abrir proyecto de ${item.title}`}
-                >
-                  {item.urlLabel ?? "Ver proyecto"}
-                </MainButton>
-              ) : null}
-            </div>
-          </div>
-        </div>
+      <div className="min-w-0">
+        <span className="font-semibold">{item.title}</span>
+        <span className="text-neutral-600">
+          {" "}
+          — {item.institution} · {item.year}
+          {item.duration ? ` · ${item.duration}` : ""}
+        </span>
       </div>
-    </div>
+      <span className="shrink-0 text-xs text-neutral-500 underline underline-offset-4 decoration-neutral-300 group-hover:decoration-neutral-600">
+        Ver detalle
+      </span>
+    </button>
   );
 }
 
@@ -353,56 +294,30 @@ export default function EducationSection({ items, className }: EducationProps) {
         </header>
       </div>
 
-      {/* Bloques por carrera (separadores + cards intactas) */}
-      {/* Bloques por carrera (separadores + cards intactas) */}
-      <div className="space-y-12">
-        {grouped.map(([trackKey, list], idx) => {
+      {/* Bloques por carrera: encabezado liviano + lista condensada */}
+      <div className="mx-auto max-w-6xl px-4 md:px-0 space-y-8">
+        {grouped.map(([trackKey, list]) => {
           const meta =
             trackKey === "otros"
               ? null
               : TRACKS[trackKey as keyof typeof TRACKS];
 
           return (
-            <div key={trackKey} className="space-y-6">
-              {/* Separador de carrera - FULL BLEED BAND */}
-              <div
-                className={clsx(
-                  "relative w-screen mx-auto",
-                  "border-y border-foreground/40",
-                  "bg-foreground"
-                )}
-              >
-                <div className="mx-auto max-w-6xl px-4 md:px-0 py-10 md:py-12">
-                  <div className="flex items-end justify-between gap-6">
-                    <div className="text-left">
-                      <p className="text-md tracking-[0.22em] uppercase text-neutral-100">
-                        {trackKey === "otros" ? "Otros" : "Carrera"}
-                      </p>
-
-                      <h3 className="text-white mt-2 text-xl md:text-4xl font-semibold tracking-[-0.01em]">
-                        {trackKey === "otros"
-                          ? "Cursos y certificaciones"
-                          : meta?.title}
-                      </h3>
-
-                      {meta?.subtitle ? (
-                        <p className="mt-2 text-lg text-neutral-100">
-                          {meta.subtitle}
-                        </p>
-                      ) : null}
-                    </div>
-
-                    <div className="text-md text-neutral-300">
-                      {list.length} {list.length === 1 ? "curso" : "cursos"}
-                    </div>
-                  </div>
-                </div>
+            <div key={trackKey}>
+              <div className="flex items-baseline justify-between gap-4 border-b border-foreground/40 pb-2">
+                <h3 className="text-base md:text-lg font-semibold tracking-tight">
+                  {trackKey === "otros"
+                    ? "Otros cursos y certificaciones"
+                    : meta?.title}
+                </h3>
+                <span className="shrink-0 text-xs text-neutral-500">
+                  {list.length} {list.length === 1 ? "curso" : "cursos"}
+                </span>
               </div>
 
-              {/* Tus tarjetas full-bleed intactas */}
-              <div className="space-y-4">
+              <div>
                 {list.map((item) => (
-                  <EducationCard key={item.id} item={item} onOpen={openModal} />
+                  <EducationRow key={item.id} item={item} onOpen={openModal} />
                 ))}
               </div>
             </div>

@@ -93,6 +93,32 @@ const BEPASS = {
     "Deploy y configuración productiva",
   ],
 };
+const CUENCA_DEL_SUR = {
+  header:
+    "Cuenca del Sur es un distribuidor B2B de caños de acero al carbono en Luján de Cuyo, Mendoza. El proyecto acompañó una reconversión comercial activa de la empresa: reposicionamiento completo de identidad de marca, sistema de contenido y pauta paga alineados al canal principal de ventas.",
+  body:
+    "El desafío fue reposicionar una marca con historia mientras la empresa atravesaba, en paralelo, una reconversión comercial activa. El trabajo abarcó desde el manual de marca y las piezas editoriales hasta la gestión del contenido en LinkedIn e Instagram —canal principal de ventas del cliente— y la optimización de campañas de Meta Ads y Google Ads.",
+  items: [
+    "Manual de marca completo",
+    "Piezas editoriales y brochure institucional",
+    "Tarjetas de presentación con código QR",
+    "Plan de contenido LinkedIn e Instagram",
+    "Campañas de Meta Ads y Google Ads",
+    "Workspace de gestión de marca en Notion",
+  ],
+};
+const ANZORENA = {
+  header:
+    "La Asociación Deportiva Anzorena es un club deportivo y equipo de básquet mendocino. El trabajo consistió en la gestión integral de su comunicación digital: contenido gráfico y audiovisual, cobertura de partidos y participación en decisiones visuales de uniformes y estadio.",
+  body:
+    "Un club con historia necesitaba una comunicación digital a la altura de su crecimiento deportivo. El foco estuvo en construir un sistema de contenido sostenido en el tiempo —no piezas sueltas— capaz de acompañar cada partido, cada categoría y cada anuncio institucional con la misma consistencia visual.",
+  items: [
+    "Material gráfico para redes sociales",
+    "Cobertura visual y audiovisual de partidos",
+    "Coordinación de contenido con encargados de categorías",
+    "Participación en decisiones visuales de uniformes y estadio",
+  ],
+};
 const BLINDAJE = {
   blindaje_header:
     "Blindaje es una empresa de seguridad privada en Mendoza que ofrece soluciones de seguridad integral con un enfoque 360°. El proyecto consistió en la creación completa de la identidad de marca y el desarrollo de una web institucional orientada a transmitir profesionalismo, confianza y posicionamiento premium.",
@@ -445,7 +471,173 @@ export const PROJECTS: ProjectCase[] = [
     ],
   },
 
-  // 4) LF5A (igual a tu grilla, tags ajustadas)
+  // 4) Cuenca del Sur — TODO: reemplazar heroImage y mediaGrid con piezas reales exportadas
+  {
+    slug: "cuenca-del-sur",
+    clientLabel: "Cliente:",
+    clientName: "Cuenca del Sur",
+    year: 2026,
+    tags: ["Branding", "Marketing", "Diseño Editorial"],
+    heroIntro: CUENCA_DEL_SUR.header,
+    // TODO: reemplazar por heroImage propio de Cuenca del Sur
+    heroImage: {
+      src: "/images/projects/cuenca-del-sur/hero.webp",
+      alt: "Cuenca del Sur — Reposicionamiento de marca para distribuidor B2B de caños de acero, Mendoza",
+    },
+
+    blocks: [
+      {
+        kind: "highlights",
+        title: "Resumen",
+        items: [
+          { label: "Rol", value: "Diseñador Gráfico y Encargado de Marketing" },
+          {
+            label: "Objetivo",
+            value:
+              "Reposicionar la identidad de marca en el marco de una reconversión comercial activa de la empresa.",
+          },
+          {
+            label: "Entrega",
+            value:
+              "Manual de marca, piezas editoriales, plan de contenido y pauta paga alineados al canal principal de ventas.",
+          },
+        ],
+      },
+      { kind: "richText", tone: "dark", align: "center", text: CUENCA_DEL_SUR.body },
+      {
+        kind: "sectionTitle",
+        title: "Identidad",
+      },
+      {
+        kind: "richText",
+        tone: "light",
+        align: "left",
+        text: "Se elaboró el manual de marca y los lineamientos visuales de Cuenca del Sur, incluyendo piezas editoriales, brochure institucional y tarjetas de presentación con código QR, buscando una identidad consistente en todos los puntos de contacto de la empresa.",
+      },
+      {
+        // TODO: reemplazar por piezas de identidad reales (manual de marca, brochure, tarjetas)
+        kind: "mediaGrid",
+        layout: "twoUpPlusOne",
+        items: [
+          { src: "/images/projects/cuenca-del-sur/brand-1.webp", alt: "Cuenca del Sur · Manual de marca" },
+          { src: "/images/projects/cuenca-del-sur/brand-2.webp", alt: "Cuenca del Sur · Brochure institucional" },
+          { src: "/images/projects/cuenca-del-sur/brand-3.webp", alt: "Cuenca del Sur · Tarjetas con código QR" },
+        ],
+      },
+      {
+        kind: "sectionTitle",
+        title: "Contenido & Pauta",
+      },
+      {
+        kind: "richText",
+        tone: "light",
+        align: "left",
+        text: "Se diseñó y gestionó el plan de contenido de LinkedIn e Instagram —canal principal de ventas del cliente— y se optimizaron campañas de Meta Ads y Google Ads, con un workspace en Notion para centralizar calendario editorial, documentación de marca y plantillas operativas.",
+      },
+      {
+        // TODO: reemplazar por piezas de contenido reales (posteos, carruseles)
+        kind: "mediaGrid",
+        layout: "twoUp",
+        items: [
+          { src: "/images/projects/cuenca-del-sur/content-1.webp", alt: "Cuenca del Sur · Contenido LinkedIn" },
+          { src: "/images/projects/cuenca-del-sur/content-2.webp", alt: "Cuenca del Sur · Contenido Instagram" },
+        ],
+      },
+      {
+        kind: "deliverables",
+        title: "Entregables",
+        items: CUENCA_DEL_SUR.items,
+      },
+      {
+        kind: "closing",
+        leftText:
+          "Cuenca del Sur es un caso de reposicionamiento en movimiento: la marca se reconstruyó al mismo tiempo que la empresa reconvertía su modelo comercial, con la identidad visual y el contenido trabajando como un mismo sistema.",
+        rightTitle: "Cuenca del Sur",
+        rightTags: ["Branding", "Marketing", "Diseño Editorial"],
+      },
+    ],
+  },
+
+  // 5) Anzorena Básquet — TODO: reemplazar heroImage y mediaGrid con piezas reales exportadas
+  {
+    slug: "anzorena",
+    clientLabel: "Cliente:",
+    clientName: "Asociación Deportiva Anzorena",
+    year: 2025,
+    tags: ["Community Management", "Diseño Gráfico", "Deporte"],
+    heroIntro: ANZORENA.header,
+    // TODO: reemplazar por heroImage propio de Anzorena
+    heroImage: {
+      src: "/images/projects/anzorena/hero.webp",
+      alt: "Asociación Deportiva Anzorena — Comunicación digital para club deportivo y equipo de básquet mendocino",
+    },
+
+    blocks: [
+      {
+        kind: "highlights",
+        title: "Resumen",
+        items: [
+          { label: "Rol", value: "Community Manager y Diseñador" },
+          {
+            label: "Objetivo",
+            value:
+              "Modernizar la comunicación digital del club y consolidarlo como referencia local en gestión digital deportiva.",
+          },
+          {
+            label: "Entrega",
+            value:
+              "Contenido gráfico y audiovisual, cobertura de partidos y participación en decisiones visuales de uniformes y estadio.",
+          },
+        ],
+      },
+      { kind: "richText", tone: "dark", align: "center", text: ANZORENA.body },
+      {
+        kind: "sectionTitle",
+        title: "Resultados",
+      },
+      {
+        kind: "highlights",
+        items: [
+          { label: "Crecimiento de seguidores", value: "+198% (2024–2025)" },
+          { label: "Alcance orgánico", value: "+1000% (2024–2025)" },
+        ],
+      },
+      {
+        kind: "sectionTitle",
+        title: "Contenido",
+      },
+      {
+        kind: "richText",
+        tone: "light",
+        align: "left",
+        text: "Diseño de material gráfico para redes sociales y gestión integral de la comunicación digital del club, con coordinación directa con encargados de categorías, cobertura visual de partidos y desarrollo de contenido audiovisual.",
+      },
+      {
+        // TODO: reemplazar por piezas gráficas reales (posteos, cobertura de partidos)
+        kind: "mediaGrid",
+        layout: "twoUpPlusOne",
+        items: [
+          { src: "/images/projects/anzorena/content-1.webp", alt: "Anzorena · Cobertura de partido" },
+          { src: "/images/projects/anzorena/content-2.webp", alt: "Anzorena · Pieza institucional" },
+          { src: "/images/projects/anzorena/content-3.webp", alt: "Anzorena · Contenido de categoría" },
+        ],
+      },
+      {
+        kind: "deliverables",
+        title: "Entregables",
+        items: ANZORENA.items,
+      },
+      {
+        kind: "closing",
+        leftText:
+          "Anzorena Básquet es la prueba de que un plan de contenido sostenido, sin pauta paga de arranque, puede transformar la comunicación digital de un club y consolidarlo como referencia local.",
+        rightTitle: "Asociación Deportiva Anzorena",
+        rightTags: ["Community Management", "Diseño Gráfico", "Deporte"],
+      },
+    ],
+  },
+
+  // 6) LF5A (igual a tu grilla, tags ajustadas)
   {
     slug: "lf5a",
     clientLabel: "Cliente:",
