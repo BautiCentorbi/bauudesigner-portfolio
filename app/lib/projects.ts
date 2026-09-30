@@ -147,7 +147,7 @@ export const PROJECTS: ProjectCase[] = [
     heroIntro: BEPASS.bepass_header,
     // TODO: reemplazar por assets propios de BePass (heroImage, logos, video demo)
     heroImage: {
-      src: "/images/projects/Projects-MUTA.webp",
+      src: "/images/projects/Projects-BEPASS.webp",
       alt: "BePass — Identidad de marca y desarrollo web para consultora de gestión, Mendoza",
     },
     primaryCta: {
@@ -194,15 +194,15 @@ export const PROJECTS: ProjectCase[] = [
         items: [
           {
             // TODO: reemplazar por assets de marca de BePass
-            src: "/images/projects/muta/brand-w&b.webp",
+            src: "/images/projects/bepass/brand-w&b.webp",
             alt: "BePass · Construcción del logotipo",
           },
           {
-            src: "/images/projects/muta/brand-2.webp",
+            src: "/images/projects/bepass/brand-2.webp",
             alt: "BePass · Logotipo completo",
           },
           {
-            src: "/images/projects/muta/brand-app.webp",
+            src: "/images/projects/bepass/brand-app.webp",
             alt: "BePass · Aplicación del logotipo",
           },
         ],
@@ -384,9 +384,9 @@ export const PROJECTS: ProjectCase[] = [
     clientLabel: "Cliente:",
     clientName: "iMatorras",
     year: 2025,
-    tags: ["Brand System", "Art Direction"],
+    tags: ["Brand System", "Diseño Editorial", "Art Direction"],
     heroIntro:
-      "iMatorras es una bodega que combina tradición y visión contemporánea. El proyecto se enfocó en construir un sistema de marca refinado y coherente, capaz de transmitir identidad, origen y carácter en cada punto de contacto.",
+      "iMatorras es una bodega que combina tradición y visión contemporánea. A partir de su identidad existente, construí el sistema completo que la sostiene: fundación, tono, voz, mensaje y una línea visual aplicada a cada punto de contacto, hoy en manos del equipo para continuar sin mí.",
     heroImage: {
       src: "/images/projects/Projects-iMatorras.webp",
       alt: "iMatorras — Sistema de marca y dirección de arte para bodega, Mendoza",
@@ -398,16 +398,16 @@ export const PROJECTS: ProjectCase[] = [
         kind: "highlights",
         title: "Resumen",
         items: [
-          { label: "Rol", value: "Diseñador de Marca & Dirección de Arte" },
+          { label: "Rol", value: "Sistema de Marca, Diseño Editorial & Dirección de Arte" },
           {
             label: "Objetivo",
             value:
-              "Consolidar un sistema de identidad visual sobrio y flexible, capaz de transmitir origen, tradición y carácter en cada punto de contacto de la bodega.",
+              "Estandarizar la identidad visual y definir la fundación de marca (tono, voz y mensaje) para que la bodega comunique con coherencia en cada punto de contacto y pueda seguir aplicándola de forma autónoma.",
           },
           {
             label: "Entrega",
             value:
-              "Sistema de identidad completo, brandbook y aplicaciones para medios editoriales, digitales y de packaging.",
+              "Manual de marca, brochure, fichas técnicas, piezas editoriales y comerciales, contenido para redes y dirección de arte de una sesión de fotos.",
           },
         ],
       },
@@ -416,26 +416,26 @@ export const PROJECTS: ProjectCase[] = [
         tone: "dark",
         align: "center",
         text:
-          "Trabajar la marca de una bodega con historia implica un riesgo concreto: quedar anclada al pasado, o renovarse perdiendo lo que la hace reconocible. El objetivo fue encontrar ese punto medio, con un sistema flexible que pudiera escalar a nuevas aplicaciones sin resignar consistencia.",
+          "Una bodega con historia puede quedar anclada al pasado, o renovarse perdiendo lo que la hace reconocible. Antes de diseñar piezas, definí los cimientos: cómo habla la marca, qué dice y cómo se ve. Con esa base, cada aplicación nueva suma consistencia en lugar de restarla.",
       },
       {
         kind: "sectionTitle",
-        title: "Identidad",
+        title: "Sistema",
       },
       {
         kind: "richText",
         tone: "light",
         align: "left",
         text:
-          "El resultado es un lenguaje visual atemporal: paleta cromática contenida, jerarquías claras y un sistema versátil, pensado para convivir en soportes editoriales, digitales y de packaging sin perder personalidad.",
+          "Estandaricé la identidad visual existente en un lenguaje atemporal: paleta contenida, jerarquías claras y reglas de uso, pensado para convivir en soportes editoriales, comerciales y digitales sin perder personalidad. Logotipo original: Estudio Argo.",
       },
       {
         kind: "mediaGrid",
         layout: "twoUpPlusOne",
         items: [
-          { src: "/images/projects/imatorras/brand-w&b.webp", alt: "iMatorras · Construcción del logotipo" },
-          { src: "/images/projects/imatorras/brand-2.webp", alt: "iMatorras · Logotipo completo" },
-          { src: "/images/projects/imatorras/brand-app.webp", alt: "iMatorras · Aplicación del logotipo" },
+          { src: "/images/projects/imatorras/brand-1.webp", alt: "iMatorras · Brand brochure", aspect: "4/3" },
+          { src: "/images/projects/imatorras/brand-2.webp", alt: "iMatorras · Aplicaciones de marca: promociones y accolades", aspect: "4/3" },
+          { src: "/images/projects/imatorras/brand-3.webp", alt: "iMatorras · Fichas técnicas de vinos", aspect: "16/9" },
         ],
       },
       {
@@ -443,7 +443,7 @@ export const PROJECTS: ProjectCase[] = [
         tone: "light",
         align: "left",
         text:
-          "Como parte del sistema, se desarrolló un brandbook que documenta criterios de uso, proporciones, aplicaciones y lineamientos visuales para mantener consistencia en todos los medios.",
+          "El manual de marca documenta la fundación (tono, voz y mensaje) junto con criterios de uso, aplicaciones y lineamientos visuales. Es la herramienta con la que el equipo sigue produciendo piezas coherentes de forma independiente.",
       },
       {
         kind: "mediaGrid",
@@ -452,21 +452,56 @@ export const PROJECTS: ProjectCase[] = [
           {
             src: "/images/projects/imatorras/brandbook-cover.webp",
             alt: "iMatorras · Brandbook",
-            href: "/downloads/Matorras_Brandbook.pdf",
+            href: "/images/projects/imatorras/iMatorras-Brandbook_compressed-1.pdf",
             aspect: "4/3",
           },
         ],
       },
       {
+        kind: "sectionTitle",
+        title: "Contenido y dirección de arte",
+      },
+      {
+        kind: "richText",
+        tone: "light",
+        align: "left",
+        text:
+          "Con la fundación definida, el sistema se extendió a contenido para redes sociales. También dirigí artísticamente una sesión de fotos, para que la imagen fotográfica hablara el mismo idioma que el resto de la marca.",
+      },
+      {
+        kind: "mediaGrid",
+        layout: "oneFull",
+        items: [
+          { src: "/images/projects/imatorras/content-1.webp", alt: "iMatorras · Contenido para redes sociales", aspect: "4/3" },
+        ],
+      },
+      {
+        kind: "mediaGrid",
+        layout: "oneFull",
+        items: [
+          { src: "/images/projects/imatorras/content-2.webp", alt: "iMatorras · Sesión de fotos, dirección de arte", aspect: "16/9" },
+        ],
+      },
+      {
         kind: "deliverables",
         title: "Entregables",
-        items: ["Brand system", "Guías", "Aplicaciones", "Assets"],
+        items: [
+          "Manual de marca",
+          "Brochure",
+          "Piezas editoriales",
+          "Fichas técnicas",
+          "Listas de precios",
+          "Convenios y accolades",
+          "Emails",
+          "Contenido para redes",
+          "Dirección de arte de sesión de fotos",
+        ],
       },
       {
         kind: "closing",
         leftText: "",
         rightTitle: "iMatorras",
-        rightTags: ["Brand System", "Art Direction"],
+        rightTags: ["Brand System", "Diseño Editorial", "Art Direction"],
       },
     ],
   },
@@ -481,7 +516,7 @@ export const PROJECTS: ProjectCase[] = [
     heroIntro: CUENCA_DEL_SUR.header,
     // TODO: reemplazar por heroImage propio de Cuenca del Sur
     heroImage: {
-      src: "/images/projects/cuenca-del-sur/hero.webp",
+      src: "/images/projects/Projects-Cuenca_Del_Sur.webp",
       alt: "Cuenca del Sur — Reposicionamiento de marca para distribuidor B2B de caños de acero, Mendoza",
     },
 
@@ -568,7 +603,7 @@ export const PROJECTS: ProjectCase[] = [
     heroIntro: ANZORENA.header,
     // TODO: reemplazar por heroImage propio de Anzorena
     heroImage: {
-      src: "/images/projects/anzorena/hero.webp",
+      src: "/images/projects/Projects-Anzorena.webp",
       alt: "Asociación Deportiva Anzorena — Comunicación digital para club deportivo y equipo de básquet mendocino",
     },
 
