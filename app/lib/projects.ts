@@ -550,13 +550,20 @@ export const PROJECTS: ProjectCase[] = [
         text: "Se elaboró el manual de marca y los lineamientos visuales de Cuenca del Sur, incluyendo piezas editoriales, brochure institucional y tarjetas de presentación con código QR, buscando una identidad consistente en todos los puntos de contacto de la empresa.",
       },
       {
-        // TODO: reemplazar por piezas de identidad reales (manual de marca, brochure, tarjetas)
+        // Manual de marca, pieza principal: portada enlazada al PDF descargable.
         kind: "mediaGrid",
-        layout: "twoUpPlusOne",
+        layout: "oneFull",
         items: [
-          { src: "/images/projects/cuenca-del-sur/brand-1.webp", alt: "Cuenca del Sur · Manual de marca" },
-          { src: "/images/projects/cuenca-del-sur/brand-2.webp", alt: "Cuenca del Sur · Brochure institucional" },
-          { src: "/images/projects/cuenca-del-sur/brand-3.webp", alt: "Cuenca del Sur · Tarjetas con código QR" },
+          { src: "/images/projects/cuenca-del-sur/brand-1.webp", alt: "Cuenca del Sur · Manual de marca", aspect: "16/9", href: "/images/projects/cuenca-del-sur/CDS-Brandbook_2026.pdf" },
+        ],
+      },
+      {
+        // Brochure institucional y tarjetas con código QR.
+        kind: "mediaGrid",
+        layout: "twoUp",
+        items: [
+          { src: "/images/projects/cuenca-del-sur/brand-2.webp", alt: "Cuenca del Sur · Brochure institucional", aspect: "4/3" },
+          { src: "/images/projects/cuenca-del-sur/brand-3.webp", alt: "Cuenca del Sur · Tarjetas con código QR", aspect: "4/3" },
         ],
       },
       {
@@ -570,12 +577,11 @@ export const PROJECTS: ProjectCase[] = [
         text: "Se diseñó y gestionó el plan de contenido de LinkedIn e Instagram —canal principal de ventas del cliente— y se optimizaron campañas de Meta Ads y Google Ads, con un workspace en Notion para centralizar calendario editorial, documentación de marca y plantillas operativas.",
       },
       {
-        // TODO: reemplazar por piezas de contenido reales (posteos, carruseles)
         kind: "mediaGrid",
         layout: "twoUp",
         items: [
-          { src: "/images/projects/cuenca-del-sur/content-1.webp", alt: "Cuenca del Sur · Contenido LinkedIn" },
-          { src: "/images/projects/cuenca-del-sur/content-2.webp", alt: "Cuenca del Sur · Contenido Instagram" },
+          { src: "/images/projects/cuenca-del-sur/content-1.webp", alt: "Cuenca del Sur · Contenido LinkedIn", aspect: "4/3" },
+          { src: "/images/projects/cuenca-del-sur/content-2.webp", alt: "Cuenca del Sur · Contenido Instagram", aspect: "4/3" },
         ],
       },
       {
