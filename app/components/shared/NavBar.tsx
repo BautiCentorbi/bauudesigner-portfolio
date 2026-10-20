@@ -172,9 +172,20 @@ export default function NavBar() {
   const active = useActiveSection(NAV_ITEMS.map((n) => n.id));
   const { scrollTo } = useLenis();
 
+  const pathname = usePathname();
+  const router = useRouter();
+
   const handleNavClick =
     (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
+
+      // Fuera de la home (ej. /projects/[slug]) la sección no existe: primero
+      // navegamos a "/#id" y HashScroller hace el scroll cuando la home carga.
+      if (pathname !== "/") {
+        router.push(`/#${id}`, { scroll: false });
+        setOpen(false);
+        return;
+      }
 
       const el = document.querySelector(`#${id}`);
       if (el instanceof HTMLElement) {
@@ -184,9 +195,6 @@ export default function NavBar() {
       history.replaceState(null, "", `#${id}`);
       setOpen(false);
     };
-
-  const pathname = usePathname();
-  const router = useRouter();
 
   return (
     <header
