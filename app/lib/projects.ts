@@ -658,9 +658,9 @@ export const PROJECTS: ProjectCase[] = [
         kind: "mediaGrid",
         layout: "twoUpPlusOne",
         items: [
-          { src: "/images/projects/anzorena/content-1.webp", alt: "Anzorena · Cobertura de partido" },
-          { src: "/images/projects/anzorena/content-2.webp", alt: "Anzorena · Pieza institucional" },
-          { src: "/images/projects/anzorena/content-3.webp", alt: "Anzorena · Contenido de categoría" },
+          { src: "/images/projects/anzorena/content-1.webp", alt: "Anzorena · Cobertura de partido", aspect: "4/3" },
+          { src: "/images/projects/anzorena/content-2.webp", alt: "Anzorena · Pieza institucional", aspect: "4/3" },
+          { src: "/images/projects/anzorena/content-3.webp", alt: "Anzorena · Contenido de categoría", aspect: "16/9" },
         ],
       },
       {
