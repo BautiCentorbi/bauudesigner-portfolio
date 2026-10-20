@@ -8,6 +8,7 @@ import Script from "next/script";
 import CookiesBanner from "./components/CookiesBanner";
 import { Toaster } from "react-hot-toast";
 import PageTransition from "./components/shared/PageTransition";
+import HashScroller from "./components/shared/HashScroller";
 import StructuredData from "./components/shared/StructuredData";
 
 const darkerGrotesque = Darker_Grotesque({
@@ -130,6 +131,7 @@ export default function RootLayout({
       <body className={`${darkerGrotesque.className} ${syneSans.variable} ${interSans.variable} antialiased`}>
         <ScrollProvider>
         <NavBar />
+        <HashScroller />
         <CookiesBanner />
         <PageTransition>{children}</PageTransition>
         <Toaster

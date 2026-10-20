@@ -60,7 +60,7 @@ export default function Footer() {
     if (isHome) {
       scrollTo(href, { offset: -96, duration: 1 });
     } else {
-      router.push(`/${href}`);
+      router.push(`/${href}`, { scroll: false });
     }
   };
 
